@@ -1,0 +1,732 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Creme e lozioni · HVARA Pharmaceuticals</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:        #e8eaef;
+  --bg-2:      #ffffff;
+  --panel:     #ffffff;
+  --card:      #ffffff;
+  --card-2:    #fafbfd;
+  --line:      #e2e6ec;
+  --line-soft: #eef1f5;
+  --ink:       #0a1428;
+  --ink-soft:  #4a5878;
+  --ink-mute:  #8895ab;
+  --brand:     #1d6fb8;
+  --brand-2:   #4ea3e0;
+  --brand-deep:#0f4a85;
+  --glow:      rgba(29,111,184,.12);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Geist',ui-sans-serif,system-ui,-apple-system,sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  font-size:16px;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+
+.wrap{max-width:1280px;margin:0 auto;padding:0 32px}
+
+/* ── HEADER ─────────────────────────────────────────────── */
+.hdr{
+  background:var(--bg);
+  padding:18px 0;
+  position:sticky;top:0;z-index:50;
+  border-bottom:1px solid var(--line-soft);
+}
+.hdr .wrap{display:flex;align-items:center;gap:32px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-logo{height:46px;width:auto;display:block}
+.brand-mark{
+  width:46px;height:46px;
+  background:linear-gradient(135deg,var(--brand-deep),var(--brand-2));
+  border-radius:8px;
+  display:grid;place-items:center;
+  box-shadow:0 8px 22px -10px rgba(29,111,184,.4);
+  position:relative;
+}
+.brand-mark::before{
+  content:"";position:absolute;inset:8px;
+  border:2px solid #fff;
+  clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);
+}
+.brand-name{display:flex;flex-direction:column;line-height:1.1}
+.brand-name b{font-weight:700;font-size:18px;letter-spacing:.04em;color:var(--ink)}
+.brand-name small{font-size:9.5px;color:var(--ink-mute);letter-spacing:.18em;text-transform:uppercase;margin-top:3px}
+.nav{display:flex;gap:18px;margin-left:32px;flex:1;flex-wrap:nowrap;white-space:nowrap;align-items:center}
+.nav a{font-size:14.5px;color:var(--ink-soft);padding:6px 0;border-bottom:2px solid transparent}
+.nav a:hover,.nav a.is-active{color:var(--ink);border-bottom-color:var(--brand)}
+.hdr-right{display:flex;align-items:center;gap:14px}
+.lang{font-size:13px;color:var(--ink-soft);padding:8px 14px;border:1px solid var(--line);border-radius:8px;display:inline-flex;align-items:center;gap:6px;background:#fff}
+
+/* util-style chip buttons in header (RU / location / contacts) */
+.util-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:7px 13px;border-radius:7px;
+  font-family:'Geist',sans-serif;
+  font-size:12px;color:var(--ink-soft);
+  border:1px solid var(--line);background:#fff;
+  cursor:pointer;
+  transition:border-color .15s,color .15s,background .15s;
+}
+.util-btn:hover{border-color:var(--brand);color:var(--ink);background:var(--bg)}
+.util-btn svg{width:13px;height:13px;flex:0 0 auto}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 20px;border-radius:8px;
+  font-family:'Geist',sans-serif;
+  font-size:14px;font-weight:600;
+  cursor:pointer;border:1px solid transparent;
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:linear-gradient(180deg,var(--brand-deep),#0a3a6b);color:#fff;box-shadow:0 6px 20px -8px rgba(29,111,184,.5)}
+.btn-primary:hover{box-shadow:0 10px 26px -8px rgba(29,111,184,.7)}
+.btn-ghost{background:#fff;border-color:var(--line);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--brand);background:rgba(29,111,184,.06)}
+.btn-play{background:#fff;border:1px solid var(--line);color:var(--ink);padding:10px 20px 10px 12px;border-radius:8px;display:inline-flex;align-items:center;gap:10px}
+.btn-play .play-circle{width:32px;height:32px;border-radius:50%;background:linear-gradient(180deg,var(--brand),var(--brand-deep));display:grid;place-items:center}
+.btn-play:hover{border-color:var(--brand);background:#fafbfd}
+
+/* ── HERO ───────────────────────────────────────────────── */
+.hero{padding:0 0 32px;position:relative;background:var(--bg)}
+.hero-stage{
+  position:relative;
+  height:540px;
+  background:#dde3ec;
+  overflow:hidden;
+}
+.hero-stage img{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;object-position:center right;
+  display:block;
+}
+.hero-stage::before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg, rgba(232,234,239,.97) 0%, rgba(232,234,239,.88) 35%, rgba(232,234,239,.55) 55%, rgba(232,234,239,.05) 75%, transparent 100%);
+  z-index:1;
+}
+.hero-content{
+  position:relative;z-index:2;
+  height:100%;
+  max-width:1280px;margin:0 auto;
+  padding:0 32px;
+  display:flex;align-items:center;
+}
+.hero-text{max-width:560px}
+.hero-eyebrow{font-size:12px;color:var(--brand-deep);letter-spacing:.24em;text-transform:uppercase;font-weight:600;margin-bottom:20px}
+.hero h1{
+  font-family:'Instrument Serif',serif;
+  font-weight:400;font-size:72px;line-height:1.02;letter-spacing:-.02em;
+  margin:0 0 24px;color:var(--ink);
+}
+.hero .sub{font-size:16px;color:var(--ink-soft);max-width:46ch;margin:0 0 32px;line-height:1.6}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+.hero-img{
+  aspect-ratio:1/1;
+  border-radius:14px;overflow:hidden;
+  background:#091628;
+  position:relative;
+  box-shadow:0 30px 60px -30px rgba(0,0,0,.6);
+}
+
+/* ── STATS GRID ─────────────────────────────────────────── */
+.stats{padding:24px 0 24px}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.stat-card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:24px 24px 22px;
+  display:flex;align-items:center;gap:18px;
+  box-shadow:0 6px 20px -16px rgba(10,20,40,.18);
+  transition:border-color .2s, box-shadow .2s, transform .2s;
+}
+.stat-card:hover{border-color:var(--brand);transform:translateY(-2px);box-shadow:0 10px 30px -12px var(--glow)}
+.stat-icon{
+  width:54px;height:54px;flex:0 0 auto;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:12px;
+  display:grid;place-items:center;
+  color:var(--brand-deep);
+  box-shadow:inset 0 0 24px rgba(29,111,184,.06);
+}
+.stat-icon svg{width:26px;height:26px}
+.stat-text{display:flex;flex-direction:column;line-height:1.2}
+.stat-n{
+  font-family:'Instrument Serif',serif;
+  font-weight:600;
+  font-size:34px;color:var(--ink);letter-spacing:-.01em;
+}
+.stat-l{font-size:12.5px;color:var(--ink-soft);margin-top:4px;line-height:1.4;max-width:18ch}
+
+/* ── ABOUT SPLIT ────────────────────────────────────────── */
+.about{padding:24px 0}
+.about-card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
+  display:grid;grid-template-columns:1fr 1.4fr;
+  box-shadow:0 6px 20px -16px rgba(10,20,40,.18);
+}
+.about-body{padding:48px 48px 48px}
+.about-eyebrow{
+  font-size:11px;color:var(--brand-deep);letter-spacing:.24em;text-transform:uppercase;font-weight:600;margin-bottom:18px;display:block;
+}
+.about-body h2{
+  font-family:'Instrument Serif',serif;
+  font-weight:400;font-size:42px;line-height:1.05;letter-spacing:-.01em;
+  margin:0 0 20px;color:var(--ink);
+}
+.about-body p{color:var(--ink-soft);font-size:15px;margin:0 0 28px;max-width:42ch;line-height:1.6}
+.about-more{
+  font-size:14px;color:var(--brand-deep);font-weight:600;
+  display:inline-flex;align-items:center;gap:8px;
+  border-bottom:1px solid var(--brand-deep);padding-bottom:2px;
+}
+.about-photo{background:#dde3ec;position:relative;min-height:380px;overflow:hidden}
+.about-photo .badge{position:absolute;right:32px;top:32px;font-family:'Instrument Serif',serif;font-style:italic;font-size:48px;color:rgba(255,255,255,.85);letter-spacing:.04em;text-shadow:0 2px 12px rgba(10,20,40,.4);z-index:2}
+
+/* ── DIRECTIONS / CATEGORIES ────────────────────────────── */
+.dir{padding:24px 0}
+.section-head{
+  display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;gap:24px;
+  padding:0 6px;
+}
+.section-eyebrow{
+  font-size:11px;color:var(--brand-deep);letter-spacing:.24em;text-transform:uppercase;font-weight:600;
+}
+.slider-ctrl{display:flex;gap:8px}
+.slider-btn{
+  width:38px;height:38px;border-radius:50%;
+  background:#fff;border:1px solid var(--line);color:var(--ink);
+  display:grid;place-items:center;cursor:pointer;
+  transition:border-color .15s,background .15s;
+  box-shadow:0 4px 12px -8px rgba(10,20,40,.18);
+}
+.slider-btn:hover{border-color:var(--brand);background:#fafbfd;color:var(--brand-deep)}
+.dir-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+.dir-card{
+  position:relative;
+  background:#1a3358;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:24px 22px 22px;
+  display:flex;flex-direction:column;gap:16px;
+  aspect-ratio:4/5;
+  transition:border-color .2s,transform .2s,box-shadow .2s;
+  cursor:pointer;
+  overflow:hidden;
+  box-shadow:0 6px 20px -16px rgba(10,20,40,.18);
+  background-size:115% auto;background-position:center top;background-repeat:no-repeat;
+}
+.dir-card::before{
+  content:"";position:absolute;inset:0;z-index:0;
+  background:linear-gradient(180deg, rgba(15,30,54,.78) 0%, rgba(15,30,54,.55) 38%, rgba(15,30,54,.05) 65%, transparent 100%);
+}
+.dir-card > *{position:relative;z-index:1}
+.dir-card::after{
+  content:"";position:absolute;inset:0;z-index:0;
+  background:linear-gradient(135deg, rgba(78,163,224,.45) 0%, rgba(29,111,184,.35) 50%, rgba(15,90,147,.55) 100%);
+  opacity:0;transition:opacity .3s ease;
+  pointer-events:none;
+}
+.dir-card:hover::after{opacity:1}
+.dir-card:hover{border-color:var(--brand);transform:translateY(-3px);box-shadow:0 14px 40px -12px rgba(78,163,224,.4)}
+.dir-icon{
+  width:36px;height:36px;
+  background:rgba(255,255,255,.85);
+  border:1px solid rgba(78,163,224,.4);
+  border-radius:50%;
+  display:grid;place-items:center;
+  color:var(--brand-deep);
+  box-shadow:0 2px 8px rgba(10,20,40,.08);
+  margin-bottom:4px;
+}
+.dir-icon svg{width:18px;height:18px}
+.dir-icon svg{width:28px;height:28px}
+.dir-card h3{font-size:17px;margin:0;color:#fff;font-weight:700;text-shadow:0 1px 4px rgba(10,20,40,.4)}
+.dir-card p{font-size:13px;color:rgba(255,255,255,.92);margin:0;line-height:1.5;flex:1;text-shadow:0 1px 3px rgba(10,20,40,.35)}
+.dir-arr{align-self:flex-start;color:#fff;display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500}
+
+/* ── QUALITY CONTROL ────────────────────────────────────── */
+.quality{padding:24px 0}
+.quality-card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
+  display:grid;grid-template-columns:1.2fr 1fr;
+  min-height:420px;
+  box-shadow:0 6px 20px -16px rgba(10,20,40,.18);
+}
+.quality-photo{background:#dde3ec;position:relative}
+.quality-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(232,234,239,.05),rgba(232,234,239,.55))}
+.quality-body{padding:44px 44px;display:flex;flex-direction:column;justify-content:center;gap:18px;position:relative;z-index:2}
+.quality-body h2{font-family:'Instrument Serif',serif;font-weight:400;font-size:38px;line-height:1.1;margin:0;color:var(--ink)}
+.quality-body p{margin:0;color:var(--ink-soft);font-size:15px;max-width:42ch;line-height:1.6}
+.quality-feats{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:14px}
+.q-feat{display:flex;align-items:center;gap:12px;font-size:13.5px;color:var(--ink-soft)}
+.q-feat .ic{
+  width:38px;height:38px;flex:0 0 auto;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:8px;display:grid;place-items:center;color:var(--brand-deep);
+}
+.q-feat .ic svg{width:18px;height:18px}
+
+/* ── STANDARDS ──────────────────────────────────────────── */
+.standards{padding:24px 0}
+.standards-card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:32px 40px;
+  display:flex;align-items:center;gap:48px;
+  box-shadow:0 6px 20px -16px rgba(10,20,40,.18);
+}
+.standards-card .lead{flex:0 0 auto;max-width:34ch}
+.standards-card .eyebrow{font-size:11px;color:var(--brand-deep);letter-spacing:.24em;text-transform:uppercase;font-weight:600;margin-bottom:14px;display:block}
+.standards-card h2{font-family:'Instrument Serif',serif;font-weight:400;font-size:28px;line-height:1.15;margin:0;color:var(--ink)}
+.cert-row{display:flex;align-items:center;gap:32px;flex:1;flex-wrap:wrap}
+.cert{display:flex;flex-direction:column;align-items:center;gap:6px}
+.cert-mark{
+  width:62px;height:62px;border-radius:50%;
+  background:#fff;
+  border:1.5px solid var(--brand-deep);
+  display:grid;place-items:center;color:var(--brand-deep);
+  font-family:'Geist',sans-serif;font-weight:700;font-size:14px;text-align:center;line-height:1;letter-spacing:.04em;
+}
+.cert-label{font-size:11px;color:var(--ink-soft);font-family:'Geist',sans-serif;letter-spacing:.06em;font-weight:500}
+.cert-all{margin-left:auto;font-size:14px;color:var(--brand-deep);font-weight:600;white-space:nowrap;display:inline-flex;align-items:center;gap:8px}
+
+
+/* ── PARTNERSHIP ─────────────────────────────────────────── */
+.partnership{padding:24px 0}
+.partnership-card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
+  display:grid;grid-template-columns:1.4fr 1fr;
+  box-shadow:0 6px 20px -16px rgba(10,20,40,.18);
+}
+.partnership-body{padding:44px 44px;display:flex;flex-direction:column;gap:18px}
+.partnership-body h2{font-family:'Instrument Serif',serif;font-weight:400;font-size:38px;line-height:1.1;margin:0;color:var(--ink)}
+.partnership-body p{margin:0;color:var(--ink-soft);font-size:15px;max-width:54ch;line-height:1.6}
+.partnership-feats{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:8px}
+.p-feat{display:flex;align-items:center;gap:12px;font-size:13.5px;color:var(--ink-soft)}
+.p-feat .ic{
+  width:38px;height:38px;flex:0 0 auto;
+  background:#fff;border:1px solid var(--line);
+  border-radius:8px;display:grid;place-items:center;color:var(--brand-deep);
+}
+.p-feat .ic svg{width:18px;height:18px}
+.partnership-cta{display:flex;gap:12px;margin-top:14px;flex-wrap:wrap}
+.partnership-map{
+  background:linear-gradient(135deg,#0a1428,#1a3358);
+  color:#fff;
+  padding:44px 36px;
+  display:flex;flex-direction:column;gap:18px;
+}
+.map-title{font-family:'Instrument Serif',serif;font-weight:500;font-size:24px;letter-spacing:-.01em;color:#fff}
+.map-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+.map-list li{display:flex;align-items:baseline;gap:12px;font-size:15px;font-weight:500;color:#fff}
+.map-list li small{font-size:12px;color:rgba(255,255,255,.6);font-weight:400;margin-left:auto;letter-spacing:.02em}
+.world-map{width:100%;height:auto;display:block;margin-top:6px}
+.world-map .continents path{
+  fill:rgba(255,255,255,.10);
+  stroke:rgba(255,255,255,.18);
+  stroke-width:.8;
+}
+.world-map .partners .country{
+  fill:#0a1428;
+  stroke:#fff;
+  stroke-width:1;
+  cursor:pointer;
+  transition:fill .25s ease, stroke .25s ease, filter .25s ease;
+}
+.world-map .partners .country:hover{
+  fill:#4ea3e0;
+  stroke:#fff;
+  filter:drop-shadow(0 0 6px rgba(78,163,224,.7));
+}
+.world-map .partners .country.is-home{
+  fill:#d8232a;
+  stroke:#fff;
+}
+.world-map .partners .country.is-home:hover{
+  fill:#ff5b6c;
+}
+.world-map .map-tooltip{
+  font-family:'Geist',sans-serif;
+  font-size:14px;
+  font-weight:600;
+  fill:#fff;
+  letter-spacing:.02em;
+}
+.map-legend{display:flex;gap:18px;margin-top:8px;font-size:12px;color:rgba(255,255,255,.75);flex-wrap:wrap}
+.legend-item{display:inline-flex;align-items:center;gap:8px}
+.lg-sw{width:14px;height:14px;border-radius:3px;display:inline-block}
+.lg-sw.home{background:#d8232a;border:1px solid #fff}
+.lg-sw.partner{background:#0a1428;border:1px solid #fff}
+.map-list .dot{
+  width:8px;height:8px;border-radius:50%;flex:0 0 auto;
+  background:var(--brand-2);box-shadow:0 0 0 4px rgba(78,163,224,.18);
+}
+
+/* ── NEWS ───────────────────────────────────────────────── */
+.news{padding:24px 0 80px}
+.news-grid{display:grid;grid-template-columns:repeat(3,1fr) auto;gap:16px;align-items:stretch}
+.news-card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
+  display:flex;flex-direction:column;
+  min-height:340px;
+  transition:border-color .2s,transform .2s,box-shadow .2s;
+  cursor:pointer;
+  box-shadow:0 6px 20px -16px rgba(10,20,40,.18);
+}
+.news-card:hover{border-color:var(--brand);transform:translateY(-3px);box-shadow:0 10px 30px -12px var(--glow)}
+.news-photo{aspect-ratio:16/9;background:#dde3ec;position:relative}
+.news-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(255,255,255,.4))}
+.news-body{padding:20px 22px 24px;display:flex;flex-direction:column;gap:10px;flex:1}
+.news-date{font-size:12px;color:var(--brand-deep);letter-spacing:.04em;font-weight:600}
+.news-card h3{margin:0;font-size:16px;color:var(--ink);line-height:1.35;font-weight:600;flex:1}
+.news-arr{align-self:flex-start;color:var(--brand-deep);display:inline-flex;align-items:center;gap:8px;font-size:13px;margin-top:6px}
+.news-side{display:flex;flex-direction:column;justify-content:flex-end;gap:8px}
+.side-link{font-size:14px;color:var(--brand-deep);font-weight:600;display:inline-flex;align-items:center;gap:8px;margin-bottom:14px}
+
+/* ── FOOTER ─────────────────────────────────────────────── */
+.foot{background:#070f1e;color:rgba(255,255,255,.65);padding:60px 0 32px;border-top:1px solid var(--line-soft)}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px}
+.foot h5{font-family:'Geist',sans-serif;text-transform:uppercase;font-size:11px;letter-spacing:.14em;color:rgba(255,255,255,.45);margin:0 0 16px;font-weight:500}
+.foot ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
+.foot a{color:rgba(255,255,255,.78);font-size:14px}
+.foot a:hover{color:#fff}
+.foot-brand{display:flex;flex-direction:column;gap:14px;max-width:260px}
+.foot-brand p{font-size:13.5px;color:rgba(255,255,255,.55);margin:0;line-height:1.6}
+.foot-bot{padding-top:32px;margin-top:48px;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;font-size:13px;color:rgba(255,255,255,.45)}
+.foot-legal{display:flex;gap:24px;flex-wrap:wrap}
+
+/* ── PHOTO SLOTS ────────────────────────────────────────── */
+.slot{
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,#e3e8ef,#cfd6e1);
+  display:grid;place-items:center;
+  color:var(--ink-mute);
+  font-family:'Geist',sans-serif;font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+  text-align:center;padding:24px;
+}
+.slot::after{
+  content:"";position:absolute;inset:14px;
+  border:1.5px dashed rgba(29,111,184,.3);
+  border-radius:8px;pointer-events:none;
+}
+.slot span{position:relative;z-index:2;max-width:24ch}
+
+@media (max-width:1100px){
+  .dir-grid{grid-template-columns:repeat(3,1fr)}
+  .news-grid{grid-template-columns:repeat(2,1fr)}
+  .news-side{grid-column:span 2;flex-direction:row;justify-content:flex-end}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:760px){
+  .hero h1{font-size:42px}
+  .hero-grid,.about-card,.quality-card{grid-template-columns:1fr}
+  .standards-card{flex-direction:column;align-items:flex-start;gap:24px}
+  .nav{display:none}
+  .dir-grid,.news-grid{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:1fr}
+}
+
+
+.page-hero{background:linear-gradient(135deg,#0a1428 0%,#0f3a6b 60%,#1d6fb8 100%);color:#fff;padding:80px 0 64px;position:relative;overflow:hidden}
+.page-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% 30%,rgba(78,163,224,.35),transparent 55%)}
+.page-hero .wrap{position:relative;z-index:2}
+.page-hero .crumbs{font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:14px}
+.page-hero .crumbs a{color:#fff;opacity:.7}
+.page-hero h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:62px;line-height:1.04;letter-spacing:-.02em;margin:0;max-width:20ch;color:#fff}
+.page-hero .sub{margin:18px 0 0;color:rgba(255,255,255,.82);font-size:16px;max-width:60ch;line-height:1.6}
+.page{padding:48px 0 80px}
+.intro{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center;margin-bottom:48px}
+.intro h2{font-family:'Instrument Serif',serif;font-weight:400;font-size:38px;line-height:1.1;margin:0 0 18px}
+.intro p{color:var(--ink-soft);font-size:16px;line-height:1.7;margin:0 0 16px;max-width:54ch}
+.intro .img-frame{aspect-ratio:4/5;background:#1a3358 var(--cat-img) center/cover no-repeat;border-radius:14px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:24px 0}
+.cards.cols-4{grid-template-columns:repeat(4,1fr)}
+.cards.cols-2{grid-template-columns:repeat(2,1fr)}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:28px 26px;display:flex;flex-direction:column;gap:12px;box-shadow:0 6px 20px -16px rgba(10,20,40,.18);transition:all .2s}
+.card:hover{border-color:var(--brand);transform:translateY(-3px);box-shadow:0 10px 30px -12px var(--glow)}
+.card h3{font-family:'Geist',sans-serif;font-weight:700;font-size:17px;margin:0;color:var(--ink)}
+.card p{font-size:13.5px;color:var(--ink-soft);margin:0;line-height:1.55;flex:1}
+.card .ic{width:48px;height:48px;border-radius:12px;background:#eaf2fb;color:var(--brand-deep);display:grid;place-items:center}
+.card .ic svg{width:24px;height:24px}
+.section-title{font-family:'Instrument Serif',serif;font-weight:400;font-size:42px;line-height:1.05;letter-spacing:-.01em;margin:48px 0 24px;color:var(--ink)}
+.eyebrow{font-size:11px;color:var(--brand-deep);letter-spacing:.24em;text-transform:uppercase;font-weight:600;margin:0 0 12px;display:block}
+.prod-list{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:24px 0}
+.prod-list .p{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:8px;transition:all .2s}
+.prod-list .p:hover{border-color:var(--brand);transform:translateY(-2px);box-shadow:0 10px 30px -12px var(--glow)}
+.prod-list .p .tag{font-size:11px;color:var(--brand-deep);font-weight:600;letter-spacing:.16em;text-transform:uppercase}
+.prod-list .p h4{margin:4px 0 0;font-size:17px;color:var(--ink);font-weight:700}
+.prod-list .p p{margin:6px 0 0;color:var(--ink-soft);font-size:13.5px;line-height:1.55}
+.usage-banner{background:linear-gradient(135deg,var(--brand-deep),#0a1428);color:#fff;border-radius:14px;padding:48px;display:grid;grid-template-columns:1.4fr 1fr;gap:32px;align-items:center;margin:48px 0}
+.usage-banner h2{font-family:'Instrument Serif',serif;font-weight:400;font-size:32px;margin:0 0 14px;color:#fff;line-height:1.15}
+.usage-banner p{margin:0;color:rgba(255,255,255,.85);font-size:15px;line-height:1.65}
+.usage-banner .stats{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.usage-banner .stats .s{background:rgba(255,255,255,.08);border-radius:10px;padding:18px 18px;border:1px solid rgba(255,255,255,.12)}
+.usage-banner .stats .s .n{font-family:'Instrument Serif',serif;font-size:34px;color:#fff;line-height:1}
+.usage-banner .stats .s .l{color:rgba(255,255,255,.75);font-size:12.5px;margin-top:6px}
+.faq{display:flex;flex-direction:column;gap:10px;margin:24px 0}
+.faq details{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 22px}
+.faq details summary{cursor:pointer;font-weight:600;color:var(--ink);font-size:15px;list-style:none}
+.faq details summary::-webkit-details-marker{display:none}
+.faq details summary::after{content:"+";float:right;color:var(--brand-deep);font-size:22px;line-height:1;transition:transform .2s}
+.faq details[open] summary::after{content:"−"}
+.faq details p{margin:10px 0 0;color:var(--ink-soft);font-size:14px;line-height:1.65}
+@media (max-width:900px){
+  .intro,.cards,.cards.cols-4,.cards.cols-2,.prod-list,.usage-banner{grid-template-columns:1fr}
+  .page-hero h1{font-size:42px}
+}
+
+.lang-wrap{position:relative;display:inline-block}.lang-wrap > .util-btn{cursor:pointer}.lang-menu{position:absolute;top:calc(100% + 6px);right:0;background:#fff;border:1px solid var(--line);border-radius:8px;box-shadow:0 12px 30px -12px rgba(10,20,40,.18);min-width:160px;padding:6px;z-index:100;display:none}.lang-menu.is-open{display:block}.lang-menu button,.lang-menu a{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:9px 12px;border-radius:6px;background:transparent;border:0;cursor:pointer;font-family:'Geist',sans-serif;font-size:13px;color:var(--ink)}.lang-menu button:hover,.lang-menu a:hover{background:var(--bg)}.lang-menu button .flag,.lang-menu a .flag{width:22px;height:16px;border-radius:2px;flex:0 0 auto}.lang-menu button .flag.ru,.lang-menu a .flag.ru{background:linear-gradient(180deg,#fff 0% 33%,#0039a6 33% 66%,#d52b1e 66%)}.lang-menu button .flag.en,.lang-menu a .flag.en{background:#012169 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 30'><clipPath id='t'><path d='M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z'/></clipPath><path d='M0,0 v30 l60,-30 h-60 z M60,0 v30 l-60,-30 h60 z' stroke='%23fff' stroke-width='6'/><path d='M0,0 v30 l60,-30 h-60 z M60,0 v30 l-60,-30 h60 z' clip-path='url(%23t)' stroke='%23C8102E' stroke-width='4'/><path d='M30,0 v30 M0,15 h60' stroke='%23fff' stroke-width='10'/><path d='M30,0 v30 M0,15 h60' stroke='%23C8102E' stroke-width='6'/></svg>") center/cover no-repeat}.lang-menu button .flag.it,.lang-menu a .flag.it{background:linear-gradient(90deg,#009246 33%,#fff 33% 66%,#ce2b37 66%)}.flag.uz,.lang-menu a .flag.uz{background:linear-gradient(180deg,#0099b5 0 45%,#fff 45% 55%,#1eb53a 55%)}.lang-menu button.is-active{background:rgba(78,163,224,.08);color:var(--brand-deep);font-weight:600}.skiptranslate,.goog-te-banner-frame.skiptranslate{display:none !important}body{top:0 !important}.goog-te-gadget{height:0;overflow:hidden}
+/* Nav dropdown submenu */
+.nav .has-sub{position:relative}
+.nav .has-sub > a::after{content:" ▾";font-size:9px;opacity:.7;margin-left:2px}
+.nav .submenu{position:absolute;top:calc(100% + 8px);left:-12px;min-width:220px;background:#fff;border:1px solid var(--line);border-radius:8px;box-shadow:0 12px 30px -12px rgba(10,20,40,.18);padding:6px;display:none;z-index:60}
+.nav .has-sub:hover .submenu,.nav .has-sub:focus-within .submenu{display:block}
+.nav .submenu a{display:block;padding:9px 14px;font-size:13.5px;color:var(--ink-soft);border-radius:6px;border-bottom:0}
+.nav .submenu a:hover{background:var(--bg);color:var(--ink)}
+
+.lineup{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin:24px 0}
+.lineup .item{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:all .2s}
+.lineup .item:hover{border-color:var(--brand);transform:translateY(-3px);box-shadow:0 12px 30px -14px var(--glow)}
+.lineup .ph{aspect-ratio:1/1;background:var(--tint,#eef3f8) center/cover no-repeat;display:grid;place-items:center;position:relative}
+.lineup .ph svg{width:48px;height:48px;color:var(--brand-deep);opacity:.5}
+.lineup .ph img{width:100%;height:100%;object-fit:cover;display:block}
+.lineup .b{padding:16px 18px 18px}
+.lineup .b h4{margin:0;font-size:15px;color:var(--ink);font-weight:700;font-family:'Geist',sans-serif;line-height:1.3}
+@media (max-width:1100px){.lineup{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:760px){.lineup{grid-template-columns:repeat(2,1fr)}}
+</style>
+
+<style>
+/* global: all headings in Geist */
+h1,h2,h3,h4,h5,h6,.section-title,.hero h1,.page-hero h1{font-family:'Geist',sans-serif !important}
+</style>
+</head>
+<body>
+<!-- ───── HEADER ───── -->
+<header class="hdr">
+  <div class="wrap">
+    <a href="index.html" class="brand"><img src="../img/logo-hvara.png" alt="HVARA Pharmaceuticals" class="brand-logo" style="height:48px">
+    </a>
+    <nav class="nav">
+      <a href="index.html">Casa</a>
+      <a href="o-nas.html">Chi siamo</a>
+      <span class="has-sub"><a href="produkciya.html" class="is-active">Prodotti</a><div class="submenu"><a href="katalog.html?cat=sprays">Spray</a><a href="katalog.html?cat=drops">Gocce</a><a href="katalog.html?cat=eye">Colliri</a><a href="katalog.html?cat=capsules">Capsule</a><a href="katalog.html?cat=powders">Polveri e bustine</a><a href="katalog.html?cat=solutions">Soluzioni orali</a><a href="katalog.html?cat=suspensions">Sospensioni</a><a href="katalog.html?cat=gels">Gel</a><a href="katalog.html?cat=creams">Creme e unguenti</a></div></span>
+      <a href="napravleniya.html">Aree</a>
+      <a href="partneram.html">Partner</a>
+      <a href="standarty.html">Standard</a>
+    </nav>
+    <div class="hdr-right">
+      <div class="lang-wrap"><button class="util-btn" aria-label="Lingua" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"></path></svg> Italiano (IT) <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg></button><div class="lang-menu" role="menu"><a href="../kat-kremy.html"><span class="flag ru"></span>Русский</a><a href="../en/kat-kremy.html"><span class="flag en"></span>English</a><a href="kat-kremy.html" class="is-active"><span class="flag it"></span>Italiano</a><a href="../uz/kat-kremy.html"><span class="flag uz"></span>O‘zbekcha</a></div></div>
+      <a class="util-btn" href="kontakty.html#map" style="text-decoration:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s-7-7.5-7-13a7 7 0 1 1 14 0c0 5.5-7 13-7 13z"></path><circle cx="12" cy="9" r="2.5"></circle></svg>Posizione</a>
+      <a class="util-btn" href="kontakty.html" style="text-decoration:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.5 8.5 0 1 1 16.1-3.8z"></path></svg>Contatti</a>
+    </div>
+  </div>
+</header>
+
+
+<section class="page-hero" style="background:linear-gradient(135deg,#0a1428 0%,#5a1f6b 50%,#a91a5e 100%)">
+  <div class="wrap">
+    <div class="crumbs"><a href="index.html">HVARA</a> &middot; <a href="produkciya.html">Prodotti</a> &middot; Creme e lozioni</div>
+    <h1>Creme e lozioni</h1>
+    <p class="sub">Prodotti cosmetici e terapeutici per la cura della pelle — creme e lozioni idratanti, rigeneranti e antinfiammatorie.</p>
+  </div>
+</section>
+
+<section class="page">
+  <div class="wrap">
+    <div class="intro">
+      <div>
+        <span class="eyebrow">Dermatologia · Cura della pelle</span>
+        <h2>Creme e lozioni di&nbsp;HVARA</h2>
+        <p>Prodotti cosmetici e terapeutici per la cura della pelle — creme e lozioni idratanti, rigeneranti e antinfiammatorie.</p>
+        <p>Hvara Pharmaceuticals è un moderno produttore farmaceutico dell’Uzbekistan. I nostri prodotti sono realizzati in conformità agli standard internazionali di qualità e forniti in oltre 5 paesi della regione.</p>
+      </div>
+      <div class="img-frame" style="--cat-img:url('../img/cat-crem.png')"></div>
+    </div>
+
+    <h2 class="section-title">Vantaggi</h2>
+    <div class="cards cols-4">
+      
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l8 3v6a9 9 0 0 1-8 9 9 9 0 0 1-8-9V6l8-3z"/><path d="M8 12l3 3 5-6"/></svg></div>
+        <h3>Certificazione di qualità</h3>
+        <p>La produzione è conforme agli standard internazionali di qualità.</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 16V8a2 2 0 0 0-1-1.7l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.7l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
+        <h3>Controllo delle materie prime</h3>
+        <p>Ogni lotto di materie prime è sottoposto a test di laboratorio.</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/></svg></div>
+        <h3>Esportazione in oltre 5 paesi</h3>
+        <p>I nostri prodotti sono forniti a Kazakistan, Tagikistan, Kirghizistan, Afghanistan e Georgia.</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+        <h3>Prezzo accessibile</h3>
+        <p>Medicinali di qualità a un prezzo accessibile per i pazienti.</p>
+      </div>
+    </div>
+
+    <style>
+      .jc-search{width:100%;max-width:360px;padding:12px 16px;border:1px solid var(--line);border-radius:10px;font-family:'Geist',sans-serif;font-size:14px;color:var(--ink);background:#fff;margin:0 0 20px}
+      .jc-search:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px rgba(29,111,184,.12)}
+      .jc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+      .jc-item{background:#fff;border:1px solid var(--line);border-radius:12px;padding:22px;display:flex;flex-direction:column;gap:8px;transition:all .2s}
+      .jc-item:hover{border-color:var(--brand);transform:translateY(-2px);box-shadow:0 10px 28px -14px var(--glow)}
+      .jc-item h4{margin:0;font-size:17px;color:var(--ink);font-weight:700;font-family:'Geist',sans-serif}
+      .jc-item .form{font-size:12.5px;color:var(--ink-mute);font-weight:500}
+      .jc-item p{margin:4px 0 0;font-size:13px;color:var(--ink-soft);line-height:1.5}
+      .jc-item .jc-thumb{margin:-22px -22px 4px;height:150px;background:#f5f7fa;border-radius:12px 12px 0 0;display:flex;align-items:center;justify-content:center;overflow:hidden}
+      .jc-item .jc-thumb img{max-width:78%;max-height:88%;object-fit:contain}
+      .jc-empty{text-align:center;color:var(--ink-mute);padding:36px;font-size:15px}
+      @media (max-width:1100px){.jc-grid{grid-template-columns:repeat(3,1fr)}}
+      @media (max-width:760px){.jc-grid{grid-template-columns:repeat(2,1fr)}}
+      @media (max-width:480px){.jc-grid{grid-template-columns:1fr}}
+    </style>
+    <h2 class="section-title">Gamma di prodotti</h2>
+    <input type="search" id="jcSearch" class="jc-search" placeholder="Cerca prodotti…" oninput="renderJidkosti()">
+    <div class="jc-grid" id="jcGrid"></div>
+    <p class="jc-empty" id="jcEmpty" style="display:none">Nessun risultato.</p>
+
+    <div class="usage-banner">
+      <div>
+        <span class="eyebrow" style="color:#ffaecf">Qualità e controllo</span>
+        <h2>Ogni lotto, sotto pieno controllo</h2>
+        <p>Ogni prodotto della categoria “creme e lozioni” è sottoposto a un controllo qualità multilivello: dall’ispezione delle materie prime in entrata ai test del prodotto finito nel nostro laboratorio.</p>
+      </div>
+      <div class="stats">
+        <div class="s"><div class="n">✓</div><div class="l">Piena conformità agli standard</div></div>
+        <div class="s"><div class="n">100%</div><div class="l">Controllo di ogni lotto</div></div>
+      </div>
+    </div>
+
+    <h2 class="section-title">FAQ</h2>
+    <div class="faq">
+      
+      <details>
+        <summary>Qual è la differenza tra crema e lozione?</summary>
+        <p>Una lozione è più leggera e acquosa, si assorbe rapidamente ed è adatta alla pelle grassa. Una crema è più densa, idrata meglio ed è indicata per la pelle secca.</p>
+      </details>
+      <details>
+        <summary>Le creme ormonali si possono usare a lungo?</summary>
+        <p>Un ciclo di pomate ormonali è solitamente limitato a 2–4 settimane. L’uso prolungato provoca l’assottigliamento della pelle.</p>
+      </details>
+      <details>
+        <summary>Sono adatte ai bambini?</summary>
+        <p>Disponiamo di una linea dedicata di prodotti per bambini. Le creme ormonali per bambini — solo su prescrizione medica.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+
+<!-- ───── FOOTER ───── -->
+<footer class="foot" id="contacts">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="index.html" class="brand"><img src="../img/logo-hvara.png" alt="HVARA Pharmaceuticals" class="brand-logo" style="height:52px;filter:brightness(0) invert(1)">
+        </a>
+        <p>Un moderno produttore farmaceutico a ciclo completo. Scienza, qualità e cura delle persone fin dal primo giorno.</p>
+      </div>
+      <div>
+        <h5>Azienda</h5>
+        <ul>
+          <li><a href="o-nas.html">Chi siamo</a></li>
+          <li><a href="produkciya.html">Prodotti</a></li>
+          <li><a href="partneram.html">Partner</a></li>
+          <li><a href="standarty.html">Standard</a></li>
+          <li></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Categorie</h5>
+        <ul>
+          <li><a href="katalog.html?cat=solutions">Soluzioni orali</a></li>
+          <li><a href="katalog.html?cat=drops">Gocce</a></li>
+          <li><a href="katalog.html?cat=capsules">Capsule</a></li>
+          <li><a href="katalog.html?cat=sprays">Spray</a></li>
+          <li><a href="katalog.html?cat=suspensions">Sospensioni</a></li>
+          <li><a href="katalog.html?cat=powders">Polveri e bustine</a></li>
+          <li><a href="katalog.html?cat=gels">Gel</a></li>
+          <li><a href="katalog.html?cat=creams">Creme e unguenti</a></li>
+          <li><a href="katalog.html?cat=eye">Colliri</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contatti</h5>
+        <ul>
+          <li><a href="tel:+998339890090">+998 33 989 00 90</a></li>
+          <li><a href="mailto:info@hvara.uz">info@hvara.uz</a></li>
+          <li>Urgench, Regione di Khorezm</li>
+          <li>Repubblica dell’Uzbekistan</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <div>© 2020–2026 HVARA  Tutti i diritti riservati</div>
+      
+    </div>
+  </div>
+</footer>
+<!-- lang-wrap toggle --><script>(function(){document.addEventListener('DOMContentLoaded',function(){var w=document.querySelector('.lang-wrap');if(!w)return;var b=w.querySelector('.util-btn'),m=w.querySelector('.lang-menu');if(!b||!m)return;b.addEventListener('click',function(e){e.stopPropagation();m.classList.toggle('is-open')});document.addEventListener('click',function(){m.classList.remove('is-open')})})})();</script>
+<!-- ===== Catalogo categoria (data in products.js) ===== -->
+<script>window.JC_LANG='it';window.JC_CAT='creams';</script>
+<script src="../products.js"></script>
+<script>
+function renderJidkosti(){
+  var L=window.JC_LANG||'ru', C=window.JC_CAT;
+  var grid=document.getElementById('jcGrid'); if(!grid) return;
+  var empty=document.getElementById('jcEmpty');
+  var q=((document.getElementById('jcSearch')||{}).value||'').trim().toLowerCase();
+  var items=(window.HVARA_PRODUCTS||[]).filter(function(p){
+    if(p.cat!==C) return false;
+    var hay=(p.name+' '+(p.sub[L]||'')+' '+(p.form[L]||'')).toLowerCase();
+    return !q || hay.indexOf(q)!==-1;
+  });
+  var BASE=/\/(en|it)\//.test(location.pathname)?'../':'';
+  grid.innerHTML=items.map(function(p){
+    var t=p.img?'<div class="jc-thumb"><img src="'+BASE+p.img+'" alt="'+p.name+'" loading="lazy"></div>':'';
+    var inner=t+'<h4>'+p.name+'</h4><div class="form">'+p.form[L]+'</div><p>'+p.sub[L]+'</p>';
+    return p.page?'<a class="jc-item" href="'+p.page+'">'+inner+'</a>':'<div class="jc-item">'+inner+'</div>';
+  }).join('');
+  if(empty) empty.style.display=items.length?'none':'block';
+}
+document.addEventListener('DOMContentLoaded', renderJidkosti);
+</script>
+</body>
+</html>
