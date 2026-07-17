@@ -6,12 +6,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>HVARA — Pharmaceutical Manufacturing</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'Geist';font-style:normal;font-weight:400;font-display:swap;src:url('fonts/Geist-Regular.woff2') format('woff2')}
+@font-face{font-family:'Geist';font-style:normal;font-weight:500;font-display:swap;src:url('fonts/Geist-Medium.woff2') format('woff2')}
+@font-face{font-family:'Geist';font-style:normal;font-weight:600;font-display:swap;src:url('fonts/Geist-SemiBold.woff2') format('woff2')}
+@font-face{font-family:'Geist';font-style:normal;font-weight:700;font-display:swap;src:url('fonts/Geist-Bold.woff2') format('woff2')}
+@font-face{font-family:'Instrument Serif';font-style:normal;font-weight:400;font-display:swap;src:url('fonts/InstrumentSerif-Regular.ttf') format('truetype')}
+@font-face{font-family:'Instrument Serif';font-style:italic;font-weight:400;font-display:swap;src:url('fonts/InstrumentSerif-Italic.ttf') format('truetype')}
+</style>
 <style>
 :root{
-  --bg:        #e8eaef;
+  --bg:        #f4f6f9;
   --bg-2:      #ffffff;
   --panel:     #ffffff;
   --card:      #ffffff;
@@ -157,6 +162,13 @@ a{color:inherit;text-decoration:none}
   box-shadow:0 30px 60px -30px rgba(0,0,0,.6);
 }
 
+/* HERO REEL (видео-продолжение при прокрутке) */
+.hero-reel-sec{position:relative;background:var(--bg);padding:0 0 8px}
+.hero-reel{position:relative;width:100%;height:560px;overflow:hidden;background:#091628}
+.hero-reel video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.hero-reel::before{content:"";position:absolute;top:0;left:0;right:0;height:90px;z-index:1;pointer-events:none;background:linear-gradient(180deg,var(--bg) 0%,transparent 100%)}
+@media(max-width:760px){.hero-reel{height:56vw;min-height:260px}}
+
 /* ── STATS GRID ─────────────────────────────────────────── */
 .stats{padding:24px 0 24px}
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
@@ -229,6 +241,35 @@ a{color:inherit;text-decoration:none}
 .about-photo{background:#dde3ec;position:relative;min-height:380px;overflow:hidden}
 .about-photo .badge{position:absolute;right:32px;top:32px;font-family:'Instrument Serif',serif;font-style:italic;font-size:48px;color:rgba(255,255,255,.85);letter-spacing:.04em;text-shadow:0 2px 12px rgba(10,20,40,.4);z-index:2}
 
+/* ── О компании — плитки (блок из hvuz1) ── */
+.bh-head{display:flex;align-items:flex-start;gap:14px;margin:6px 6px 24px}
+.bh-head .n{font-family:'Instrument Serif',serif;font-style:italic;font-size:50px;line-height:.8;color:var(--brand)}
+.bh-head h3{margin:0;padding-top:8px;font-family:'Instrument Serif',serif;font-weight:400;font-size:34px;line-height:1;color:var(--ink);letter-spacing:-.01em}
+.bh-tiles{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.bh-tile{position:relative;display:block;height:380px;overflow:hidden;border-radius:14px;text-decoration:none;transition:transform .35s cubic-bezier(.18,.7,.2,1),box-shadow .35s ease}
+.bh-tile .bh-zoom{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .7s cubic-bezier(.18,.7,.2,1);will-change:transform}
+.bh-tile:hover .bh-zoom{transform:scale(1.05)}
+.bh-tile:hover{transform:translateY(-8px);box-shadow:0 22px 42px -18px rgba(10,20,40,.42)}
+.bh-tile .bh-shade{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 52%,rgba(4,12,28,.62));z-index:2}
+.bh-tile .bh-cap{position:absolute;left:26px;bottom:24px;color:#fff;font-size:21px;font-weight:600;z-index:3;letter-spacing:.01em}
+.bh-tile .bh-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .4s ease;z-index:1}
+.bh-tile:hover .bh-vid{opacity:1}
+.bh-btns{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
+.bh-btn{border:1px solid var(--line);border-radius:12px;padding:18px;text-align:center;font-size:15.5px;color:var(--ink-soft);background:#fff;text-decoration:none;font-weight:500;transition:transform .25s ease,box-shadow .25s ease,background .25s ease,color .25s ease,border-color .25s ease}
+.bh-btn:hover{transform:translateY(-3px);box-shadow:0 12px 26px -12px rgba(10,20,40,.28);background:var(--brand-deep);color:#fff;border-color:var(--brand-deep)}
+@media (max-width:760px){.bh-tiles{grid-template-columns:1fr}.bh-btns{grid-template-columns:1fr}.bh-tile{height:280px}}
+
+/* Вариант «сплит»: интро-колонка слева + плитки справа */
+.bh-split{display:grid;grid-template-columns:.82fr 1.18fr;gap:36px;align-items:stretch}
+.bh-intro{align-self:center;padding-right:8px}
+.bh-intro .ey{font-size:12px;color:var(--brand-deep);letter-spacing:.24em;text-transform:uppercase;font-weight:600;display:block;margin-bottom:16px}
+.bh-intro h2{font-family:'Instrument Serif',serif;font-weight:400;font-size:44px;line-height:1.05;letter-spacing:-.01em;margin:0 0 18px;color:var(--ink)}
+.bh-intro p{color:var(--ink-soft);font-size:15.5px;line-height:1.65;margin:0 0 24px;max-width:44ch}
+.bh-more{font-size:14px;color:var(--brand-deep);font-weight:600;display:inline-flex;align-items:center;gap:8px;border-bottom:1px solid var(--brand-deep);padding-bottom:2px;text-decoration:none}
+.bh-split .bh-tiles{align-content:stretch}
+.bh-split .bh-tile{height:100%;min-height:360px}
+@media (max-width:860px){.bh-split{grid-template-columns:1fr;gap:26px}.bh-split .bh-tile{min-height:280px}}
+
 /* ── DIRECTIONS / CATEGORIES ────────────────────────────── */
 .dir{padding:24px 0}
 .section-head{
@@ -294,30 +335,112 @@ a{color:inherit;text-decoration:none}
 .dir-arr{align-self:flex-start;color:#fff;display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500}
 
 /* ── QUALITY CONTROL ────────────────────────────────────── */
+/* ── VIRTUAL TOUR ──────────────────────────────────────── */
+.tour{padding:60px 0 16px}
+.tour-stage{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:16/8;background:#0a1428;cursor:zoom-in;box-shadow:0 20px 50px -26px rgba(10,20,40,.5)}
+.tour-stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.06);transition:transform 8s ease-out}
+.tour-stage:hover img{transform:scale(1.12)}
+.tour-stage::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,16,33,.12),rgba(7,16,33,.55))}
+.tour-badge{position:absolute;top:20px;left:20px;z-index:2;display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.92);backdrop-filter:blur(6px);border-radius:999px;padding:8px 15px;font-size:12.5px;font-weight:600;color:var(--brand-deep)}
+.tour-badge .dot{width:7px;height:7px;border-radius:50%;background:#2fb37a;box-shadow:0 0 0 4px rgba(47,179,122,.25)}
+.tour-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:14px;color:#fff;text-align:center;pointer-events:none}
+.tour-play .ring{width:78px;height:78px;border-radius:50%;background:rgba(255,255,255,.16);backdrop-filter:blur(4px);border:1.5px solid rgba(255,255,255,.6);display:grid;place-items:center;transition:transform .3s,background .3s}
+.tour-stage:hover .tour-play .ring{transform:scale(1.08);background:rgba(255,255,255,.28)}
+.tour-play .ring svg{width:30px;height:30px;margin-left:4px}
+.tour-play b{font-family:'Instrument Serif',serif;font-weight:400;font-size:26px;text-shadow:0 2px 14px rgba(7,16,33,.6)}
+.tour-play span{font-size:13px;opacity:.9;text-shadow:0 1px 8px rgba(7,16,33,.6)}
+.tour-caption{position:absolute;left:20px;bottom:18px;z-index:2;color:#fff}
+.tour-caption h4{margin:0;font-size:17px;font-weight:600;text-shadow:0 2px 12px rgba(7,16,33,.6)}
+.tour-caption p{margin:2px 0 0;font-size:12.5px;opacity:.85;text-shadow:0 1px 8px rgba(7,16,33,.6)}
+/* fullscreen viewer */
+.tv-overlay{position:fixed;inset:0;z-index:9998;background:#050c1c;opacity:0;visibility:hidden;transition:opacity .35s ease}
+.tv-overlay.open{opacity:1;visibility:visible}
+.tv-frame{position:absolute;inset:0;overflow:hidden;background:#050c1c}
+.tv-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.12);transition:opacity .7s ease,transform 1.2s cubic-bezier(.22,.61,.36,1)}
+.tv-frame img.show{opacity:1;transform:scale(1)}
+.tv-floor{position:absolute;left:50%;bottom:12%;transform:translateX(-50%);z-index:11;display:flex;flex-direction:column;align-items:center;gap:9px;background:none;border:0;padding:0;cursor:pointer}
+.tv-floor .chev{width:76px;height:76px;border-radius:50%;display:grid;place-items:center;color:#0a1428;background:rgba(255,255,255,.92);transform:perspective(320px) rotateX(46deg);transition:transform .2s,background .2s;box-shadow:0 12px 26px -6px rgba(0,0,0,.55);animation:tvstep 1.9s ease-in-out infinite}
+.tv-floor:hover .chev{background:#fff;transform:perspective(320px) rotateX(46deg) scale(1.09)}
+.tv-floor .chev svg{width:36px;height:36px}
+.tv-floor .lbl{font-size:12.5px;font-weight:600;letter-spacing:.06em;color:#fff;text-shadow:0 1px 10px rgba(7,16,33,.75);background:rgba(7,16,33,.35);padding:3px 12px;border-radius:999px;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+@keyframes tvstep{0%,100%{box-shadow:0 12px 26px -6px rgba(0,0,0,.55),0 0 0 0 rgba(255,255,255,.5)}50%{box-shadow:0 12px 26px -6px rgba(0,0,0,.55),0 0 0 18px rgba(255,255,255,0)}}
+.tv-back{position:absolute;left:26px;bottom:calc(12% + 12px);z-index:11;width:50px;height:50px;border-radius:50%;background:rgba(7,16,33,.5);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);border:1.5px solid rgba(255,255,255,.55);color:#fff;display:grid;place-items:center;cursor:pointer;transition:background .2s,transform .2s}
+.tv-back:hover{background:rgba(255,255,255,.28);transform:scale(1.07)}
+.tv-back[disabled]{opacity:.28;pointer-events:none}
+.tv-back svg{width:22px;height:22px}
+.tv-progress{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);z-index:11;display:flex;gap:8px}
+.tv-progress i{width:28px;height:4px;border-radius:2px;background:rgba(255,255,255,.28);cursor:pointer;transition:background .3s}
+.tv-progress i.on{background:var(--brand-2)}
+.tv-arrows{position:absolute;inset:0;z-index:11;pointer-events:none}
+.tv-af{position:absolute;z-index:11;display:flex;flex-direction:column;align-items:center;gap:7px;background:none;border:0;padding:0;cursor:pointer;pointer-events:auto}
+.tv-af .disc{width:72px;height:72px;border-radius:50%;display:grid;place-items:center;color:#0a1428;background:rgba(255,255,255,.92);transform:perspective(320px) rotateX(46deg);box-shadow:0 12px 26px -6px rgba(0,0,0,.55);animation:tvstep 1.9s ease-in-out infinite;transition:background .2s,transform .2s}
+.tv-af:hover .disc{background:#fff;transform:perspective(320px) rotateX(46deg) scale(1.08)}
+.tv-af .disc svg{width:34px;height:34px}
+.tv-af .lbl{font-size:12px;font-weight:600;color:#fff;text-shadow:0 1px 10px rgba(7,16,33,.8);background:rgba(7,16,33,.42);padding:3px 11px;border-radius:999px;white-space:nowrap;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.tv-af.dir-fwd{left:50%;bottom:15%;transform:translateX(-50%)}
+.tv-af.dir-left{left:20%;bottom:13%}
+.tv-af.dir-right{right:20%;bottom:13%}
+.tv-af.dir-left .disc svg{transform:rotate(-90deg)}
+.tv-af.dir-right .disc svg{transform:rotate(90deg)}
+.tv-step{position:absolute;left:50%;bottom:24px;transform:translateX(-50%);z-index:11;color:rgba(255,255,255,.85);font-size:12px;font-weight:600;letter-spacing:.06em;background:rgba(7,16,33,.4);padding:5px 13px;border-radius:999px;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.tv-scene{position:absolute;inset:0;overflow:hidden}
+.tv-pano{position:absolute;inset:0;background-repeat:repeat-x;background-size:auto 100%;background-position:center center;opacity:0;transition:opacity .6s ease;will-change:background-position}
+.tv-pano.show{opacity:1}
+.tv-scene{position:absolute;inset:0;overflow:hidden;cursor:grab}
+.tv-scene.grabbing{cursor:grabbing}
+.tv-360{position:absolute;top:22px;left:50%;transform:translateX(-50%);z-index:10;display:inline-flex;align-items:center;gap:7px;background:rgba(7,16,33,.5);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:6px 13px;color:#fff;font-size:12px;font-weight:600;letter-spacing:.04em}
+.tv-360 svg{width:15px;height:15px}
+.tv-nav{position:absolute;left:50%;bottom:96px;transform:translateX(-50%);z-index:10;display:flex;gap:120px}
+.tv-arrow{width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,.16);backdrop-filter:blur(4px);border:1.5px solid rgba(255,255,255,.65);color:#fff;display:grid;place-items:center;cursor:pointer;transition:background .25s,transform .25s,opacity .25s}
+.tv-arrow:hover{background:rgba(255,255,255,.32);transform:scale(1.08)}
+.tv-arrow[disabled]{opacity:.28;pointer-events:none}
+.tv-arrow svg{width:30px;height:30px}
+.tv-hint{position:absolute;left:50%;bottom:70px;transform:translateX(-50%);z-index:9;color:rgba(255,255,255,.7);font-size:12px;letter-spacing:.02em;pointer-events:none;text-shadow:0 1px 8px rgba(7,16,33,.6)}
+.tv-vignette{position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 90% at 50% 45%,transparent 55%,rgba(5,12,28,.55))}
+.tv-hot{position:absolute;z-index:5;transform:translate(-50%,-50%);width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,.16);backdrop-filter:blur(3px);border:1.5px solid rgba(255,255,255,.7);color:#fff;display:grid;place-items:center;cursor:pointer;animation:tvpulse 2.2s ease-in-out infinite;transition:background .25s,transform .25s}
+.tv-hot:hover{background:rgba(255,255,255,.34);transform:translate(-50%,-50%) scale(1.12)}
+.tv-hot svg{width:26px;height:26px}
+.tv-hot .lbl{position:absolute;top:calc(100% + 7px);left:50%;transform:translateX(-50%);white-space:nowrap;font-size:11.5px;font-weight:600;background:rgba(7,16,33,.72);padding:4px 9px;border-radius:6px;opacity:0;transition:opacity .2s;pointer-events:none}
+.tv-hot:hover .lbl{opacity:1}
+@keyframes tvpulse{0%,100%{box-shadow:0 0 0 0 rgba(255,255,255,.35)}50%{box-shadow:0 0 0 12px rgba(255,255,255,0)}}
+.tv-top{position:absolute;top:0;left:0;right:0;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:22px 26px;background:linear-gradient(180deg,rgba(5,12,28,.7),transparent)}
+.tv-title{color:#fff}
+.tv-title .ey{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--brand-2);font-weight:600;display:block;margin-bottom:5px}
+.tv-title h3{margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:30px;line-height:1}
+.tv-close{width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(255,255,255,.4);background:rgba(255,255,255,.08);color:#fff;display:grid;place-items:center;cursor:pointer;transition:background .25s}
+.tv-close:hover{background:rgba(255,255,255,.2)}
+.tv-close svg{width:20px;height:20px}
+.tv-dots{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);z-index:10;display:flex;gap:12px;background:rgba(7,16,33,.5);backdrop-filter:blur(6px);padding:11px 16px;border-radius:999px}
+.tv-dot{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;color:rgba(255,255,255,.6);font-size:11px;font-weight:600;transition:color .25s}
+.tv-dot .pip{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.35);transition:background .25s,transform .25s}
+.tv-dot:hover{color:#fff}
+.tv-dot.active{color:#fff}
+.tv-dot.active .pip{background:var(--brand-2);transform:scale(1.25)}
+@media(max-width:860px){.tour-stage{aspect-ratio:4/3}.tv-title h3{font-size:22px}.tv-dot span{display:none}}
+
+/* ── QUALITY CONTROL removed marker keeps below intact ── */
 .quality{padding:24px 0}
-.quality-card{
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:14px;
-  overflow:hidden;
-  display:grid;grid-template-columns:1.2fr 1fr;
-  min-height:420px;
-  box-shadow:0 6px 20px -16px rgba(10,20,40,.18);
-}
-.quality-photo{background:#dde3ec;position:relative}
-.quality-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(232,234,239,.05),rgba(232,234,239,.55))}
-.quality-body{padding:44px 44px;display:flex;flex-direction:column;justify-content:center;gap:18px;position:relative;z-index:2}
-.quality-body h2{font-family:'Instrument Serif',serif;font-weight:400;font-size:38px;line-height:1.1;margin:0;color:var(--ink)}
-.quality-body p{margin:0;color:var(--ink-soft);font-size:15px;max-width:42ch;line-height:1.6}
-.quality-feats{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:14px}
-.q-feat{display:flex;align-items:center;gap:12px;font-size:13.5px;color:var(--ink-soft)}
-.q-feat .ic{
-  width:38px;height:38px;flex:0 0 auto;
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:8px;display:grid;place-items:center;color:var(--brand-deep);
-}
-.q-feat .ic svg{width:18px;height:18px}
+.q2-grid{display:grid;grid-template-columns:.82fr 1.18fr;gap:16px;align-items:stretch}
+.q2-steps{display:flex;flex-direction:column;gap:16px;align-self:start}
+.q2-step{border-radius:14px;overflow:hidden;display:flex;flex-direction:column;text-decoration:none;background:var(--card);border:1px solid var(--line);box-shadow:0 6px 20px -16px rgba(10,20,40,.18);transition:transform .3s cubic-bezier(.18,.7,.2,1),box-shadow .3s,border-color .3s}
+.q2-step:hover{transform:translateY(-4px);box-shadow:0 16px 34px -20px rgba(20,30,60,.3);border-color:var(--brand-2)}
+.q2-ph{position:relative;overflow:hidden;height:190px}
+.q2-step img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.18,.7,.2,1)}
+.q2-step:hover img{transform:scale(1.06)}
+.q2-cap{padding:16px 20px 18px}
+.q2-step h4{margin:0;font-size:16px;font-weight:600;color:var(--ink)}
+.q2-step p{margin:5px 0 0;font-size:12.5px;line-height:1.45;color:var(--ink-soft)}
+.q2-panel{position:relative;border-radius:16px;overflow:hidden;min-height:620px;display:flex;flex-direction:column;justify-content:flex-end;padding:48px;color:#fff;isolation:isolate;text-decoration:none}
+.q2-panel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .7s cubic-bezier(.18,.7,.2,1)}
+.q2-panel:hover img{transform:scale(1.05)}
+.q2-panel .q2-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;opacity:0;transition:opacity .4s ease}
+.q2-panel:hover .q2-vid{opacity:1}
+.q2-panel>div{position:relative;z-index:2;text-shadow:0 2px 16px rgba(7,16,33,.6)}
+.q2-panel::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(7,16,33,.12) 0%,rgba(7,16,33,.5) 50%,rgba(7,16,33,.88) 100%)}
+.q2-ey{font-size:12px;letter-spacing:.24em;text-transform:uppercase;font-weight:600;color:var(--brand-2);margin-bottom:16px;display:block}
+.q2-panel h2{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(30px,3.4vw,44px);line-height:1.05;margin:0;color:#fff}
+.q2-panel p{margin:16px 0 0;font-size:15px;line-height:1.6;color:rgba(255,255,255,.82);max-width:46ch}
+@media(max-width:860px){.q2-grid{grid-template-columns:1fr}.q2-panel{min-height:320px;padding:32px}}
 
 /* ── STANDARDS ──────────────────────────────────────────── */
 .standards{padding:24px 0}
@@ -352,11 +475,24 @@ a{color:inherit;text-decoration:none}
 .geo-title{font-family:'Geist',sans-serif;font-weight:600;font-size:30px;line-height:1.1;margin:0}
 .geo-sub{color:rgba(255,255,255,.7);font-size:15px;margin:10px 0 22px}
 .geo-mapwrap{position:relative;border-radius:16px;overflow:hidden;background:radial-gradient(circle at 50% 38%,#14294f,#0a1430 72%);margin:0 0 26px}
-.geo-map{width:100%;height:620px}
-#exportMap{height:620px !important}
-@media(max-width:720px){#exportMap{height:440px !important}}
-.geo-map svg{height:100% !important;width:auto !important;min-width:100%;display:block;margin:0 auto}
-.geo-map .jvm-tooltip{background:#fff;color:#0a1428;border:none;border-radius:8px;box-shadow:0 8px 24px -8px rgba(0,0,0,.4);padding:7px 11px;font-family:'Geist',sans-serif}
+#geoMapWrap{position:relative;padding:16px}
+.geo-zoom{position:absolute;top:24px;left:24px;z-index:5;display:flex;flex-direction:column;gap:6px}
+.geo-zoom button{width:36px;height:36px;border-radius:8px;border:1px solid rgba(255,255,255,.25);background:rgba(10,20,40,.55);color:#fff;font-size:20px;line-height:1;font-family:'Geist',sans-serif;cursor:pointer;display:grid;place-items:center;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);transition:background .2s,border-color .2s}
+.geo-zoom button:hover{background:rgba(47,128,255,.55);border-color:#5fa8e0}
+#worldMap{width:100%;height:auto;display:block;max-height:600px}
+#worldMap .wm-c{fill:#22314f;stroke:#0e1c34;stroke-width:.4;vector-effect:non-scaling-stroke}
+#worldMap .wm-c.on{fill:#2f80ff;cursor:pointer;transition:fill .2s}
+#worldMap .wm-c.on:hover{fill:#a8d4ff}
+#worldMap .wm-c.on.home{fill:#5aa8ff}
+#worldMap .wm-dot{fill:#bfe0ff;stroke:#0a1730;stroke-width:.5;cursor:pointer;transform-box:fill-box;transform-origin:center;animation:wmpulse 2.4s ease-in-out infinite}
+#worldMap .wm-dot.home{fill:#fff}
+#worldMap .wm-line{stroke:#5fa8e0;stroke-width:.9;fill:none;opacity:.6;stroke-linecap:round;stroke-dasharray:2.5 3.5;vector-effect:non-scaling-stroke;animation:wmflow 20s linear infinite}
+@keyframes wmflow{to{stroke-dashoffset:-60}}
+@keyframes wmpulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.6)}}
+.geo-tip{position:absolute;z-index:6;pointer-events:none;background:#fff;color:#0a1428;border-radius:8px;box-shadow:0 8px 24px -8px rgba(0,0,0,.45);padding:7px 11px;font-family:'Geist',sans-serif;transform:translate(-50%,calc(-100% - 14px));opacity:0;transition:opacity .15s;white-space:nowrap}
+.geo-tip.show{opacity:1}
+.geo-tip b{display:block;font-weight:600;font-size:13px}
+.geo-tip span{font-size:11px;color:#6b7a93}
 @media(max-width:720px){.geo-map{height:440px}}
 .geo-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px 40px}
 .geo-item{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 0;border-top:1px solid rgba(255,255,255,.1);transition:padding-left .25s ease}
@@ -463,6 +599,48 @@ a{color:inherit;text-decoration:none}
 .news-side{display:flex;flex-direction:column;justify-content:flex-end;gap:8px}
 .side-link{font-size:14px;color:var(--brand-deep);font-weight:600;display:inline-flex;align-items:center;gap:8px;margin-bottom:14px}
 
+/* ── TRUST / ДОВЕРИЕ ── */
+.trust{padding:24px 0}
+.trust-card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:grid;grid-template-columns:1.05fr .95fr;box-shadow:0 6px 20px -16px rgba(10,20,40,.18)}
+.trust-body{padding:48px 48px}
+.trust-body h2{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(30px,3.4vw,44px);line-height:1.05;margin:0 0 18px;color:var(--ink)}
+.trust-body>p{color:var(--ink-soft);font-size:15px;line-height:1.65;margin:0 0 28px;max-width:52ch}
+.trust-feats{display:grid;grid-template-columns:1fr 1fr;gap:22px 28px;margin-bottom:30px}
+.tf{display:flex;gap:12px;align-items:flex-start}
+.tf .ic{width:34px;height:34px;flex:none;border-radius:8px;background:var(--glow);display:grid;place-items:center;color:var(--brand-deep)}
+.tf .ic svg{width:17px;height:17px}
+.tf h4{margin:0 0 3px;font-size:14px;font-weight:600;color:var(--ink)}
+.tf p{margin:0;font-size:12.5px;line-height:1.45;color:var(--ink-soft)}
+.trust-media{position:relative;min-height:400px;overflow:hidden}
+.trust-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.trust-stat{position:absolute;right:28px;bottom:28px;background:rgba(255,255,255,.93);backdrop-filter:blur(6px);border-radius:14px;padding:22px 26px;box-shadow:0 20px 44px -22px rgba(10,20,40,.42)}
+.trust-stat b{font-family:'Instrument Serif',serif;font-weight:400;font-size:44px;line-height:1;color:var(--brand-deep);display:block}
+.trust-stat span{font-size:12.5px;color:var(--ink-soft);font-weight:600}
+@media(max-width:860px){.trust-card{grid-template-columns:1fr}.trust-feats{grid-template-columns:1fr 1fr}.trust-media{min-height:280px}}
+
+/* ── OUR FOCUS ── */
+.focus{padding:60px 0 16px}
+.focus-head{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:32px}
+.focus-ey{font-size:12px;letter-spacing:.24em;text-transform:uppercase;font-weight:600;color:var(--ink-mute);display:block;margin-bottom:16px}
+.focus-head h2{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(30px,3.8vw,50px);line-height:1.04;letter-spacing:-.01em;margin:0;color:var(--ink)}
+.focus-right{display:flex;flex-direction:column;gap:18px;padding-bottom:6px}
+.focus-right p{margin:0;color:var(--ink-soft);font-size:15.5px;line-height:1.6;max-width:52ch}
+.focus-link{font-size:14px;color:var(--brand-deep);font-weight:600;display:inline-flex;align-items:center;gap:8px;align-self:flex-start}
+.focus-link:hover{gap:12px}
+.focus-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.fcard{position:relative;height:342px;border-radius:16px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:26px;color:#fff;isolation:isolate;text-decoration:none}
+.fcard .fbg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .7s cubic-bezier(.18,.7,.2,1);z-index:-2}
+.fcard:hover .fbg{transform:scale(1.06)}
+.fcard::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(7,16,33,.12) 0%,rgba(7,16,33,.55) 52%,rgba(7,16,33,.92) 100%)}
+.fcard .fic{position:absolute;top:24px;left:26px;width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center;color:var(--brand-deep)}
+.fcard .fic svg{width:23px;height:23px}
+.fcard h3{font-family:'Instrument Serif',serif;font-weight:400;font-size:23px;line-height:1.1;margin:0 0 9px}
+.fcard p{font-size:13px;line-height:1.5;color:rgba(255,255,255,.82);margin:0 0 16px}
+.fcard .farr{width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.5);display:grid;place-items:center;color:#fff;transition:background .2s,border-color .2s,color .2s}
+.fcard:hover .farr{background:#fff;color:var(--brand-deep);border-color:#fff}
+@media(max-width:900px){.focus-head{grid-template-columns:1fr;gap:18px}.focus-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.focus-grid{grid-template-columns:1fr}}
+
 /* ── FOOTER ─────────────────────────────────────────────── */
 .foot{background:#070f1e;color:rgba(255,255,255,.65);padding:60px 0 32px;border-top:1px solid var(--line-soft)}
 .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px}
@@ -522,19 +700,16 @@ a{color:inherit;text-decoration:none}
 /* global: all headings in Geist */
 h1,h2,h3,h4,h5,h6,.section-title,.hero h1,.page-hero h1{font-family:'Geist',sans-serif !important}
 </style>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsvectormap/dist/jsvectormap.min.css">
-<script src="https://cdn.jsdelivr.net/npm/jsvectormap/dist/jsvectormap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jsvectormap/dist/maps/world.js"></script>
 </head>
 <body style="">
 
 <!-- ───── HEADER ───── -->
 <header class="hdr">
   <div class="wrap">
-    <a href="hv_wp04.html" class="brand"><img src="img/logo-hvara.png" alt="HVARA Pharmaceuticals" class="brand-logo" style="height:48px">
+    <a href="index.html" class="brand"><img src="img/logo-hvara.png" alt="HVARA Pharmaceuticals" class="brand-logo" style="height:48px">
     </a>
     <nav class="nav">
-      <a href="hv_wp04.html" class="is-active">Главная</a>
+      <a href="index.html" class="is-active">Главная</a>
       <a href="o-nas.html">О нас</a>
       <span class="has-sub"><a href="produkciya.html">Продукция</a><div class="submenu"><a href="katalog.html?cat=sprays">Спреи</a><a href="katalog.html?cat=drops">Капли</a><a href="katalog.html?cat=eye">Глазные капли</a><a href="katalog.html?cat=capsules">Капсулы</a><a href="katalog.html?cat=powders">Порошки и саше</a><a href="katalog.html?cat=solutions">Растворы для приёма внутрь</a><a href="katalog.html?cat=suspensions">Суспензии</a><a href="katalog.html?cat=gels">Гели</a><a href="katalog.html?cat=creams">Кремы и мази</a></div></span>
       <a href="napravleniya.html">Направления</a>
@@ -542,7 +717,7 @@ h1,h2,h3,h4,h5,h6,.section-title,.hero h1,.page-hero h1{font-family:'Geist',sans
       <a href="standarty.html">Стандарты</a>
     </nav>
     <div class="hdr-right">
-      <div class="lang-wrap"><button class="util-btn" aria-label="Язык" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"></path></svg> Русский (RU) <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg></button><div class="lang-menu" role="menu"><a href="hv_wp04.html" class="is-active"><span class="flag ru"></span>Русский</a><a href="en/index.html"><span class="flag en"></span>English</a><a href="it/index.html"><span class="flag it"></span>Italiano</a><a href="uz/index.html"><span class="flag uz"></span>O‘zbekcha</a></div></div>
+      <div class="lang-wrap"><button class="util-btn" aria-label="Язык" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"></path></svg> Русский (RU) <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg></button><div class="lang-menu" role="menu"><a href="index.html" class="is-active"><span class="flag ru"></span>Русский</a><a href="en/index.html"><span class="flag en"></span>English</a><a href="it/index.html"><span class="flag it"></span>Italiano</a><a href="uz/index.html"><span class="flag uz"></span>O‘zbekcha</a></div></div>
       <a class="util-btn" href="kontakty.html#map" style="text-decoration:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s-7-7.5-7-13a7 7 0 1 1 14 0c0 5.5-7 13-7 13z"></path><circle cx="12" cy="9" r="2.5"></circle></svg>Локация</a>
       <a class="util-btn" href="kontakty.html" style="text-decoration:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.5 8.5 0 1 1 16.1-3.8z"></path></svg>Контакты</a>
     </div>
@@ -571,7 +746,7 @@ h1,h2,h3,h4,h5,h6,.section-title,.hero h1,.page-hero h1{font-family:'Geist',sans
 <!-- ───── HERO ───── -->
 <section class="hero">
   <div class="hero-stage">
-    <img src="img/hero-vials2.jpg" alt="Производство — ампулы на линии">
+    <img src="img/hero_2.jpg" alt="HVARA — наука и забота о здоровье">
     <div class="hero-content">
       <div class="hero-text">
         <h1 style="font-family:Geist"><span style="font-size:52px;font-weight:600">Качество. Инновации.</span><br><span class="accent">Забота о здоровье людей</span></h1>
@@ -588,15 +763,33 @@ h1,h2,h3,h4,h5,h6,.section-title,.hero h1,.page-hero h1{font-family:'Geist',sans
           <a class="btn btn-primary" href="o-nas.html">О компании
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
           </a>
-          <a class="btn-play" href="#">
-            <span class="play-circle"><svg width="12" height="12" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"></path></svg></span>
-            Смотреть видео
-          </a>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<!-- ───── HERO REEL (автовоспроизведение при прокрутке) ───── -->
+<section class="hero-reel-sec" aria-label="Видео о производстве HVARA">
+  <div class="hero-reel">
+    <video id="heroReel" muted playsinline loop autoplay preload="auto" poster="img/hero-reel-poster.jpg">
+      <source src="media/hero-reel.webm" type="video/webm">
+    </video>
+  </div>
+</section>
+<script>
+(function(){
+  var v=document.getElementById('heroReel'); if(!v) return;
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        var p=v.play(); if(p&&p.catch)p.catch(function(){});
+      } else { v.pause(); }
+    });
+  },{threshold:0.01});
+  io.observe(v);
+})();
+</script>
 
 <!-- ───── STATS ───── -->
 <section class="stats">
@@ -645,17 +838,157 @@ h1,h2,h3,h4,h5,h6,.section-title,.hero h1,.page-hero h1{font-family:'Geist',sans
 <!-- ───── ABOUT ───── -->
 <section class="about" id="about">
   <div class="wrap">
-    <div class="about-card">
-      <div class="about-body">
-        <a href="o-nas.html" class="about-eyebrow" style="text-decoration:none;font-size:20px;font-weight:700">О компании</a>
-        <a href="o-nas.html" style="color:inherit;text-decoration:none"><h2 style="font-size:48px;font-family:Geist;font-weight:600">Технологии,<br>которые спасают<br>жизни</h2></a>
+    <div class="bh-split">
+      <div class="bh-intro">
+        <span class="ey" style="font-size: 20px; font-style: normal; text-decoration-line: none">О компании</span>
+        <h2>Технологии,<br>которые спасают<br>жизни</h2>
         <p>Мы — современный фармацевтический завод полного цикла с фокусом на качество, инновации и устойчивое развитие.</p>
-        <a href="o-nas.html" class="about-more">Подробнее о нас
+        <a href="o-nas.html" class="bh-more">Подробнее о нас
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
         </a>
       </div>
-      <div class="about-photo">
-        <img src="img/factory-night.png" alt="HVARA — производство (ночной фасад)" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
+      <div class="bh-tiles">
+        <a href="o-nas.html" class="bh-tile" id="researchTile">
+          <span class="bh-zoom" style="background-image:url('img/birdamlik.png');background-position:center 20%"></span>
+          <video class="bh-vid" id="researchVid" muted loop playsinline preload="metadata" src="media/hv-research.mp4"></video>
+          <span class="bh-shade"></span>
+          <span class="bh-cap">Непрерывные исследования</span>
+        </a>
+        <a href="o-nas.html" class="bh-tile">
+          <span class="bh-zoom" style="background-image:url('img/hvara-building.png')"></span>
+          <span class="bh-shade"></span>
+          <span class="bh-cap">HVARA Pharmaceuticals</span>
+        </a>
+      </div>
+    </div>
+    <div class="bh-btns">
+      <a href="o-nas.html" class="bh-btn">Наша команда</a>
+      <a href="novosti.html" class="bh-btn">Новости</a>
+      <a href="o-nas.html" class="bh-btn">Наши цели</a>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var t=document.getElementById('researchTile'), v=document.getElementById('researchVid');
+  if(!t||!v) return;
+  t.addEventListener('mouseenter',function(){var p=v.play();if(p&&p.catch)p.catch(function(){});});
+  t.addEventListener('mouseleave',function(){v.pause();try{v.currentTime=0;}catch(_){}});
+})();
+(function(){
+  var v=document.getElementById('qualityVid');
+  if(!v) return;
+  var pl=function(){var p=v.play();if(p&&p.catch)p.catch(function(){});};
+  pl(); v.addEventListener('canplay',pl,{once:true});
+})();
+</script>
+
+<!-- ───── OUR FOCUS ───── -->
+<section class="focus" id="focus">
+  <div class="wrap">
+    <div class="focus-head">
+      <div>
+        <span class="focus-ey">Наш фокус</span>
+        <h2>Где инновации<br>встречают результат</h2>
+      </div>
+      <div class="focus-right">
+        <p>Мы направляем усилия на решение самых сложных задач здравоохранения — через передовую науку, современное производство полного цикла и неустанную заботу о людях.</p>
+        <a href="o-nas.html" class="focus-link">Узнать больше
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+        </a>
+      </div>
+    </div>
+    <div class="focus-grid">
+      <a href="napravleniya.html" class="fcard">
+        <span class="fbg" style="background-image:url('img/focus-science.jpg')"></span>
+        <h3>Наука и инновации</h3>
+        <p>Передовые исследования и разработка эффективных препаратов.</p>
+        <span class="farr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+      </a>
+      <a href="o-nas.html" class="fcard">
+        <span class="fbg" style="background-image:url('img/focus-people.jpg')"></span>
+        <h3>Забота о людях</h3>
+        <p>Здоровье и благополучие людей — в центре всего, что мы делаем.</p>
+        <span class="farr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+      </a>
+      <a href="partneram.html" class="fcard">
+        <span class="fbg" style="background-image:url('img/focus-global.jpg')"></span>
+        <h3>Детское здоровье</h3>
+        <p>Мы производим продукцию с учетом особенностей детского организма.</p>
+        <span class="farr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+      </a>
+      <a href="standarty.html" class="fcard">
+        <span class="fbg" style="background-image:url('img/focus-quality.jpg')"></span>
+        <h3>Устойчивое развитие</h3>
+        <p>Строим более здоровую планету через ответственные и устойчивые действия.</p>
+        <span class="farr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ───── QUALITY ───── -->
+<section class="quality" id="quality">
+  <div class="wrap">
+    <div class="focus-head">
+      <div>
+        <span class="focus-ey">Контроль качества</span>
+        <h2>Качество на каждом этапе</h2>
+      </div>
+      <div class="focus-right">
+        <p>Многоуровневый контроль сырья, производства и готовой продукции обеспечивает безопасность и эффективность наших лекарств.</p>
+        <a href="standarty.html" class="focus-link">Подробнее о стандартах
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+        </a>
+      </div>
+    </div>
+    <div class="q2-grid">
+      <div class="q2-steps">
+        <a href="standarty.html" class="q2-step">
+          <span class="q2-ph"><img src="img/quality-mix.jpg" alt="Смешивание и эмульгирование рецептуры" style="object-position:center 20%"></span>
+          <span class="q2-cap"><h4>Смешивание и эмульгирование рецептуры</h4><p>Контролируемое перемешивание партий помогает поддерживать однородность рецептуры от стадии пробы до производства.</p></span>
+        </a>
+        <a href="standarty.html" class="q2-step">
+          <span class="q2-ph"><img src="img/quality-fill.jpg" alt="Заполнение и сборка"></span>
+          <span class="q2-cap"><h4>Заполнение и сборка</h4><p>Упаковка и сборка продукции осуществляются с соблюдением всех требований чистоты, точности и внешнего вида.</p></span>
+        </a>
+        <a href="standarty.html" class="q2-step">
+          <span class="q2-ph"><img src="img/quality-code.jpg" alt="Кодирование и маркировка"></span>
+          <span class="q2-cap"><h4>Кодирование и маркировка</h4><p>Партионное кодирование и маркировка способствуют идентификации продукции и отслеживанию производственного процесса.</p></span>
+        </a>
+      </div>
+      <a href="standarty.html" class="q2-panel" id="qualityPanel">
+        <img src="img/quality-final.jpg" alt="Заключительный контроль качества">
+        <video class="q2-vid" id="qualityVid" muted loop playsinline autoplay preload="auto" src="media/quality-final.mp4"></video>
+        <div>
+          <h2>Заключительный контроль качества и готовность к отгрузке</h2>
+          <p>Заключительные проверки помогают подтвердить готовность продукции к выпуску, хранению и доставке.</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ───── TRUST / ДОВЕРИЕ ───── -->
+<section class="trust" id="trust">
+  <div class="wrap">
+    <div class="trust-card">
+      <div class="trust-body">
+        <h2>Наследие доверия.<br>Будущее открытий.</h2>
+        <p>HVARA Pharmaceuticals объединяет научную строгость и глубокую заботу о людях, создавая препараты, которые действительно важны.</p>
+        <div class="trust-feats">
+          <div class="tf"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"></path><path d="M10 3v6l-4.5 8a2 2 0 0 0 1.8 3h9.4a2 2 0 0 0 1.8-3L14 9V3"></path></svg></span><div><h4>Ведомы наукой</h4><p>Исследования со строгостью и целью.</p></div></div>
+          <div class="tf"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 12 5 5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7z"></path></svg></span><div><h4>В центре — человек</h4><p>Забота о людях прежде всего.</p></div></div>
+          <div class="tf"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V5z"></path><path d="m9 12 2 2 4-4"></path></svg></span><div><h4>Этика и ответственность</h4><p>Честность и прозрачность.</p></div></div>
+          <div class="tf"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9z"></path></svg></span><div><h4>Влияние на жизни</h4><p>Создаём то, что улучшает жизнь.</p></div></div>
+        </div>
+        <a href="o-nas.html" class="btn btn-primary">Узнать больше о нас
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+        </a>
+      </div>
+      <div class="trust-media">
+        <img src="img/trust-science.jpg" alt="HVARA — наука и исследования">
+        <div class="trust-stat"><b>90+</b><span>наименований продукции</span></div>
       </div>
     </div>
   </div>
@@ -701,38 +1034,6 @@ h1,h2,h3,h4,h5,h6,.section-title,.hero h1,.page-hero h1{font-family:'Geist',sans
         <h3 style="">Гели</h3>
         <p style="">Гели для кожи, суставов и женского здоровья</p>
         <a class="dir-arr" href="katalog.html?cat=gels" style="text-decoration:none">Подробнее <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div>
-    </div>
-  </div>
-</section>
-
-<!-- ───── QUALITY ───── -->
-<section class="quality" id="quality">
-  <div class="wrap">
-    <div class="quality-card">
-      <div class="quality-photo"><img src="img/lab.jpg" alt="HVARA — лаборатория" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></div>
-      <div class="quality-body">
-        <a href="standarty.html" class="section-eyebrow" style="font-size: 20px; text-decoration:none">Контроль качества</a>
-        <a href="standarty.html" style="color:inherit;text-decoration:none"><h2 style="font-size:48px;font-family:Geist;font-weight:600">Качество<br>на каждом этапе</h2></a>
-        <p>Многоуровневый контроль качества сырья, производства и готовой продукции обеспечивает безопасность и эффективность наших лекарств.</p>
-        <div class="quality-feats">
-          <div class="q-feat">
-            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.7l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.7l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.3 7L12 12l8.7-5"/><path d="M12 22V12"/></svg></span>
-            Входной контроль<br>сырья
-          </div>
-          <div class="q-feat">
-            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11V5a3 3 0 1 1 6 0v6"/><path d="M5 11h14l-1.5 9a2 2 0 0 1-2 1.5h-7a2 2 0 0 1-2-1.5z"/><path d="M10 14v3M14 14v3"/></svg></span>
-            Контроль в процессе<br>производства
-          </div>
-          <div class="q-feat">
-            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20z"/></svg></span>
-            Испытания готовой<br>продукции
-          </div>
-          <div class="q-feat">
-            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4"/><path d="M3 17l9 4 9-4"/></svg></span>
-            Стабильность<br>и хранение
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -835,11 +1136,9 @@ h1,h2,h3,h4,h5,h6,.section-title,.hero h1,.page-hero h1{font-family:'Geist',sans
           <li><span class="dot"></span>Кыргызстан <small>регулярные поставки</small></li>
           <li><span class="dot"></span>Афганистан <small>социальные программы</small></li>
           <li><span class="dot"></span>Грузия <small>новые соглашения 2026</small></li>
-          <li><span class="dot"></span>Россия <small>экспорт</small></li>
           <li><span class="dot"></span>Беларусь <small>экспорт</small></li>
           <li><span class="dot"></span>Молдова <small>экспорт</small></li>
           <li><span class="dot"></span>Азербайджан <small>экспорт</small></li>
-          <li><span class="dot"></span>Нигерия <small>экспорт</small></li>
         </ul>
       </div>
     </div>
@@ -851,8 +1150,8 @@ h1,h2,h3,h4,h5,h6,.section-title,.hero h1,.page-hero h1{font-family:'Geist',sans
   <div class="wrap">
     <div class="geo-card">
       <div class="geo-title">География поставок</div>
-      <div class="geo-sub">Наведите на страну или точку — покажутся название и статус.</div>
-      <div class="geo-map" id="exportMap"></div>
+      <div class="geo-sub">Наша продукция поставляется в следующие страны:</div>
+      <div class="geo-mapwrap" id="geoMapWrap"><div class="geo-zoom"><button type="button" id="geoZoomIn" aria-label="Приблизить">+</button><button type="button" id="geoZoomOut" aria-label="Отдалить">−</button></div><svg id="worldMap" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 441" role="img" aria-label="Карта поставок HVARA"></svg><div class="geo-tip" id="geoTip"></div></div>
       <div class="geo-grid">
         <div class="geo-item"><b><span class="gdot"></span>Узбекистан</b><small>Основной рынок</small></div>
         <div class="geo-item"><b><span class="gdot"></span>Казахстан</b><small>Дистрибьюторы</small></div>
@@ -860,16 +1159,52 @@ h1,h2,h3,h4,h5,h6,.section-title,.hero h1,.page-hero h1{font-family:'Geist',sans
         <div class="geo-item"><b><span class="gdot"></span>Кыргызстан</b><small>Регулярные поставки</small></div>
         <div class="geo-item"><b><span class="gdot"></span>Афганистан</b><small>Социальные программы</small></div>
         <div class="geo-item"><b><span class="gdot"></span>Грузия</b><small class="accent2">Новые соглашения 2026</small></div>
-        <div class="geo-item"><b><span class="gdot"></span>Россия</b><small>Экспорт</small></div>
         <div class="geo-item"><b><span class="gdot"></span>Беларусь</b><small>Экспорт</small></div>
         <div class="geo-item"><b><span class="gdot"></span>Молдова</b><small>Экспорт</small></div>
         <div class="geo-item"><b><span class="gdot"></span>Азербайджан</b><small>Экспорт</small></div>
-        <div class="geo-item"><b><span class="gdot"></span>Нигерия</b><small>Экспорт</small></div>
-        <div class="geo-item"><b><span class="gdot"></span>Замбия</b><small>Экспорт</small></div>
       </div>
     </div>
   </div>
 </section>
+
+<!-- ───── VIRTUAL TOUR ───── -->
+<section class="tour" id="tour">
+  <div class="wrap">
+    <div class="focus-head">
+      <div>
+        <span class="focus-ey">Виртуальный тур</span>
+        <h2>Загляните на производство</h2>
+      </div>
+      <div class="focus-right">
+        <p>Панорамная прогулка по ключевым зонам завода HVARA — от входной группы и цехов до лаборатории контроля и склада готовой продукции.</p>
+      </div>
+    </div>
+    <div class="tour-stage" id="tourStage" role="button" tabindex="0" aria-label="Открыть виртуальный тур">
+      <img src="img/tour/1.jpg" alt="Холл HVARA — виртуальный тур">
+      <div class="tour-badge"><span class="dot"></span>Виртуальный тур по зданию</div>
+      <div class="tour-play">
+        <span class="ring"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg></span>
+        <b>Смотреть тур</b>
+        <span>5 панорамных сцен завода</span>
+      </div>
+      <div class="tour-caption">
+        <h4>HVARA Pharmaceuticals</h4>
+        <p>Нажмите, чтобы начать виртуальную прогулку</p>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="tv-overlay" id="tvOverlay" aria-hidden="true">
+  <div class="tv-frame" id="tvFrame"></div>
+  <div class="tv-vignette"></div>
+  <div class="tv-top">
+    <div class="tv-title"><span class="ey">Виртуальный тур</span><h3 id="tvName"></h3></div>
+    <button class="tv-close" id="tvClose" type="button" aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6l-12 12"></path></svg></button>
+  </div>
+  <div class="tv-arrows" id="tvArrows"></div>
+  <button class="tv-back" id="tvBack" type="button" aria-label="Назад"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 6l-6 6 6 6"></path></svg></button>
+  <div class="tv-step" id="tvStep"></div>
+</div>
 
 <!-- ───── NEWS ───── -->
 <section class="news">
@@ -920,7 +1255,7 @@ h1,h2,h3,h4,h5,h6,.section-title,.hero h1,.page-hero h1{font-family:'Geist',sans
   <div class="wrap">
     <div class="foot-grid">
       <div class="foot-brand">
-        <a href="hv_wp04.html" class="brand"><img src="img/logo-hvara.png" alt="HVARA Pharmaceuticals" class="brand-logo" style="height:52px;filter:brightness(0) invert(1)">
+        <a href="index.html" class="brand"><img src="img/logo-hvara.png" alt="HVARA Pharmaceuticals" class="brand-logo" style="height:52px;filter:brightness(0) invert(1)">
         </a>
         <p>Современное фармацевтическое производство полного цикла. Наука, качество, забота о людях с первого дня работы компании.</p>
       </div>
@@ -1078,53 +1413,130 @@ function openMapLB(src){
   document.body.appendChild(ov);
 }
 </script>
+<script>window.jsVectorMap={_maps:{},addMap:function(n,d){this._maps[n]=d}};</script>
+<script src="js/world-map.js"></script>
 <script>
 (function(){
-  var data=[
-    {code:'UZ',name:'Узбекистан',status:'Основной рынок',coords:[41.31,69.28],hub:true},
-    {code:'KZ',name:'Казахстан',status:'Дистрибьюторы',coords:[51.16,71.43]},
-    {code:'TJ',name:'Таджикистан',status:'Активные поставки',coords:[38.56,68.79]},
-    {code:'KG',name:'Кыргызстан',status:'Регулярные поставки',coords:[42.87,74.59]},
-    {code:'AF',name:'Афганистан',status:'Социальные программы',coords:[34.52,69.18]},
-    {code:'GE',name:'Грузия',status:'Новые соглашения 2026',coords:[41.72,44.79]},
-    {code:'RU',name:'Россия',status:'Экспорт',coords:[55.75,37.62]},
-    {code:'BY',name:'Беларусь',status:'Экспорт',coords:[53.90,27.57]},
-    {code:'MD',name:'Молдова',status:'Экспорт',coords:[47.01,28.86]},
-    {code:'AZ',name:'Азербайджан',status:'Экспорт',coords:[40.41,49.87]},
-    {code:'NG',name:'Нигерия',status:'Экспорт',coords:[9.08,7.49]},
-    {code:'ZM',name:'Замбия',status:'Экспорт',coords:[-15.39,28.32]}
-  ];
-  function initMap(n){
-    n=n||0;
-    if(typeof window.jsVectorMap!=='function'){ if(n<80) return setTimeout(function(){initMap(n+1);},130); return; }
-    var el=document.getElementById('exportMap');
-    if(!el||el.dataset.inited) return;
-    var nameMap={},statusMap={},baseFill={};
-    data.forEach(function(c){ nameMap[c.code]=c.name; statusMap[c.code]=c.status; baseFill[c.code]=c.hub?'#5aa8ff':'#2f80ff'; });
-    var hub=data[0].name;
-    var markers=data.map(function(c){return {name:c.name,coords:c.coords};});
-    var lines=data.slice(1).map(function(c){return {from:hub,to:c.name};});
-    try{
-      el.dataset.inited='1';
-      new window.jsVectorMap({
-        selector:'#exportMap', map:'world', zoomButtons:true, zoomOnScroll:false, backgroundColor:'transparent',
-        regionStyle:{initial:{fill:'#2c3a57',stroke:'#1b2540',strokeWidth:0.4},hover:{fillOpacity:1}},
-        markerStyle:{initial:{fill:'#8fc4ff',stroke:'#0a1730',strokeWidth:1.4,r:5},hover:{fill:'#ffffff'}},
-        lineStyle:{stroke:'#3a8dff',strokeWidth:1},
-        markers:markers, lines:lines,
-        onRegionTooltipShow:function(ev,tooltip,code){ if(!nameMap[code]){ev.preventDefault();return;} tooltip.text('<div style="font-weight:600">'+nameMap[code]+'</div><div style="font-size:11px;color:#6b7a93;margin-top:1px">'+statusMap[code]+'</div>',true); },
-        onMarkerTooltipShow:function(ev,tooltip,index){ var c=data[index]; if(c) tooltip.text('<div style="font-weight:600">'+c.name+'</div><div style="font-size:11px;color:#6b7a93;margin-top:1px">'+c.status+'</div>',true); }
-      });
-      setTimeout(function(){try{window.dispatchEvent(new Event('resize'));}catch(e){}},400);
-      el.querySelectorAll('path[data-code]').forEach(function(p){
-        var code=p.getAttribute('data-code');
-        if(baseFill[code]){ p.style.fill=baseFill[code]; p.style.cursor='pointer';
-          p.addEventListener('mouseenter',function(){p.style.fill='#a8d4ff';});
-          p.addEventListener('mouseleave',function(){p.style.fill=baseFill[code];}); }
-      });
-    }catch(e){ el.dataset.inited=''; if(n<70) return setTimeout(function(){initMap(n+1);},160); }
+  function init(){
+    var md=(window.jsVectorMap&&window.jsVectorMap._maps&&window.jsVectorMap._maps.world);
+    var svg=document.getElementById('worldMap'), tip=document.getElementById('geoTip'), wrap=document.getElementById('geoMapWrap');
+    if(!md||!svg||svg.dataset.done) return; svg.dataset.done='1';
+    var partners={
+      UZ:{n:'Узбекистан',s:'Основной рынок',home:true},KZ:{n:'Казахстан',s:'Дистрибьюторы'},
+      TJ:{n:'Таджикистан',s:'Активные поставки'},KG:{n:'Кыргызстан',s:'Регулярные поставки'},
+      AF:{n:'Афганистан',s:'Социальные программы'},GE:{n:'Грузия',s:'Новые соглашения 2026'},
+      BY:{n:'Беларусь',s:'Экспорт'},MD:{n:'Молдова',s:'Экспорт'},AZ:{n:'Азербайджан',s:'Экспорт'}
+    };
+    var ns='http://www.w3.org/2000/svg', inset=md.insets[0], W=inset.width, H=inset.height;
+    var gP=document.createElementNS(ns,'g'), gL=document.createElementNS(ns,'g'), gM=document.createElementNS(ns,'g');
+    function moveTip(e,info){ tip.innerHTML='<b>'+info.n+'</b><span>'+info.s+'</span>'; tip.classList.add('show'); var r=wrap.getBoundingClientRect(); tip.style.left=(e.clientX-r.left)+'px'; tip.style.top=(e.clientY-r.top)+'px'; }
+    function hideTip(){ tip.classList.remove('show'); }
+    Object.keys(md.paths).forEach(function(code){
+      var pe=md.paths[code], p=document.createElementNS(ns,'path');
+      p.setAttribute('d',pe.path); p.setAttribute('data-code',code);
+      var info=partners[code];
+      p.setAttribute('class','wm-c'+(info?(' on'+(info.home?' home':'')):''));
+      if(info){ p.addEventListener('mousemove',function(e){moveTip(e,info)}); p.addEventListener('mouseleave',hideTip); }
+      gP.appendChild(p);
+    });
+    svg.appendChild(gP); svg.appendChild(gL); svg.appendChild(gM);
+    var cen={}, ccx=0, ccy=0, k=0;
+    Object.keys(partners).forEach(function(code){
+      var el=gP.querySelector('path[data-code="'+code+'"]'); if(!el) return;
+      var bb; try{ bb=el.getBBox(); }catch(e){ return; }
+      cen[code]={x:bb.x+bb.width/2, y:bb.y+bb.height/2}; ccx+=cen[code].x; ccy+=cen[code].y; k++;
+    });
+    var cz=1.69;
+    function setView(){ var vw=W/cz, vh=H/cz;
+      var vx=Math.max(0,Math.min(ccx-vw/2, W-vw)), vy=Math.max(0,Math.min(ccy-vh/2, H-vh));
+      if(vw>=W) vx=0; if(vh>=H) vy=0;
+      svg.setAttribute('viewBox', vx.toFixed(1)+' '+vy.toFixed(1)+' '+vw.toFixed(1)+' '+vh.toFixed(1));
+    }
+    if(k){ ccx/=k; ccy/=k; } else { ccx=W/2; ccy=H/2; }
+    setView();
+    var zi=document.getElementById('geoZoomIn'), zo=document.getElementById('geoZoomOut');
+    if(zi) zi.addEventListener('click',function(){ cz=Math.min(cz*1.3,6); setView(); });
+    if(zo) zo.addEventListener('click',function(){ cz=Math.max(cz/1.3,1); setView(); });
+    if(cen.UZ){ Object.keys(cen).forEach(function(code){ if(code==='UZ') return;
+      var ln=document.createElementNS(ns,'line');
+      ln.setAttribute('x1',cen.UZ.x.toFixed(1)); ln.setAttribute('y1',cen.UZ.y.toFixed(1));
+      ln.setAttribute('x2',cen[code].x.toFixed(1)); ln.setAttribute('y2',cen[code].y.toFixed(1));
+      ln.setAttribute('class','wm-line'); gL.appendChild(ln);
+    }); }
+    Object.keys(partners).forEach(function(code){
+      if(!cen[code]) return;
+      var info=partners[code], c=document.createElementNS(ns,'circle');
+      c.setAttribute('cx',cen[code].x.toFixed(1)); c.setAttribute('cy',cen[code].y.toFixed(1));
+      c.setAttribute('r',info.home?3.2:2.4); c.setAttribute('class','wm-dot'+(info.home?' home':''));
+      c.addEventListener('mousemove',function(e){moveTip(e,info)}); c.addEventListener('mouseleave',hideTip);
+      gM.appendChild(c);
+    });
   }
-  if(document.readyState!=='loading') initMap(0); else document.addEventListener('DOMContentLoaded',function(){initMap(0);});
+  if(document.readyState!=='loading') init(); else document.addEventListener('DOMContentLoaded',init);
 })();
 </script>
+<script>
+/* ───── Virtual tour — branching walkthrough ───── */
+(function(){
+  var names={1:'Главный холл',2:'Холл',3:'Ресепшн',4:'Ресепшн',5:'Ресепшн',
+    6:'Лестница',7:'Лестница',8:'Лестница',9:'Лестница',10:'Площадка 2-го этажа',11:'Балкон 2-го этажа',
+    12:'2-й этаж',13:'Коридор',14:'Коридор',15:'Коридор',16:'Коридор',17:'Коридор',18:'Коридор',19:'Коридор',20:'Коридор',21:'Коридор',
+    22:'Выход',23:'Коридор',24:'Коридор'};
+  var nav={
+    1:{fwd:2,left:6}, 2:{fwd:3}, 3:{fwd:4}, 4:{fwd:5}, 5:{},
+    6:{fwd:7}, 7:{fwd:8}, 8:{fwd:9}, 9:{fwd:10}, 10:{fwd:11}, 11:{fwd:12},
+    12:{left:13}, 13:{fwd:14}, 14:{fwd:15}, 15:{fwd:16}, 16:{fwd:17}, 17:{fwd:18}, 18:{fwd:19}, 19:{fwd:20}, 20:{fwd:21},
+    21:{fwd:22,right:12}, 22:{fwd:23}, 23:{fwd:24}, 24:{}
+  };
+  var ov=document.getElementById('tvOverlay'), frame=document.getElementById('tvFrame'),
+      nameEl=document.getElementById('tvName'), arrowsEl=document.getElementById('tvArrows'),
+      backBtn=document.getElementById('tvBack'), stepEl=document.getElementById('tvStep'),
+      closeBtn=document.getElementById('tvClose'), stage=document.getElementById('tourStage');
+  if(!ov||!stage) return;
+  function src(n){ return 'img/tour/'+n+'.jpg'; }
+  Object.keys(names).forEach(function(n){ var i=new Image(); i.src=src(n); });
+  var cur=0, busy=false, curEl=null, hist=[];
+  var CHEV='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 19V5M6 11l6-6 6 6"></path></svg>';
+  function buildArrows(id){
+    arrowsEl.innerHTML='';
+    var n=nav[id]||{};
+    [['fwd','dir-fwd'],['left','dir-left'],['right','dir-right']].forEach(function(p){
+      var t=n[p[0]]; if(!t) return;
+      var b=document.createElement('button'); b.type='button'; b.className='tv-af '+p[1];
+      b.innerHTML='<span class="disc">'+CHEV+'</span><span class="lbl">'+(names[t]||'')+'</span>';
+      b.addEventListener('click',function(e){ e.stopPropagation(); goTo(t,p[0]); });
+      arrowsEl.appendChild(b);
+    });
+  }
+  function render(id,motion){
+    var el=document.createElement('img'); el.alt=names[id]||('Фото '+id);
+    el.style.transform = motion==='back' ? 'scale(0.9)' : (motion==='left'?'translateX(7%) scale(1.1)':motion==='right'?'translateX(-7%) scale(1.1)':'scale(1.14)');
+    frame.appendChild(el);
+    var old=curEl; curEl=el;
+    el.src=src(id);
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ el.classList.add('show'); }); });
+    if(old){ old.classList.remove('show'); old.style.transform = motion==='back'?'scale(1.14)':'scale(0.92)'; setTimeout(function(){ if(old.parentNode) old.remove(); },900); }
+    cur=id; nameEl.textContent=names[id]||('Фото '+id); stepEl.textContent=id+' / 24';
+    buildArrows(id); backBtn.disabled=(hist.length===0);
+  }
+  function goTo(id,motion){ if(busy||!id) return; busy=true; hist.push(cur); render(id,motion||'fwd'); setTimeout(function(){busy=false;},600); }
+  function back(){ if(busy||!hist.length) return; busy=true; var id=hist.pop(); render(id,'back'); setTimeout(function(){busy=false;},600); }
+  function open(){ ov.classList.add('open'); ov.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; if(!cur){ hist=[]; render(1,'fwd'); } }
+  function close(){ ov.classList.remove('open'); ov.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+  stage.addEventListener('click',open);
+  stage.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();open();} });
+  closeBtn.addEventListener('click',close);
+  backBtn.addEventListener('click',back);
+  document.addEventListener('keydown',function(e){
+    if(!ov.classList.contains('open')) return;
+    var n=nav[cur]||{};
+    if(e.key==='Escape') close();
+    else if(e.key==='Backspace'){ e.preventDefault(); back(); }
+    else if(e.key==='ArrowUp'){ if(n.fwd) goTo(n.fwd,'fwd'); }
+    else if(e.key==='ArrowLeft'){ if(n.left) goTo(n.left,'left'); }
+    else if(e.key==='ArrowRight'){ if(n.right) goTo(n.right,'right'); }
+  });
+})();
+</script>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#0f4a85"/><g transform="translate(50 50)" fill="#fff"><path d="M-16 -14 h7 v11 h18 v-11 h7 v34 h-7 v-16 h-18 v16 h-7 z"/></g></svg></template>
 </body></html>
