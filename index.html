@@ -1,0 +1,1542 @@
+<!DOCTYPE html><html lang="ru"><head>
+
+
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HVARA — Pharmaceutical Manufacturing</title>
+<style>
+@font-face{font-family:'Geist';font-style:normal;font-weight:400;font-display:swap;src:url('fonts/Geist-Regular.woff2') format('woff2')}
+@font-face{font-family:'Geist';font-style:normal;font-weight:500;font-display:swap;src:url('fonts/Geist-Medium.woff2') format('woff2')}
+@font-face{font-family:'Geist';font-style:normal;font-weight:600;font-display:swap;src:url('fonts/Geist-SemiBold.woff2') format('woff2')}
+@font-face{font-family:'Geist';font-style:normal;font-weight:700;font-display:swap;src:url('fonts/Geist-Bold.woff2') format('woff2')}
+@font-face{font-family:'Instrument Serif';font-style:normal;font-weight:400;font-display:swap;src:url('fonts/InstrumentSerif-Regular.ttf') format('truetype')}
+@font-face{font-family:'Instrument Serif';font-style:italic;font-weight:400;font-display:swap;src:url('fonts/InstrumentSerif-Italic.ttf') format('truetype')}
+</style>
+<style>
+:root{
+  --bg:        #f4f6f9;
+  --bg-2:      #ffffff;
+  --panel:     #ffffff;
+  --card:      #ffffff;
+  --card-2:    #fafbfd;
+  --line:      #e2e6ec;
+  --line-soft: #eef1f5;
+  --ink:       #0a1428;
+  --ink-soft:  #4a5878;
+  --ink-mute:  #8895ab;
+  --brand:     #1d6fb8;
+  --brand-2:   #4ea3e0;
+  --brand-deep:#0f4a85;
+  --glow:      rgba(29,111,184,.12);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Geist',ui-sans-serif,system-ui,-apple-system,sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  font-size:16px;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+
+.wrap{max-width:1280px;margin:0 auto;padding:0 32px}
+
+/* ── HEADER ─────────────────────────────────────────────── */
+.hdr{
+  background:var(--bg);
+  padding:18px 0;
+  position:sticky;top:0;z-index:50;
+  border-bottom:1px solid var(--line-soft);
+}
+.hdr .wrap{display:flex;align-items:center;gap:32px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-logo{height:46px;width:auto;display:block}
+.brand-mark{
+  width:46px;height:46px;
+  background:linear-gradient(135deg,var(--brand-deep),var(--brand-2));
+  border-radius:8px;
+  display:grid;place-items:center;
+  box-shadow:0 8px 22px -10px rgba(29,111,184,.4);
+  position:relative;
+}
+.brand-mark::before{
+  content:"";position:absolute;inset:8px;
+  border:2px solid #fff;
+  clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);
+}
+.brand-name{display:flex;flex-direction:column;line-height:1.1}
+.brand-name b{font-weight:700;font-size:18px;letter-spacing:.04em;color:var(--ink)}
+.brand-name small{font-size:9.5px;color:var(--ink-mute);letter-spacing:.18em;text-transform:uppercase;margin-top:3px}
+.nav{display:flex;gap:18px;margin-left:32px;flex:1;flex-wrap:nowrap;white-space:nowrap;align-items:center}
+.nav a{font-size:14.5px;color:var(--ink-soft);padding:6px 0;border-bottom:2px solid transparent}
+.nav a:hover,.nav a.is-active{color:var(--ink);border-bottom-color:var(--brand)}
+.hdr-right{display:flex;align-items:center;gap:14px}
+.lang{font-size:13px;color:var(--ink-soft);padding:8px 14px;border:1px solid var(--line);border-radius:8px;display:inline-flex;align-items:center;gap:6px;background:#fff}
+
+/* util-style chip buttons in header (RU / location / contacts) */
+.util-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:7px 13px;border-radius:7px;
+  font-family:'Geist',sans-serif;
+  font-size:12px;color:var(--ink-soft);
+  border:1px solid var(--line);background:#fff;
+  cursor:pointer;
+  transition:border-color .15s,color .15s,background .15s;
+}
+.util-btn:hover{border-color:var(--brand);color:var(--ink);background:var(--bg)}
+.util-btn svg{width:13px;height:13px;flex:0 0 auto}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 20px;border-radius:8px;
+  font-family:'Geist',sans-serif;
+  font-size:14px;font-weight:600;
+  cursor:pointer;border:1px solid transparent;
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:linear-gradient(180deg,var(--brand-deep),#0a3a6b);color:#fff;box-shadow:0 6px 20px -8px rgba(29,111,184,.5)}
+.btn-primary:hover{box-shadow:0 10px 26px -8px rgba(29,111,184,.7)}
+.btn-ghost{background:#fff;border-color:var(--line);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--brand);background:rgba(29,111,184,.06)}
+.btn-play{background:#fff;border:1px solid var(--line);color:var(--ink);padding:10px 20px 10px 12px;border-radius:8px;display:inline-flex;align-items:center;gap:10px}
+.btn-play .play-circle{width:32px;height:32px;border-radius:50%;background:linear-gradient(180deg,var(--brand),var(--brand-deep));display:grid;place-items:center}
+.btn-play:hover{border-color:var(--brand);background:#fafbfd}
+
+/* ── HERO ───────────────────────────────────────────────── */
+.hero{padding:0 0 32px;position:relative;background:var(--bg)}
+.hero-stage{
+  position:relative;
+  height:620px;
+  background:#dde3ec;
+  overflow:hidden;
+}
+.hero-stage img{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;object-position:center right;
+  display:block;
+}
+.hero-stage::before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg, rgba(232,234,239,.97) 0%, rgba(232,234,239,.88) 35%, rgba(232,234,239,.55) 55%, rgba(232,234,239,.05) 75%, transparent 100%);
+  z-index:1;
+}
+.hero-content{
+  position:relative;z-index:2;
+  height:100%;
+  max-width:1280px;margin:0 auto;
+  padding:0 32px;
+  display:flex;align-items:center;
+}
+.hero-text{max-width:560px}
+.hero-eyebrow{font-size:12px;color:var(--brand-deep);letter-spacing:.24em;text-transform:uppercase;font-weight:600;margin-bottom:20px}
+.hero h1{
+  font-family:'Instrument Serif',serif;
+  font-weight:400;font-size:46px;line-height:1.05;letter-spacing:-.01em;
+  margin:0 0 18px;color:var(--ink);
+}
+.hero .sub{font-size:15px;color:var(--ink-soft);max-width:48ch;margin:0 0 8px;line-height:1.55}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+.hero-text{max-width:600px}
+.hero h1 .accent{color:var(--brand)}
+.hero-feats{display:flex;gap:26px;flex-wrap:wrap;margin:20px 0 18px}
+.hero-feat{display:flex;flex-direction:column;align-items:flex-start;gap:9px;max-width:116px}
+.hero-feat .fi{width:34px;height:34px;color:var(--brand);display:grid;place-items:center}
+.hero-feat .fi svg{width:30px;height:30px}
+.hero-feat span{font-size:11px;line-height:1.3;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.04em;font-weight:600}
+.hero-certs{display:flex;gap:13px;flex-wrap:wrap;align-items:center}
+.cert-badge{width:64px;height:64px;border:1.5px solid var(--brand-deep);color:var(--brand-deep);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:700;text-align:center;line-height:1;background:rgba(255,255,255,.45)}
+.cert-badge b{font-size:17px;letter-spacing:.02em}
+.cert-badge small{font-size:8px;font-weight:600;margin-top:3px;letter-spacing:.03em}
+.hero-img{
+  aspect-ratio:1/1;
+  border-radius:14px;overflow:hidden;
+  background:#091628;
+  position:relative;
+  box-shadow:0 30px 60px -30px rgba(0,0,0,.6);
+}
+
+/* HERO REEL (видео-продолжение при прокрутке) */
+.hero-reel-sec{position:relative;background:var(--bg);padding:0 0 8px}
+.hero-reel{position:relative;width:100%;height:560px;overflow:hidden;background:#091628}
+.hero-reel video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.hero-reel::before{content:"";position:absolute;top:0;left:0;right:0;height:90px;z-index:1;pointer-events:none;background:linear-gradient(180deg,var(--bg) 0%,transparent 100%)}
+@media(max-width:760px){.hero-reel{height:56vw;min-height:260px}}
+
+/* ── STATS GRID ─────────────────────────────────────────── */
+.stats{padding:24px 0 24px}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.stat-card{
+  background:linear-gradient(180deg,#ffffff 0%,#f4f7fb 100%);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:24px 24px 22px;
+  display:flex;align-items:center;gap:18px;
+  box-shadow:
+    0 1px 0 #fff inset,
+    0 -1px 0 rgba(10,20,40,.04) inset,
+    0 14px 28px -14px rgba(10,20,40,.22),
+    0 6px 12px -6px rgba(10,20,40,.12);
+  transform:translateZ(0);
+  transition:border-color .2s, box-shadow .25s, transform .25s;
+}
+.stat-card:hover{
+  border-color:var(--brand);
+  transform:translateY(-4px);
+  box-shadow:
+    0 1px 0 #fff inset,
+    0 -1px 0 rgba(10,20,40,.04) inset,
+    0 22px 40px -14px rgba(29,111,184,.28),
+    0 10px 18px -8px rgba(10,20,40,.18);
+}
+.stat-icon{
+  width:54px;height:54px;flex:0 0 auto;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:12px;
+  display:grid;place-items:center;
+  color:var(--brand-deep);
+  box-shadow:inset 0 0 24px rgba(29,111,184,.06);
+}
+.stat-icon svg{width:26px;height:26px}
+.stat-text{display:flex;flex-direction:column;line-height:1.2}
+.stat-n{
+  font-family:'Instrument Serif',serif;
+  font-weight:600;
+  font-size:34px;color:var(--ink);letter-spacing:-.01em;
+}
+.stat-l{font-size:12.5px;color:var(--ink-soft);margin-top:4px;line-height:1.4;max-width:18ch}
+
+/* ── ABOUT SPLIT ────────────────────────────────────────── */
+.about{padding:24px 0}
+.about-card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
+  display:grid;grid-template-columns:1fr 1.4fr;
+  box-shadow:0 6px 20px -16px rgba(10,20,40,.18);
+}
+.about-body{padding:48px 48px 48px}
+.about-eyebrow{
+  font-size:11px;color:var(--brand-deep);letter-spacing:.24em;text-transform:uppercase;font-weight:600;margin-bottom:18px;display:block;
+}
+.about-body h2{
+  font-family:'Instrument Serif',serif;
+  font-weight:400;font-size:42px;line-height:1.05;letter-spacing:-.01em;
+  margin:0 0 20px;color:var(--ink);
+}
+.about-body p{color:var(--ink-soft);font-size:15px;margin:0 0 28px;max-width:42ch;line-height:1.6}
+.about-more{
+  font-size:14px;color:var(--brand-deep);font-weight:600;
+  display:inline-flex;align-items:center;gap:8px;
+  border-bottom:1px solid var(--brand-deep);padding-bottom:2px;
+}
+.about-photo{background:#dde3ec;position:relative;min-height:380px;overflow:hidden}
+.about-photo .badge{position:absolute;right:32px;top:32px;font-family:'Instrument Serif',serif;font-style:italic;font-size:48px;color:rgba(255,255,255,.85);letter-spacing:.04em;text-shadow:0 2px 12px rgba(10,20,40,.4);z-index:2}
+
+/* ── О компании — плитки (блок из hvuz1) ── */
+.bh-head{display:flex;align-items:flex-start;gap:14px;margin:6px 6px 24px}
+.bh-head .n{font-family:'Instrument Serif',serif;font-style:italic;font-size:50px;line-height:.8;color:var(--brand)}
+.bh-head h3{margin:0;padding-top:8px;font-family:'Instrument Serif',serif;font-weight:400;font-size:34px;line-height:1;color:var(--ink);letter-spacing:-.01em}
+.bh-tiles{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.bh-tile{position:relative;display:block;height:380px;overflow:hidden;border-radius:14px;text-decoration:none;transition:transform .35s cubic-bezier(.18,.7,.2,1),box-shadow .35s ease}
+.bh-tile .bh-zoom{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .7s cubic-bezier(.18,.7,.2,1);will-change:transform}
+.bh-tile:hover .bh-zoom{transform:scale(1.05)}
+.bh-tile:hover{transform:translateY(-8px);box-shadow:0 22px 42px -18px rgba(10,20,40,.42)}
+.bh-tile .bh-shade{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 52%,rgba(4,12,28,.62));z-index:2}
+.bh-tile .bh-cap{position:absolute;left:26px;bottom:24px;color:#fff;font-size:21px;font-weight:600;z-index:3;letter-spacing:.01em}
+.bh-tile .bh-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .4s ease;z-index:1}
+.bh-tile:hover .bh-vid{opacity:1}
+.bh-btns{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
+.bh-btn{border:1px solid var(--line);border-radius:12px;padding:18px;text-align:center;font-size:15.5px;color:var(--ink-soft);background:#fff;text-decoration:none;font-weight:500;transition:transform .25s ease,box-shadow .25s ease,background .25s ease,color .25s ease,border-color .25s ease}
+.bh-btn:hover{transform:translateY(-3px);box-shadow:0 12px 26px -12px rgba(10,20,40,.28);background:var(--brand-deep);color:#fff;border-color:var(--brand-deep)}
+@media (max-width:760px){.bh-tiles{grid-template-columns:1fr}.bh-btns{grid-template-columns:1fr}.bh-tile{height:280px}}
+
+/* Вариант «сплит»: интро-колонка слева + плитки справа */
+.bh-split{display:grid;grid-template-columns:.82fr 1.18fr;gap:36px;align-items:stretch}
+.bh-intro{align-self:center;padding-right:8px}
+.bh-intro .ey{font-size:12px;color:var(--brand-deep);letter-spacing:.24em;text-transform:uppercase;font-weight:600;display:block;margin-bottom:16px}
+.bh-intro h2{font-family:'Instrument Serif',serif;font-weight:400;font-size:44px;line-height:1.05;letter-spacing:-.01em;margin:0 0 18px;color:var(--ink)}
+.bh-intro p{color:var(--ink-soft);font-size:15.5px;line-height:1.65;margin:0 0 24px;max-width:44ch}
+.bh-more{font-size:14px;color:var(--brand-deep);font-weight:600;display:inline-flex;align-items:center;gap:8px;border-bottom:1px solid var(--brand-deep);padding-bottom:2px;text-decoration:none}
+.bh-split .bh-tiles{align-content:stretch}
+.bh-split .bh-tile{height:100%;min-height:360px}
+@media (max-width:860px){.bh-split{grid-template-columns:1fr;gap:26px}.bh-split .bh-tile{min-height:280px}}
+
+/* ── DIRECTIONS / CATEGORIES ────────────────────────────── */
+.dir{padding:24px 0}
+.section-head{
+  display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;gap:24px;
+  padding:0 6px;
+}
+.section-eyebrow{
+  font-size:11px;color:var(--brand-deep);letter-spacing:.24em;text-transform:uppercase;font-weight:600;
+}
+.slider-ctrl{display:flex;gap:8px}
+.slider-btn{
+  width:38px;height:38px;border-radius:50%;
+  background:#fff;border:1px solid var(--line);color:var(--ink);
+  display:grid;place-items:center;cursor:pointer;
+  transition:border-color .15s,background .15s;
+  box-shadow:0 4px 12px -8px rgba(10,20,40,.18);
+}
+.slider-btn:hover{border-color:var(--brand);background:#fafbfd;color:var(--brand-deep)}
+.dir-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+.prod-grid{grid-template-columns:repeat(4,1fr)}
+.napr-grid{grid-template-columns:repeat(5,1fr)}
+.dir-card{
+  position:relative;
+  background:#1a3358;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:24px 22px 22px;
+  display:flex;flex-direction:column;gap:16px;
+  aspect-ratio:4/5;
+  transition:border-color .2s,transform .2s,box-shadow .2s;
+  cursor:pointer;
+  overflow:hidden;
+  box-shadow:0 6px 20px -16px rgba(10,20,40,.18);
+  background-size:115% auto;background-position:center top;background-repeat:no-repeat;
+}
+.dir-card::before{
+  content:"";position:absolute;inset:0;z-index:0;
+  background:linear-gradient(180deg, rgba(15,30,54,.78) 0%, rgba(15,30,54,.55) 38%, rgba(15,30,54,.05) 65%, transparent 100%);
+}
+.dir-card > *{position:relative;z-index:1}
+.dir-card::after{
+  content:"";position:absolute;inset:0;z-index:0;
+  background:linear-gradient(135deg, rgba(78,163,224,.45) 0%, rgba(29,111,184,.35) 50%, rgba(15,90,147,.55) 100%);
+  opacity:0;transition:opacity .3s ease;
+  pointer-events:none;
+}
+.dir-card:hover::after{opacity:1}
+.dir-card:hover{border-color:var(--brand);transform:translateY(-3px);box-shadow:0 14px 40px -12px rgba(78,163,224,.4)}
+.dir-icon{
+  width:36px;height:36px;
+  background:rgba(255,255,255,.85);
+  border:1px solid rgba(78,163,224,.4);
+  border-radius:50%;
+  display:grid;place-items:center;
+  color:var(--brand-deep);
+  box-shadow:0 2px 8px rgba(10,20,40,.08);
+  margin-bottom:4px;
+}
+.dir-icon svg{width:18px;height:18px}
+.dir-icon svg{width:28px;height:28px}
+.dir-card h3{font-size:17px;margin:0;color:#fff;font-weight:700;text-shadow:0 1px 4px rgba(10,20,40,.4)}
+.dir-card p{font-size:13px;color:rgba(255,255,255,.92);margin:0;line-height:1.5;flex:1;text-shadow:0 1px 3px rgba(10,20,40,.35)}
+.dir-arr{align-self:flex-start;color:#fff;display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500}
+
+/* ── QUALITY CONTROL ────────────────────────────────────── */
+/* ── VIRTUAL TOUR ──────────────────────────────────────── */
+.tour{padding:60px 0 16px}
+.tour-stage{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:16/8;background:#0a1428;cursor:zoom-in;box-shadow:0 20px 50px -26px rgba(10,20,40,.5)}
+.tour-stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.06);transition:transform 8s ease-out}
+.tour-stage:hover img{transform:scale(1.12)}
+.tour-stage::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,16,33,.12),rgba(7,16,33,.55))}
+.tour-badge{position:absolute;top:20px;left:20px;z-index:2;display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.92);backdrop-filter:blur(6px);border-radius:999px;padding:8px 15px;font-size:12.5px;font-weight:600;color:var(--brand-deep)}
+.tour-badge .dot{width:7px;height:7px;border-radius:50%;background:#2fb37a;box-shadow:0 0 0 4px rgba(47,179,122,.25)}
+.tour-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:14px;color:#fff;text-align:center;pointer-events:none}
+.tour-play .ring{width:78px;height:78px;border-radius:50%;background:rgba(255,255,255,.16);backdrop-filter:blur(4px);border:1.5px solid rgba(255,255,255,.6);display:grid;place-items:center;transition:transform .3s,background .3s}
+.tour-stage:hover .tour-play .ring{transform:scale(1.08);background:rgba(255,255,255,.28)}
+.tour-play .ring svg{width:30px;height:30px;margin-left:4px}
+.tour-play b{font-family:'Instrument Serif',serif;font-weight:400;font-size:26px;text-shadow:0 2px 14px rgba(7,16,33,.6)}
+.tour-play span{font-size:13px;opacity:.9;text-shadow:0 1px 8px rgba(7,16,33,.6)}
+.tour-caption{position:absolute;left:20px;bottom:18px;z-index:2;color:#fff}
+.tour-caption h4{margin:0;font-size:17px;font-weight:600;text-shadow:0 2px 12px rgba(7,16,33,.6)}
+.tour-caption p{margin:2px 0 0;font-size:12.5px;opacity:.85;text-shadow:0 1px 8px rgba(7,16,33,.6)}
+/* fullscreen viewer */
+.tv-overlay{position:fixed;inset:0;z-index:9998;background:#050c1c;opacity:0;visibility:hidden;transition:opacity .35s ease}
+.tv-overlay.open{opacity:1;visibility:visible}
+.tv-frame{position:absolute;inset:0;overflow:hidden;background:#050c1c}
+.tv-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.12);transition:opacity .7s ease,transform 1.2s cubic-bezier(.22,.61,.36,1)}
+.tv-frame img.show{opacity:1;transform:scale(1)}
+.tv-floor{position:absolute;left:50%;bottom:12%;transform:translateX(-50%);z-index:11;display:flex;flex-direction:column;align-items:center;gap:9px;background:none;border:0;padding:0;cursor:pointer}
+.tv-floor .chev{width:76px;height:76px;border-radius:50%;display:grid;place-items:center;color:#0a1428;background:rgba(255,255,255,.92);transform:perspective(320px) rotateX(46deg);transition:transform .2s,background .2s;box-shadow:0 12px 26px -6px rgba(0,0,0,.55);animation:tvstep 1.9s ease-in-out infinite}
+.tv-floor:hover .chev{background:#fff;transform:perspective(320px) rotateX(46deg) scale(1.09)}
+.tv-floor .chev svg{width:36px;height:36px}
+.tv-floor .lbl{font-size:12.5px;font-weight:600;letter-spacing:.06em;color:#fff;text-shadow:0 1px 10px rgba(7,16,33,.75);background:rgba(7,16,33,.35);padding:3px 12px;border-radius:999px;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+@keyframes tvstep{0%,100%{box-shadow:0 12px 26px -6px rgba(0,0,0,.55),0 0 0 0 rgba(255,255,255,.5)}50%{box-shadow:0 12px 26px -6px rgba(0,0,0,.55),0 0 0 18px rgba(255,255,255,0)}}
+.tv-back{position:absolute;left:26px;bottom:calc(12% + 12px);z-index:11;width:50px;height:50px;border-radius:50%;background:rgba(7,16,33,.5);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);border:1.5px solid rgba(255,255,255,.55);color:#fff;display:grid;place-items:center;cursor:pointer;transition:background .2s,transform .2s}
+.tv-back:hover{background:rgba(255,255,255,.28);transform:scale(1.07)}
+.tv-back[disabled]{opacity:.28;pointer-events:none}
+.tv-back svg{width:22px;height:22px}
+.tv-progress{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);z-index:11;display:flex;gap:8px}
+.tv-progress i{width:28px;height:4px;border-radius:2px;background:rgba(255,255,255,.28);cursor:pointer;transition:background .3s}
+.tv-progress i.on{background:var(--brand-2)}
+.tv-arrows{position:absolute;inset:0;z-index:11;pointer-events:none}
+.tv-af{position:absolute;z-index:11;display:flex;flex-direction:column;align-items:center;gap:7px;background:none;border:0;padding:0;cursor:pointer;pointer-events:auto}
+.tv-af .disc{width:72px;height:72px;border-radius:50%;display:grid;place-items:center;color:#0a1428;background:rgba(255,255,255,.92);transform:perspective(320px) rotateX(46deg);box-shadow:0 12px 26px -6px rgba(0,0,0,.55);animation:tvstep 1.9s ease-in-out infinite;transition:background .2s,transform .2s}
+.tv-af:hover .disc{background:#fff;transform:perspective(320px) rotateX(46deg) scale(1.08)}
+.tv-af .disc svg{width:34px;height:34px}
+.tv-af .lbl{font-size:12px;font-weight:600;color:#fff;text-shadow:0 1px 10px rgba(7,16,33,.8);background:rgba(7,16,33,.42);padding:3px 11px;border-radius:999px;white-space:nowrap;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.tv-af.dir-fwd{left:50%;bottom:15%;transform:translateX(-50%)}
+.tv-af.dir-left{left:20%;bottom:13%}
+.tv-af.dir-right{right:20%;bottom:13%}
+.tv-af.dir-left .disc svg{transform:rotate(-90deg)}
+.tv-af.dir-right .disc svg{transform:rotate(90deg)}
+.tv-step{position:absolute;left:50%;bottom:24px;transform:translateX(-50%);z-index:11;color:rgba(255,255,255,.85);font-size:12px;font-weight:600;letter-spacing:.06em;background:rgba(7,16,33,.4);padding:5px 13px;border-radius:999px;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.tv-scene{position:absolute;inset:0;overflow:hidden}
+.tv-pano{position:absolute;inset:0;background-repeat:repeat-x;background-size:auto 100%;background-position:center center;opacity:0;transition:opacity .6s ease;will-change:background-position}
+.tv-pano.show{opacity:1}
+.tv-scene{position:absolute;inset:0;overflow:hidden;cursor:grab}
+.tv-scene.grabbing{cursor:grabbing}
+.tv-360{position:absolute;top:22px;left:50%;transform:translateX(-50%);z-index:10;display:inline-flex;align-items:center;gap:7px;background:rgba(7,16,33,.5);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:6px 13px;color:#fff;font-size:12px;font-weight:600;letter-spacing:.04em}
+.tv-360 svg{width:15px;height:15px}
+.tv-nav{position:absolute;left:50%;bottom:96px;transform:translateX(-50%);z-index:10;display:flex;gap:120px}
+.tv-arrow{width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,.16);backdrop-filter:blur(4px);border:1.5px solid rgba(255,255,255,.65);color:#fff;display:grid;place-items:center;cursor:pointer;transition:background .25s,transform .25s,opacity .25s}
+.tv-arrow:hover{background:rgba(255,255,255,.32);transform:scale(1.08)}
+.tv-arrow[disabled]{opacity:.28;pointer-events:none}
+.tv-arrow svg{width:30px;height:30px}
+.tv-hint{position:absolute;left:50%;bottom:70px;transform:translateX(-50%);z-index:9;color:rgba(255,255,255,.7);font-size:12px;letter-spacing:.02em;pointer-events:none;text-shadow:0 1px 8px rgba(7,16,33,.6)}
+.tv-vignette{position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 90% at 50% 45%,transparent 55%,rgba(5,12,28,.55))}
+.tv-hot{position:absolute;z-index:5;transform:translate(-50%,-50%);width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,.16);backdrop-filter:blur(3px);border:1.5px solid rgba(255,255,255,.7);color:#fff;display:grid;place-items:center;cursor:pointer;animation:tvpulse 2.2s ease-in-out infinite;transition:background .25s,transform .25s}
+.tv-hot:hover{background:rgba(255,255,255,.34);transform:translate(-50%,-50%) scale(1.12)}
+.tv-hot svg{width:26px;height:26px}
+.tv-hot .lbl{position:absolute;top:calc(100% + 7px);left:50%;transform:translateX(-50%);white-space:nowrap;font-size:11.5px;font-weight:600;background:rgba(7,16,33,.72);padding:4px 9px;border-radius:6px;opacity:0;transition:opacity .2s;pointer-events:none}
+.tv-hot:hover .lbl{opacity:1}
+@keyframes tvpulse{0%,100%{box-shadow:0 0 0 0 rgba(255,255,255,.35)}50%{box-shadow:0 0 0 12px rgba(255,255,255,0)}}
+.tv-top{position:absolute;top:0;left:0;right:0;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:22px 26px;background:linear-gradient(180deg,rgba(5,12,28,.7),transparent)}
+.tv-title{color:#fff}
+.tv-title .ey{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--brand-2);font-weight:600;display:block;margin-bottom:5px}
+.tv-title h3{margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:30px;line-height:1}
+.tv-close{width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(255,255,255,.4);background:rgba(255,255,255,.08);color:#fff;display:grid;place-items:center;cursor:pointer;transition:background .25s}
+.tv-close:hover{background:rgba(255,255,255,.2)}
+.tv-close svg{width:20px;height:20px}
+.tv-dots{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);z-index:10;display:flex;gap:12px;background:rgba(7,16,33,.5);backdrop-filter:blur(6px);padding:11px 16px;border-radius:999px}
+.tv-dot{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;color:rgba(255,255,255,.6);font-size:11px;font-weight:600;transition:color .25s}
+.tv-dot .pip{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.35);transition:background .25s,transform .25s}
+.tv-dot:hover{color:#fff}
+.tv-dot.active{color:#fff}
+.tv-dot.active .pip{background:var(--brand-2);transform:scale(1.25)}
+@media(max-width:860px){.tour-stage{aspect-ratio:4/3}.tv-title h3{font-size:22px}.tv-dot span{display:none}}
+
+/* ── QUALITY CONTROL removed marker keeps below intact ── */
+.quality{padding:24px 0}
+.q2-grid{display:grid;grid-template-columns:.82fr 1.18fr;gap:16px;align-items:stretch}
+.q2-steps{display:flex;flex-direction:column;gap:16px;align-self:start}
+.q2-step{border-radius:14px;overflow:hidden;display:flex;flex-direction:column;text-decoration:none;background:var(--card);border:1px solid var(--line);box-shadow:0 6px 20px -16px rgba(10,20,40,.18);transition:transform .3s cubic-bezier(.18,.7,.2,1),box-shadow .3s,border-color .3s}
+.q2-step:hover{transform:translateY(-4px);box-shadow:0 16px 34px -20px rgba(20,30,60,.3);border-color:var(--brand-2)}
+.q2-ph{position:relative;overflow:hidden;height:190px}
+.q2-step img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.18,.7,.2,1)}
+.q2-step:hover img{transform:scale(1.06)}
+.q2-cap{padding:16px 20px 18px}
+.q2-step h4{margin:0;font-size:16px;font-weight:600;color:var(--ink)}
+.q2-step p{margin:5px 0 0;font-size:12.5px;line-height:1.45;color:var(--ink-soft)}
+.q2-panel{position:relative;border-radius:16px;overflow:hidden;min-height:620px;display:flex;flex-direction:column;justify-content:flex-end;padding:48px;color:#fff;isolation:isolate;text-decoration:none}
+.q2-panel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .7s cubic-bezier(.18,.7,.2,1)}
+.q2-panel:hover img{transform:scale(1.05)}
+.q2-panel .q2-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;opacity:0;transition:opacity .4s ease}
+.q2-panel:hover .q2-vid{opacity:1}
+.q2-panel>div{position:relative;z-index:2;text-shadow:0 2px 16px rgba(7,16,33,.6)}
+.q2-panel::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(7,16,33,.12) 0%,rgba(7,16,33,.5) 50%,rgba(7,16,33,.88) 100%)}
+.q2-ey{font-size:12px;letter-spacing:.24em;text-transform:uppercase;font-weight:600;color:var(--brand-2);margin-bottom:16px;display:block}
+.q2-panel h2{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(30px,3.4vw,44px);line-height:1.05;margin:0;color:#fff}
+.q2-panel p{margin:16px 0 0;font-size:15px;line-height:1.6;color:rgba(255,255,255,.82);max-width:46ch}
+@media(max-width:860px){.q2-grid{grid-template-columns:1fr}.q2-panel{min-height:320px;padding:32px}}
+
+/* ── STANDARDS ──────────────────────────────────────────── */
+.standards{padding:24px 0}
+.standards-card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:32px 40px;
+  display:flex;align-items:center;gap:48px;
+  box-shadow:0 6px 20px -16px rgba(10,20,40,.18);
+}
+.standards-card .lead{flex:0 0 auto;max-width:34ch}
+.standards-card .eyebrow{font-size:11px;color:var(--brand-deep);letter-spacing:.24em;text-transform:uppercase;font-weight:600;margin-bottom:14px;display:block}
+.standards-card h2{font-family:'Instrument Serif',serif;font-weight:400;font-size:28px;line-height:1.15;margin:0;color:var(--ink)}
+.cert-row{display:flex;align-items:center;gap:32px;flex:1;flex-wrap:wrap}
+.cert{display:flex;flex-direction:column;align-items:center;gap:6px}
+.cert-mark{
+  width:74px;height:74px;border-radius:50%;
+  background:#fff;
+  border:1.5px solid var(--brand-deep);
+  display:grid;place-items:center;color:var(--brand-deep);
+  font-family:'Geist',sans-serif;font-weight:700;font-size:14px;text-align:center;line-height:1;letter-spacing:.04em;
+}
+.cert-label{font-size:11px;color:var(--ink-soft);font-family:'Geist',sans-serif;letter-spacing:.06em;font-weight:500}
+.cert-all{margin-left:auto;font-size:14px;color:var(--brand-deep);font-weight:600;white-space:nowrap;display:inline-flex;align-items:center;gap:8px}
+
+
+/* ── PARTNERSHIP ─────────────────────────────────────────── */
+.partnership{padding:24px 0}
+.geo{padding:24px 0}
+.geo-card{background:linear-gradient(160deg,#0a1e4d 0%,#0a1428 100%);border-radius:20px;padding:40px 40px 34px;color:#fff;box-shadow:0 18px 46px -20px rgba(10,20,40,.5)}
+.geo-title{font-family:'Geist',sans-serif;font-weight:600;font-size:30px;line-height:1.1;margin:0}
+.geo-sub{color:rgba(255,255,255,.7);font-size:15px;margin:10px 0 22px}
+.geo-mapwrap{position:relative;border-radius:16px;overflow:hidden;background:radial-gradient(circle at 50% 38%,#14294f,#0a1430 72%);margin:0 0 26px}
+#geoMapWrap{position:relative;padding:16px}
+.geo-zoom{position:absolute;top:24px;left:24px;z-index:5;display:flex;flex-direction:column;gap:6px}
+.geo-zoom button{width:36px;height:36px;border-radius:8px;border:1px solid rgba(255,255,255,.25);background:rgba(10,20,40,.55);color:#fff;font-size:20px;line-height:1;font-family:'Geist',sans-serif;cursor:pointer;display:grid;place-items:center;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);transition:background .2s,border-color .2s}
+.geo-zoom button:hover{background:rgba(47,128,255,.55);border-color:#5fa8e0}
+#worldMap{width:100%;height:auto;display:block;max-height:600px}
+#worldMap .wm-c{fill:#22314f;stroke:#0e1c34;stroke-width:.4;vector-effect:non-scaling-stroke}
+#worldMap .wm-c.on{fill:#2f80ff;cursor:pointer;transition:fill .2s}
+#worldMap .wm-c.on:hover{fill:#a8d4ff}
+#worldMap .wm-c.on.home{fill:#5aa8ff}
+#worldMap .wm-dot{fill:#bfe0ff;stroke:#0a1730;stroke-width:.5;cursor:pointer;transform-box:fill-box;transform-origin:center;animation:wmpulse 2.4s ease-in-out infinite}
+#worldMap .wm-dot.home{fill:#fff}
+#worldMap .wm-line{stroke:#5fa8e0;stroke-width:.9;fill:none;opacity:.6;stroke-linecap:round;stroke-dasharray:2.5 3.5;vector-effect:non-scaling-stroke;animation:wmflow 20s linear infinite}
+@keyframes wmflow{to{stroke-dashoffset:-60}}
+@keyframes wmpulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.6)}}
+.geo-tip{position:absolute;z-index:6;pointer-events:none;background:#fff;color:#0a1428;border-radius:8px;box-shadow:0 8px 24px -8px rgba(0,0,0,.45);padding:7px 11px;font-family:'Geist',sans-serif;transform:translate(-50%,calc(-100% - 14px));opacity:0;transition:opacity .15s;white-space:nowrap}
+.geo-tip.show{opacity:1}
+.geo-tip b{display:block;font-weight:600;font-size:13px}
+.geo-tip span{font-size:11px;color:#6b7a93}
+@media(max-width:720px){.geo-map{height:440px}}
+.geo-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px 40px}
+.geo-item{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 0;border-top:1px solid rgba(255,255,255,.1);transition:padding-left .25s ease}
+.geo-item:hover{padding-left:8px}
+.geo-item b{display:flex;align-items:center;gap:11px;font-size:15.5px;font-weight:600;color:#fff}
+.geo-item small{font-size:13px;color:rgba(255,255,255,.6);text-align:right}
+.geo-item small.accent2{color:#f0a35e;font-weight:600}
+.gdot{width:9px;height:9px;border-radius:50%;background:#5fa8e0;flex:none;box-shadow:0 0 0 0 rgba(95,168,224,.6);animation:gpulse 2.4s ease-out infinite}
+@keyframes gpulse{0%{box-shadow:0 0 0 0 rgba(95,168,224,.55)}70%{box-shadow:0 0 0 8px rgba(95,168,224,0)}100%{box-shadow:0 0 0 0 rgba(95,168,224,0)}}
+@media(max-width:720px){.geo-grid{grid-template-columns:1fr}}
+.partnership-card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
+  display:grid;grid-template-columns:1.4fr 1fr;
+  box-shadow:0 6px 20px -16px rgba(10,20,40,.18);
+}
+.partnership-body{padding:44px 44px;display:flex;flex-direction:column;gap:18px}
+.partnership-body h2{font-family:'Instrument Serif',serif;font-weight:400;font-size:38px;line-height:1.1;margin:0;color:var(--ink)}
+.partnership-body p{margin:0;color:var(--ink-soft);font-size:15px;max-width:54ch;line-height:1.6}
+.partnership-feats{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:8px}
+.p-feat{display:flex;align-items:center;gap:12px;font-size:13.5px;color:var(--ink-soft)}
+.p-feat .ic{
+  width:38px;height:38px;flex:0 0 auto;
+  background:#fff;border:1px solid var(--line);
+  border-radius:8px;display:grid;place-items:center;color:var(--brand-deep);
+}
+.p-feat .ic svg{width:18px;height:18px}
+.partnership-cta{display:flex;gap:12px;margin-top:14px;flex-wrap:wrap}
+.partnership-map{
+  background:linear-gradient(135deg,#0a1428,#1a3358);
+  color:#fff;
+  padding:44px 36px;
+  display:flex;flex-direction:column;gap:18px;
+}
+.map-title{font-family:'Instrument Serif',serif;font-weight:500;font-size:24px;letter-spacing:-.01em;color:#fff}
+.map-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+.map-list li{display:flex;align-items:baseline;gap:12px;font-size:15px;font-weight:500;color:#fff}
+.map-list li small{font-size:12px;color:rgba(255,255,255,.6);font-weight:400;margin-left:auto;letter-spacing:.02em}
+.world-map{width:100%;height:auto;display:block;margin-top:6px}
+.world-map .continents path{
+  fill:rgba(255,255,255,.10);
+  stroke:rgba(255,255,255,.18);
+  stroke-width:.8;
+}
+.world-map .partners .country{
+  fill:#0a1428;
+  stroke:#fff;
+  stroke-width:1;
+  cursor:pointer;
+  transition:fill .25s ease, stroke .25s ease, filter .25s ease;
+}
+.world-map .partners .country:hover{
+  fill:#4ea3e0;
+  stroke:#fff;
+  filter:drop-shadow(0 0 6px rgba(78,163,224,.7));
+}
+.world-map .partners .country.is-home{
+  fill:#d8232a;
+  stroke:#fff;
+}
+.world-map .partners .country.is-home:hover{
+  fill:#ff5b6c;
+}
+.world-map .map-tooltip{
+  font-family:'Geist',sans-serif;
+  font-size:14px;
+  font-weight:600;
+  fill:#fff;
+  letter-spacing:.02em;
+}
+.map-legend{display:flex;gap:18px;margin-top:8px;font-size:12px;color:rgba(255,255,255,.75);flex-wrap:wrap}
+.legend-item{display:inline-flex;align-items:center;gap:8px}
+.lg-sw{width:14px;height:14px;border-radius:3px;display:inline-block}
+.lg-sw.home{background:#d8232a;border:1px solid #fff}
+.lg-sw.partner{background:#0a1428;border:1px solid #fff}
+.map-list .dot{
+  width:8px;height:8px;border-radius:50%;flex:0 0 auto;
+  background:var(--brand-2);box-shadow:0 0 0 4px rgba(78,163,224,.18);
+}
+
+/* ── NEWS ───────────────────────────────────────────────── */
+.news{padding:24px 0 80px}
+.news-grid{display:grid;grid-template-columns:repeat(3,1fr) auto;gap:16px;align-items:stretch}
+.news-card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
+  display:flex;flex-direction:column;
+  min-height:340px;
+  transition:border-color .2s,transform .2s,box-shadow .2s;
+  cursor:pointer;
+  box-shadow:0 6px 20px -16px rgba(10,20,40,.18);
+}
+.news-card:hover{border-color:var(--brand);transform:translateY(-3px);box-shadow:0 10px 30px -12px var(--glow)}
+.news-photo{aspect-ratio:16/9;background:#dde3ec;position:relative}
+.news-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(255,255,255,.4))}
+.news-body{padding:20px 22px 24px;display:flex;flex-direction:column;gap:10px;flex:1}
+.news-date{font-size:12px;color:var(--brand-deep);letter-spacing:.04em;font-weight:600}
+.news-card h3{margin:0;font-size:16px;color:var(--ink);line-height:1.35;font-weight:600;flex:1}
+.news-arr{align-self:flex-start;color:var(--brand-deep);display:inline-flex;align-items:center;gap:8px;font-size:13px;margin-top:6px}
+.news-side{display:flex;flex-direction:column;justify-content:flex-end;gap:8px}
+.side-link{font-size:14px;color:var(--brand-deep);font-weight:600;display:inline-flex;align-items:center;gap:8px;margin-bottom:14px}
+
+/* ── TRUST / ДОВЕРИЕ ── */
+.trust{padding:24px 0}
+.trust-card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:grid;grid-template-columns:1.05fr .95fr;box-shadow:0 6px 20px -16px rgba(10,20,40,.18)}
+.trust-body{padding:48px 48px}
+.trust-body h2{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(30px,3.4vw,44px);line-height:1.05;margin:0 0 18px;color:var(--ink)}
+.trust-body>p{color:var(--ink-soft);font-size:15px;line-height:1.65;margin:0 0 28px;max-width:52ch}
+.trust-feats{display:grid;grid-template-columns:1fr 1fr;gap:22px 28px;margin-bottom:30px}
+.tf{display:flex;gap:12px;align-items:flex-start}
+.tf .ic{width:34px;height:34px;flex:none;border-radius:8px;background:var(--glow);display:grid;place-items:center;color:var(--brand-deep)}
+.tf .ic svg{width:17px;height:17px}
+.tf h4{margin:0 0 3px;font-size:14px;font-weight:600;color:var(--ink)}
+.tf p{margin:0;font-size:12.5px;line-height:1.45;color:var(--ink-soft)}
+.trust-media{position:relative;min-height:400px;overflow:hidden}
+.trust-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.trust-stat{position:absolute;right:28px;bottom:28px;background:rgba(255,255,255,.93);backdrop-filter:blur(6px);border-radius:14px;padding:22px 26px;box-shadow:0 20px 44px -22px rgba(10,20,40,.42)}
+.trust-stat b{font-family:'Instrument Serif',serif;font-weight:400;font-size:44px;line-height:1;color:var(--brand-deep);display:block}
+.trust-stat span{font-size:12.5px;color:var(--ink-soft);font-weight:600}
+@media(max-width:860px){.trust-card{grid-template-columns:1fr}.trust-feats{grid-template-columns:1fr 1fr}.trust-media{min-height:280px}}
+
+/* ── OUR FOCUS ── */
+.focus{padding:60px 0 16px}
+.focus-head{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:32px}
+.focus-ey{font-size:12px;letter-spacing:.24em;text-transform:uppercase;font-weight:600;color:var(--ink-mute);display:block;margin-bottom:16px}
+.focus-head h2{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(30px,3.8vw,50px);line-height:1.04;letter-spacing:-.01em;margin:0;color:var(--ink)}
+.focus-right{display:flex;flex-direction:column;gap:18px;padding-bottom:6px}
+.focus-right p{margin:0;color:var(--ink-soft);font-size:15.5px;line-height:1.6;max-width:52ch}
+.focus-link{font-size:14px;color:var(--brand-deep);font-weight:600;display:inline-flex;align-items:center;gap:8px;align-self:flex-start}
+.focus-link:hover{gap:12px}
+.focus-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.fcard{position:relative;height:342px;border-radius:16px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:26px;color:#fff;isolation:isolate;text-decoration:none}
+.fcard .fbg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .7s cubic-bezier(.18,.7,.2,1);z-index:-2}
+.fcard:hover .fbg{transform:scale(1.06)}
+.fcard::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(7,16,33,.12) 0%,rgba(7,16,33,.55) 52%,rgba(7,16,33,.92) 100%)}
+.fcard .fic{position:absolute;top:24px;left:26px;width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center;color:var(--brand-deep)}
+.fcard .fic svg{width:23px;height:23px}
+.fcard h3{font-family:'Instrument Serif',serif;font-weight:400;font-size:23px;line-height:1.1;margin:0 0 9px}
+.fcard p{font-size:13px;line-height:1.5;color:rgba(255,255,255,.82);margin:0 0 16px}
+.fcard .farr{width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.5);display:grid;place-items:center;color:#fff;transition:background .2s,border-color .2s,color .2s}
+.fcard:hover .farr{background:#fff;color:var(--brand-deep);border-color:#fff}
+@media(max-width:900px){.focus-head{grid-template-columns:1fr;gap:18px}.focus-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.focus-grid{grid-template-columns:1fr}}
+
+/* ── FOOTER ─────────────────────────────────────────────── */
+.foot{background:#070f1e;color:rgba(255,255,255,.65);padding:60px 0 32px;border-top:1px solid var(--line-soft)}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px}
+.foot h5{font-family:'Geist',sans-serif;text-transform:uppercase;font-size:11px;letter-spacing:.14em;color:rgba(255,255,255,.45);margin:0 0 16px;font-weight:500}
+.foot ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
+.foot a{color:rgba(255,255,255,.78);font-size:14px}
+.foot a:hover{color:#fff}
+.foot-brand{display:flex;flex-direction:column;gap:14px;max-width:260px}
+.foot-brand p{font-size:13.5px;color:rgba(255,255,255,.55);margin:0;line-height:1.6}
+.foot-bot{padding-top:32px;margin-top:48px;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;font-size:13px;color:rgba(255,255,255,.45)}
+.foot-legal{display:flex;gap:24px;flex-wrap:wrap}
+
+/* ── PHOTO SLOTS ────────────────────────────────────────── */
+.slot{
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,#e3e8ef,#cfd6e1);
+  display:grid;place-items:center;
+  color:var(--ink-mute);
+  font-family:'Geist',sans-serif;font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+  text-align:center;padding:24px;
+}
+.slot::after{
+  content:"";position:absolute;inset:14px;
+  border:1.5px dashed rgba(29,111,184,.3);
+  border-radius:8px;pointer-events:none;
+}
+.slot span{position:relative;z-index:2;max-width:24ch}
+
+@media (max-width:1100px){
+  .dir-grid{grid-template-columns:repeat(3,1fr)}
+  .news-grid{grid-template-columns:repeat(2,1fr)}
+  .news-side{grid-column:span 2;flex-direction:row;justify-content:flex-end}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:760px){
+  .hero h1{font-size:42px}
+  .hero-grid,.about-card,.quality-card{grid-template-columns:1fr}
+  .standards-card{flex-direction:column;align-items:flex-start;gap:24px}
+  .nav{display:none}
+  .dir-grid,.news-grid{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:1fr}
+}
+.lang-wrap{position:relative;display:inline-block}.lang-wrap > .util-btn{cursor:pointer}.lang-menu{position:absolute;top:calc(100% + 6px);right:0;background:#fff;border:1px solid var(--line);border-radius:8px;box-shadow:0 12px 30px -12px rgba(10,20,40,.18);min-width:160px;padding:6px;z-index:100;display:none}.lang-menu.is-open{display:block}.lang-menu button,.lang-menu a{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:9px 12px;border-radius:6px;background:transparent;border:0;cursor:pointer;font-family:'Geist',sans-serif;font-size:13px;color:var(--ink)}.lang-menu button:hover,.lang-menu a:hover{background:var(--bg)}.lang-menu button .flag,.lang-menu a .flag{width:22px;height:16px;border-radius:2px;flex:0 0 auto}.lang-menu button .flag.ru,.lang-menu a .flag.ru{background:linear-gradient(180deg,#fff 0% 33%,#0039a6 33% 66%,#d52b1e 66%)}.lang-menu button .flag.en,.lang-menu a .flag.en{background:#012169 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 30'><clipPath id='t'><path d='M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z'/></clipPath><path d='M0,0 v30 l60,-30 h-60 z M60,0 v30 l-60,-30 h60 z' stroke='%23fff' stroke-width='6'/><path d='M0,0 v30 l60,-30 h-60 z M60,0 v30 l-60,-30 h60 z' clip-path='url(%23t)' stroke='%23C8102E' stroke-width='4'/><path d='M30,0 v30 M0,15 h60' stroke='%23fff' stroke-width='10'/><path d='M30,0 v30 M0,15 h60' stroke='%23C8102E' stroke-width='6'/></svg>") center/cover no-repeat}.lang-menu button .flag.it,.lang-menu a .flag.it{background:linear-gradient(90deg,#009246 33%,#fff 33% 66%,#ce2b37 66%)}.flag.uz,.lang-menu a .flag.uz{background:linear-gradient(180deg,#0099b5 0 45%,#fff 45% 55%,#1eb53a 55%)}.lang-menu button.is-active{background:rgba(78,163,224,.08);color:var(--brand-deep);font-weight:600}.skiptranslate,.goog-te-banner-frame.skiptranslate{display:none !important}body{top:0 !important}.goog-te-gadget{height:0;overflow:hidden}
+.cert-mark{overflow:hidden;background:#fff !important;padding:0;border-width:2px}
+.cert-mark img{width:100%;height:100%;object-fit:cover;display:block;border-radius:50%}
+
+/* Nav dropdown submenu */
+.nav .has-sub{position:relative}
+.nav .has-sub > a::after{content:" ▾";font-size:9px;opacity:.7;margin-left:2px}
+.nav .submenu{position:absolute;top:calc(100% + 8px);left:-12px;min-width:220px;background:#fff;border:1px solid var(--line);border-radius:8px;box-shadow:0 12px 30px -12px rgba(10,20,40,.18);padding:6px;display:none;z-index:60}
+.nav .has-sub:hover .submenu,.nav .has-sub:focus-within .submenu{display:block}
+.nav .submenu a{display:block;padding:9px 14px;font-size:13.5px;color:var(--ink-soft);border-radius:6px;border-bottom:0}
+.nav .submenu a:hover{background:var(--bg);color:var(--ink)}
+</style>
+
+<style>
+/* global: all headings in Geist */
+h1,h2,h3,h4,h5,h6,.section-title,.hero h1,.page-hero h1{font-family:'Geist',sans-serif !important}
+</style>
+</head>
+<body style="">
+
+<!-- ───── HEADER ───── -->
+<header class="hdr">
+  <div class="wrap">
+    <a href="index.html" class="brand"><img src="img/logo-hvara.png" alt="HVARA Pharmaceuticals" class="brand-logo" style="height:48px">
+    </a>
+    <nav class="nav">
+      <a href="index.html" class="is-active">Главная</a>
+      <a href="o-nas.html">О нас</a>
+      <span class="has-sub"><a href="produkciya.html">Продукция</a><div class="submenu"><a href="katalog.html?cat=sprays">Спреи</a><a href="katalog.html?cat=drops">Капли</a><a href="katalog.html?cat=eye">Глазные капли</a><a href="katalog.html?cat=capsules">Капсулы</a><a href="katalog.html?cat=powders">Порошки и саше</a><a href="katalog.html?cat=solutions">Растворы для приёма внутрь</a><a href="katalog.html?cat=suspensions">Суспензии</a><a href="katalog.html?cat=gels">Гели</a><a href="katalog.html?cat=creams">Кремы и мази</a></div></span>
+      <a href="napravleniya.html">Направления</a>
+      <a href="partneram.html">Партнёрам</a>
+      <a href="standarty.html">Стандарты</a>
+    </nav>
+    <div class="hdr-right">
+      <div class="lang-wrap"><button class="util-btn" aria-label="Язык" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"></path></svg> Русский (RU) <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg></button><div class="lang-menu" role="menu"><a href="index.html" class="is-active"><span class="flag ru"></span>Русский</a><a href="en/index.html"><span class="flag en"></span>English</a><a href="it/index.html"><span class="flag it"></span>Italiano</a><a href="uz/index.html"><span class="flag uz"></span>O‘zbekcha</a></div></div>
+      <a class="util-btn" href="kontakty.html#map" style="text-decoration:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s-7-7.5-7-13a7 7 0 1 1 14 0c0 5.5-7 13-7 13z"></path><circle cx="12" cy="9" r="2.5"></circle></svg>Локация</a>
+      <a class="util-btn" href="kontakty.html" style="text-decoration:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.5 8.5 0 1 1 16.1-3.8z"></path></svg>Контакты</a>
+    </div>
+  </div>
+</header>
+
+<style>
+.hero-stage{background:#08122a !important}
+.hero-stage::before{background:linear-gradient(90deg, rgba(8,18,40,.94) 0%, rgba(8,18,40,.78) 38%, rgba(8,18,40,.38) 58%, rgba(8,18,40,0) 80%) !important}
+.hero h1{color:#fff !important}
+.hero h1 .accent{color:#5fa8e0 !important}
+.hero .sub{color:rgba(255,255,255,.82) !important}
+.hero-feat .fi{color:#7fb4e6 !important}
+.hero-feat span{color:rgba(255,255,255,.8) !important}
+.cert-badge{border-color:rgba(255,255,255,.7) !important;color:#fff !important;background:rgba(255,255,255,.08) !important}
+.hero .btn-play{color:#0a1428 !important}
+@media (prefers-reduced-motion: no-preference){
+  .hero-text > *{opacity:0;transform:translateY(18px);animation:heroIn .7s cubic-bezier(.22,.61,.36,1) forwards}
+  .hero-text > h1{animation-delay:.05s}
+  .hero-text > .sub{animation-delay:.18s}
+  .hero-text > .hero-certs{animation-delay:.32s}
+  .hero-text > .hero-cta{animation-delay:.46s}
+}
+@keyframes heroIn{to{opacity:1;transform:translateY(0)}}
+</style>
+<!-- ───── HERO ───── -->
+<section class="hero">
+  <div class="hero-stage">
+    <img src="img/hero_2.jpg" alt="HVARA — наука и забота о здоровье">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1 style="font-family:Geist"><span style="font-size:52px;font-weight:600">Качество. Инновации.</span><br><span class="accent">Забота о здоровье людей</span></h1>
+        <p class="sub">HVARA PHARMACEUTICALS — современное фармацевтическое производство полного цикла, соответствующее международным стандартам качества</p>
+        <div class="hero-certs" style="margin:22px 0 0">
+          
+          <div class="cert-badge"><b>ISO</b><small>13485</small></div>
+          <div class="cert-badge"><b>HALAL</b><small>CERTIFIED</small></div>
+          <div class="cert-badge"><b>ISO</b><small>9001</small></div>
+          <div class="cert-badge"><b>ISO</b><small>22000</small></div>
+          <div class="cert-badge"><b>HACCP</b><small>CERTIFIED</small></div>
+        </div>
+        <div class="hero-cta" style="margin:22px 0 0">
+          <a class="btn btn-primary" href="o-nas.html">О компании
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── HERO REEL (автовоспроизведение при прокрутке) ───── -->
+<section class="hero-reel-sec" aria-label="Видео о производстве HVARA">
+  <div class="hero-reel">
+    <video id="heroReel" muted playsinline loop autoplay preload="auto" poster="img/hero-reel-poster.jpg">
+      <source src="media/hero-reel.webm" type="video/webm">
+    </video>
+  </div>
+</section>
+<script>
+(function(){
+  var v=document.getElementById('heroReel'); if(!v) return;
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        var p=v.play(); if(p&&p.catch)p.catch(function(){});
+      } else { v.pause(); }
+    });
+  },{threshold:0.01});
+  io.observe(v);
+})();
+</script>
+
+<!-- ───── STATS ───── -->
+<section class="stats">
+  <div class="wrap">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M3 7l9-4 9 4-9 4-9-4z"></path><path d="M3 12l9 4 9-4"></path><path d="M3 17l9 4 9-4"></path></svg>
+        </div>
+        <div class="stat-text">
+          <div class="stat-n" style="font-family: Helvetica, Arial, sans-serif; line-height: 1.2"><span>200+</span></div>
+          <div class="stat-l" style="font-size: 15px">позиций</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="2.5" y="9" width="19" height="6" rx="3" transform="rotate(-30 12 12)"></rect><path d="M8.4 6 L15.6 18"></path></svg>
+        </div>
+        <div class="stat-text">
+          <div class="stat-n" style="font-family: Helvetica, Arial, sans-serif">99+</div>
+          <div class="stat-l" style="font-size: 15px">продукций</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"></path></svg>
+        </div>
+        <div class="stat-text">
+          <div class="stat-n" style="font-family: Helvetica, Arial, sans-serif">5+</div>
+          <div class="stat-l" style="font-size: 15px">стран импортёров</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"></circle><circle cx="17" cy="9.5" r="2.5"></circle><path d="M3 19c0-3 2.7-5 6-5s6 2 6 5"></path><path d="M15 19c0-2 1.8-3.5 4-3.5s2 .8 2 3.5"></path></svg>
+        </div>
+        <div class="stat-text">
+          <div class="stat-n" style="font-family: Helvetica, Arial, sans-serif"><span>50+</span></div>
+          <div class="stat-l" style="font-size: 15px">специалистов</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── ABOUT ───── -->
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="bh-split">
+      <div class="bh-intro">
+        <span class="ey" style="font-size: 20px; font-style: normal; text-decoration-line: none">О компании</span>
+        <h2>Технологии,<br>которые спасают<br>жизни</h2>
+        <p>Мы — современный фармацевтический завод полного цикла с фокусом на качество, инновации и устойчивое развитие.</p>
+        <a href="o-nas.html" class="bh-more">Подробнее о нас
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+        </a>
+      </div>
+      <div class="bh-tiles">
+        <a href="o-nas.html" class="bh-tile" id="researchTile">
+          <span class="bh-zoom" style="background-image:url('img/birdamlik.png');background-position:center 20%"></span>
+          <video class="bh-vid" id="researchVid" muted loop playsinline preload="metadata" src="media/hv-research.mp4"></video>
+          <span class="bh-shade"></span>
+          <span class="bh-cap">Непрерывные исследования</span>
+        </a>
+        <a href="o-nas.html" class="bh-tile">
+          <span class="bh-zoom" style="background-image:url('img/hvara-building.png')"></span>
+          <span class="bh-shade"></span>
+          <span class="bh-cap">HVARA Pharmaceuticals</span>
+        </a>
+      </div>
+    </div>
+    <div class="bh-btns">
+      <a href="o-nas.html" class="bh-btn">Наша команда</a>
+      <a href="novosti.html" class="bh-btn">Новости</a>
+      <a href="o-nas.html" class="bh-btn">Наши цели</a>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var t=document.getElementById('researchTile'), v=document.getElementById('researchVid');
+  if(!t||!v) return;
+  t.addEventListener('mouseenter',function(){var p=v.play();if(p&&p.catch)p.catch(function(){});});
+  t.addEventListener('mouseleave',function(){v.pause();try{v.currentTime=0;}catch(_){}});
+})();
+(function(){
+  var v=document.getElementById('qualityVid');
+  if(!v) return;
+  var pl=function(){var p=v.play();if(p&&p.catch)p.catch(function(){});};
+  pl(); v.addEventListener('canplay',pl,{once:true});
+})();
+</script>
+
+<!-- ───── OUR FOCUS ───── -->
+<section class="focus" id="focus">
+  <div class="wrap">
+    <div class="focus-head">
+      <div>
+        <span class="focus-ey">Наш фокус</span>
+        <h2>Где инновации<br>встречают результат</h2>
+      </div>
+      <div class="focus-right">
+        <p>Мы направляем усилия на решение самых сложных задач здравоохранения — через передовую науку, современное производство полного цикла и неустанную заботу о людях.</p>
+        <a href="o-nas.html" class="focus-link">Узнать больше
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+        </a>
+      </div>
+    </div>
+    <div class="focus-grid">
+      <a href="napravleniya.html" class="fcard">
+        <span class="fbg" style="background-image:url('img/focus-science.jpg')"></span>
+        <h3>Наука и инновации</h3>
+        <p>Передовые исследования и разработка эффективных препаратов.</p>
+        <span class="farr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+      </a>
+      <a href="o-nas.html" class="fcard">
+        <span class="fbg" style="background-image:url('img/focus-people.jpg')"></span>
+        <h3>Забота о людях</h3>
+        <p>Здоровье и благополучие людей — в центре всего, что мы делаем.</p>
+        <span class="farr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+      </a>
+      <a href="partneram.html" class="fcard">
+        <span class="fbg" style="background-image:url('img/focus-global.jpg')"></span>
+        <h3>Детское здоровье</h3>
+        <p>Мы производим продукцию с учетом особенностей детского организма.</p>
+        <span class="farr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+      </a>
+      <a href="standarty.html" class="fcard">
+        <span class="fbg" style="background-image:url('img/focus-quality.jpg')"></span>
+        <h3>Устойчивое развитие</h3>
+        <p>Строим более здоровую планету через ответственные и устойчивые действия.</p>
+        <span class="farr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ───── QUALITY ───── -->
+<section class="quality" id="quality">
+  <div class="wrap">
+    <div class="focus-head">
+      <div>
+        <span class="focus-ey">Контроль качества</span>
+        <h2>Качество на каждом этапе</h2>
+      </div>
+      <div class="focus-right">
+        <p>Многоуровневый контроль сырья, производства и готовой продукции обеспечивает безопасность и эффективность наших лекарств.</p>
+        <a href="standarty.html" class="focus-link">Подробнее о стандартах
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+        </a>
+      </div>
+    </div>
+    <div class="q2-grid">
+      <div class="q2-steps">
+        <a href="standarty.html" class="q2-step">
+          <span class="q2-ph"><img src="img/quality-mix.jpg" alt="Смешивание и эмульгирование рецептуры" style="object-position:center 20%"></span>
+          <span class="q2-cap"><h4>Смешивание и эмульгирование рецептуры</h4><p>Контролируемое перемешивание партий помогает поддерживать однородность рецептуры от стадии пробы до производства.</p></span>
+        </a>
+        <a href="standarty.html" class="q2-step">
+          <span class="q2-ph"><img src="img/quality-fill.jpg" alt="Заполнение и сборка"></span>
+          <span class="q2-cap"><h4>Заполнение и сборка</h4><p>Упаковка и сборка продукции осуществляются с соблюдением всех требований чистоты, точности и внешнего вида.</p></span>
+        </a>
+        <a href="standarty.html" class="q2-step">
+          <span class="q2-ph"><img src="img/quality-code.jpg" alt="Кодирование и маркировка"></span>
+          <span class="q2-cap"><h4>Кодирование и маркировка</h4><p>Партионное кодирование и маркировка способствуют идентификации продукции и отслеживанию производственного процесса.</p></span>
+        </a>
+      </div>
+      <a href="standarty.html" class="q2-panel" id="qualityPanel">
+        <img src="img/quality-final.jpg" alt="Заключительный контроль качества">
+        <video class="q2-vid" id="qualityVid" muted loop playsinline autoplay preload="auto" src="media/quality-final.mp4"></video>
+        <div>
+          <h2>Заключительный контроль качества и готовность к отгрузке</h2>
+          <p>Заключительные проверки помогают подтвердить готовность продукции к выпуску, хранению и доставке.</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ───── TRUST / ДОВЕРИЕ ───── -->
+<section class="trust" id="trust">
+  <div class="wrap">
+    <div class="trust-card">
+      <div class="trust-body">
+        <h2>Наследие доверия.<br>Будущее открытий.</h2>
+        <p>HVARA Pharmaceuticals объединяет научную строгость и глубокую заботу о людях, создавая препараты, которые действительно важны.</p>
+        <div class="trust-feats">
+          <div class="tf"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"></path><path d="M10 3v6l-4.5 8a2 2 0 0 0 1.8 3h9.4a2 2 0 0 0 1.8-3L14 9V3"></path></svg></span><div><h4>Ведомы наукой</h4><p>Исследования со строгостью и целью.</p></div></div>
+          <div class="tf"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 12 5 5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7z"></path></svg></span><div><h4>В центре — человек</h4><p>Забота о людях прежде всего.</p></div></div>
+          <div class="tf"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V5z"></path><path d="m9 12 2 2 4-4"></path></svg></span><div><h4>Этика и ответственность</h4><p>Честность и прозрачность.</p></div></div>
+          <div class="tf"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9z"></path></svg></span><div><h4>Влияние на жизни</h4><p>Создаём то, что улучшает жизнь.</p></div></div>
+        </div>
+        <a href="o-nas.html" class="btn btn-primary">Узнать больше о нас
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+        </a>
+      </div>
+      <div class="trust-media">
+        <img src="img/trust-science.jpg" alt="HVARA — наука и исследования">
+        <div class="trust-stat"><b>90+</b><span>наименований продукции</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── DIRECTIONS ───── -->
+<section class="dir" id="products">
+  <div class="wrap">
+    <div class="section-head">
+      <a href="produkciya.html" class="section-eyebrow" style="font-size: 20px; font-family: Geist; text-decoration:none;font-weight:700">Наша продукция</a>
+      
+    </div>
+    <div class="dir-grid prod-grid">
+      <div class="dir-card" onclick="if(!event.target.closest('a'))location.href='katalog.html?cat=capsules'" style="cursor:pointer;background-image:url('img/cat-tablet.png');background-size:115% auto;background-position:center top">
+        <h3 style="">Капсулы</h3>
+        <p style="">Широкий выбор форм для перорального применения</p>
+        <a class="dir-arr" href="katalog.html?cat=capsules" style="text-decoration:none">Подробнее <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div>
+      <div class="dir-card" onclick="if(!event.target.closest('a'))location.href='katalog.html?cat=solutions'" style="cursor:pointer;background-image:url('img/cat-jidkosti-photo.png');background-size:115% auto;background-position:center top">
+        <h3 style="">Растворы</h3>
+        <p style="">Качественные жидкости и растворы для различных применений</p>
+        <a class="dir-arr" href="katalog.html?cat=solutions" style="text-decoration:none">Подробнее <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div>
+      <div class="dir-card" onclick="if(!event.target.closest('a'))location.href='katalog.html?cat=drops'" style="cursor:pointer;background-image:url('img/forms/drops.jpg');background-size:cover;background-position:center">
+        <h3 style="">Капли</h3>
+        <p style="">Витаминные капли, для нервной системы, ЖКТ и другие</p>
+        <a class="dir-arr" href="katalog.html?cat=drops" style="text-decoration:none">Подробнее <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div>
+      <div class="dir-card" onclick="if(!event.target.closest('a'))location.href='katalog.html?cat=eye'" style="cursor:pointer;background-image:url('img/cat-eye.png');background-size:115% auto;background-position:center top">
+        <h3 style="">Глазные капли</h3>
+        <p style="">Увлажняющие и восстанавливающие капли для глаз</p>
+        <a class="dir-arr" href="katalog.html?cat=eye" style="text-decoration:none">Подробнее <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div>
+      <div class="dir-card" onclick="if(!event.target.closest('a'))location.href='katalog.html?cat=sprays'" style="cursor:pointer;background-image:url('img/cat-sprei-photo.png');background-size:115% auto;background-position:center top">
+        <h3 style="">Спреи</h3>
+        <p style="">Высокоэффективные спреи для местного применения</p>
+        <a class="dir-arr" href="katalog.html?cat=sprays" style="text-decoration:none">Подробнее <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div>
+      <div class="dir-card" onclick="if(!event.target.closest('a'))location.href='katalog.html?cat=powders'" style="cursor:pointer;background-image:url('img/forms/powders.webp');background-size:cover;background-position:center">
+        <h3 style="">Порошки и саше</h3>
+        <p style="">Растворимые порошки и саше: ВМК, коллаген, иммунитет</p>
+        <a class="dir-arr" href="katalog.html?cat=powders" style="text-decoration:none">Подробнее <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div>
+      <div class="dir-card" onclick="if(!event.target.closest('a'))location.href='katalog.html?cat=suspensions'" style="cursor:pointer;background-image:url('img/forms/suspensions.webp');background-size:cover;background-position:center">
+        <h3 style="">Суспензии</h3>
+        <p style="">Суспензии для приёма внутрь — антациды и средства для ЖКТ</p>
+        <a class="dir-arr" href="katalog.html?cat=suspensions" style="text-decoration:none">Подробнее <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div>
+      <div class="dir-card" onclick="if(!event.target.closest('a'))location.href='katalog.html?cat=gels'" style="cursor:pointer;background-image:url('img/forms/gels.jpg');background-size:cover;background-position:center">
+        <h3 style="">Гели</h3>
+        <p style="">Гели для кожи, суставов и женского здоровья</p>
+        <a class="dir-arr" href="katalog.html?cat=gels" style="text-decoration:none">Подробнее <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── DIRECTIONS ───── -->
+<section class="dir" id="products-2">
+  <div class="wrap">
+    <div class="section-head">
+      <a href="napravleniya.html" class="section-eyebrow" style="font-size: 20px; text-decoration:none">НАШИ НАПРАВЛЕНИЯ</a>
+      
+    </div>
+    <div class="dir-grid napr-grid">
+      <div class="dir-card" onclick="location.href='napravleniya.html'" style="background-image:url('img/dir-cardio.jpg');background-size:cover;background-position:center;display:flex;flex-direction:column;text-decoration:none;cursor:pointer">
+        <h3>Кардиология</h3>
+        <p>Препараты для лечения сердечно-сосудистых заболеваний</p>
+        <a class="dir-arr" href="napravleniya.html" style="text-decoration:none">Подробнее <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div>
+      <div class="dir-card" onclick="location.href='napravleniya.html'" style="background-image:url('img/dir-neuro.jpg');background-size:cover;background-position:center;display:flex;flex-direction:column;text-decoration:none;cursor:pointer">
+        <h3>Неврология</h3>
+        <p>Лекарства для лечения заболеваний нервной системы</p>
+        <a class="dir-arr" href="napravleniya.html" style="text-decoration:none">Подробнее <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div>
+      <div class="dir-card" onclick="location.href='napravleniya.html'" style="background-image:url('img/dir-endo.jpg');background-size:cover;background-position:center;display:flex;flex-direction:column;text-decoration:none;cursor:pointer">
+        <h3>Эндокринология</h3>
+        <p>Препараты для лечения эндокринных заболеваний</p>
+        <a class="dir-arr" href="napravleniya.html" style="text-decoration:none">Подробнее <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div>
+      <div class="dir-card" onclick="location.href='napravleniya.html'" style="background-image:url('img/dir-antibiotik.jpg');background-size:cover;background-position:center;display:flex;flex-direction:column;text-decoration:none;cursor:pointer">
+        <h3>Антибиотики</h3>
+        <p>Современные антибактериальные препараты</p>
+        <a class="dir-arr" href="napravleniya.html" style="text-decoration:none">Подробнее <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div>
+      <div class="dir-card" onclick="location.href='napravleniya.html'" style="background-image:url('img/dir-bad.jpg');background-size:cover;background-position:center;display:flex;flex-direction:column;text-decoration:none;cursor:pointer">
+        <h3>БАД и нутрицевтика</h3>
+        <p>Безопасные и эффективные добавки и нутрицевтические продукты</p>
+        <a class="dir-arr" href="napravleniya.html" style="text-decoration:none">Подробнее <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── STANDARDS ───── -->
+<section class="standards">
+  <div class="wrap">
+    <div class="standards-card">
+      <div class="lead">
+        <a href="standarty.html" class="eyebrow" style="font-size: 15px; text-decoration:none">Международные стандарты</a>
+        <a href="standarty.html" style="color:inherit;text-decoration:none"><h2 style="font-family:Geist;font-weight:600">Мы соответствуем<br>мировым требованиям</h2></a>
+      </div>
+      <div class="cert-row">
+        <a href="standarty.html" class="cert" style="text-decoration:none"><div class="cert-mark"><img src="img/seal-iso-13485.jpg" alt="ISO 13485:2016"></div><div class="cert-label">13485:2016</div></a>
+        <a href="standarty.html" class="cert" style="text-decoration:none"><div class="cert-mark"><img src="img/seal-halal.jpg" alt="HALAL"></div><div class="cert-label">HALAL</div></a>
+        <a href="standarty.html" class="cert" style="text-decoration:none"><div class="cert-mark"><img src="img/seal-iso-9001.jpg" alt="ISO 9001:2015"></div><div class="cert-label">9001:2015</div></a>
+        <a href="standarty.html" class="cert" style="text-decoration:none"><div class="cert-mark"><img src="img/seal-iso-14001.jpg" alt="ISO 14001:2015"></div><div class="cert-label">14001:2015</div></a>
+        <a href="standarty.html" class="cert" style="text-decoration:none"><div class="cert-mark"><img src="img/seal-iso-45001.jpg" alt="ISO 45001:2018"></div><div class="cert-label">45001:2018</div></a>
+        <a href="standarty.html" class="cert-all">Все сертификаты
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── PARTNERSHIP ───── -->
+<section class="partnership" id="partners">
+  <div class="wrap">
+    <div class="partnership-card">
+      <div class="partnership-body">
+        <a href="partneram.html" class="section-eyebrow" style="font-size: 20px; text-decoration:none">Партнёрство</a>
+        <a href="partneram.html" style="color:inherit;text-decoration:none"><h2 style="font-size:48px;font-family:Geist;font-weight:600">Откройте новые<br>возможности с нами</h2></a>
+        <p>HVARA Pharmaceuticals — надёжный партнёр для дистрибьюторов, импортёров и медицинских организаций региона. Мы экспортируем свою продукцию в 5+ стран и открыты для долгосрочного сотрудничества.</p>
+        <div class="partnership-feats">
+          <div class="p-feat">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18"/><path d="M12 3a14 14 0 0 0 0 18"/></svg></span>
+            География<br>в 11+ стран региона
+          </div>
+          <div class="p-feat">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6a9 9 0 0 1-8 9 9 9 0 0 1-8-9V6l8-3z"/><path d="M8 12l3 3 5-6"/></svg></span>
+            Сертификация<br>ISO
+          </div>
+          <div class="p-feat">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11l4-4 3 3 6-6"/><path d="M16 4h4v4"/><path d="M3 15l4-4 4 4 4-4 4 4"/><path d="M3 20h18"/></svg></span>
+            Индивидуальные<br>условия для партнёров
+          </div>
+          <div class="p-feat">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6M9 9h2"/></svg></span>
+            Прозрачный<br>договор и поставки
+          </div>
+        </div>
+        <div class="partnership-cta">
+          <a class="btn btn-primary" href="kontakty.html">Стать партнёром
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="btn btn-ghost" href="partneram.html">Скачать каталог</a>
+        </div>
+      </div>
+      <div class="partnership-map">
+        <div class="map-title">Всесте мы сильнее</div>
+        <img src="img/partnership-hands.webp" alt="Вместе мы сильнее — HVARA" onclick="openMapLB(this.src)" style="width:100%;border-radius:12px;display:block;margin:4px 0 2px;cursor:zoom-in;transition:transform .3s ease" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+        <ul class="map-list">
+          <li><span class="dot"></span>Узбекистан <small>основной рынок</small></li>
+          <li><span class="dot"></span>Казахстан <small>дистрибьюторы</small></li>
+          <li><span class="dot"></span>Таджикистан <small>активные поставки</small></li>
+          <li><span class="dot"></span>Кыргызстан <small>регулярные поставки</small></li>
+          <li><span class="dot"></span>Афганистан <small>социальные программы</small></li>
+          <li><span class="dot"></span>Грузия <small>новые соглашения 2026</small></li>
+          <li><span class="dot"></span>Беларусь <small>экспорт</small></li>
+          <li><span class="dot"></span>Молдова <small>экспорт</small></li>
+          <li><span class="dot"></span>Азербайджан <small>экспорт</small></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── SUPPLY GEOGRAPHY ───── -->
+<section class="geo">
+  <div class="wrap">
+    <div class="geo-card">
+      <div class="geo-title">География поставок</div>
+      <div class="geo-sub">Наша продукция поставляется в следующие страны:</div>
+      <div class="geo-mapwrap" id="geoMapWrap"><div class="geo-zoom"><button type="button" id="geoZoomIn" aria-label="Приблизить">+</button><button type="button" id="geoZoomOut" aria-label="Отдалить">−</button></div><svg id="worldMap" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 441" role="img" aria-label="Карта поставок HVARA"></svg><div class="geo-tip" id="geoTip"></div></div>
+      <div class="geo-grid">
+        <div class="geo-item"><b><span class="gdot"></span>Узбекистан</b><small>Основной рынок</small></div>
+        <div class="geo-item"><b><span class="gdot"></span>Казахстан</b><small>Дистрибьюторы</small></div>
+        <div class="geo-item"><b><span class="gdot"></span>Таджикистан</b><small>Активные поставки</small></div>
+        <div class="geo-item"><b><span class="gdot"></span>Кыргызстан</b><small>Регулярные поставки</small></div>
+        <div class="geo-item"><b><span class="gdot"></span>Афганистан</b><small>Социальные программы</small></div>
+        <div class="geo-item"><b><span class="gdot"></span>Грузия</b><small class="accent2">Новые соглашения 2026</small></div>
+        <div class="geo-item"><b><span class="gdot"></span>Беларусь</b><small>Экспорт</small></div>
+        <div class="geo-item"><b><span class="gdot"></span>Молдова</b><small>Экспорт</small></div>
+        <div class="geo-item"><b><span class="gdot"></span>Азербайджан</b><small>Экспорт</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── VIRTUAL TOUR ───── -->
+<section class="tour" id="tour">
+  <div class="wrap">
+    <div class="focus-head">
+      <div>
+        <span class="focus-ey">Виртуальный тур</span>
+        <h2>Загляните на производство</h2>
+      </div>
+      <div class="focus-right">
+        <p>Панорамная прогулка по ключевым зонам завода HVARA — от входной группы и цехов до лаборатории контроля и склада готовой продукции.</p>
+      </div>
+    </div>
+    <div class="tour-stage" id="tourStage" role="button" tabindex="0" aria-label="Открыть виртуальный тур">
+      <img src="img/tour/1.jpg" alt="Холл HVARA — виртуальный тур">
+      <div class="tour-badge"><span class="dot"></span>Виртуальный тур по зданию</div>
+      <div class="tour-play">
+        <span class="ring"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg></span>
+        <b>Смотреть тур</b>
+        <span>5 панорамных сцен завода</span>
+      </div>
+      <div class="tour-caption">
+        <h4>HVARA Pharmaceuticals</h4>
+        <p>Нажмите, чтобы начать виртуальную прогулку</p>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="tv-overlay" id="tvOverlay" aria-hidden="true">
+  <div class="tv-frame" id="tvFrame"></div>
+  <div class="tv-vignette"></div>
+  <div class="tv-top">
+    <div class="tv-title"><span class="ey">Виртуальный тур</span><h3 id="tvName"></h3></div>
+    <button class="tv-close" id="tvClose" type="button" aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6l-12 12"></path></svg></button>
+  </div>
+  <div class="tv-arrows" id="tvArrows"></div>
+  <button class="tv-back" id="tvBack" type="button" aria-label="Назад"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 6l-6 6 6 6"></path></svg></button>
+  <div class="tv-step" id="tvStep"></div>
+</div>
+
+<!-- ───── NEWS ───── -->
+<section class="news">
+  <div class="wrap">
+    <div class="section-head">
+      <a href="novosti.html" class="section-eyebrow" style="font-size: 20px; text-decoration:none">Новости и события</a>
+      <div class="slider-ctrl">
+        <button class="slider-btn" aria-label="Назад"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 18l-6-6 6-6"></path></svg></button>
+        <button class="slider-btn" aria-label="Вперёд"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 6l6 6-6 6"></path></svg></button>
+      </div>
+    </div>
+    <div class="news-grid">
+      <a href="novosti.html" class="news-card" style="text-decoration:none">
+        <div class="news-photo"><img src="img/news-tseh.jpg" alt="Запуск новой линии" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></div>
+        <div class="news-body">
+          <span class="news-date">15.01.2024</span>
+          <h3>Запуск новой производственной линии по выпуску инъекционных препаратов</h3>
+          <span class="news-arr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+        </div>
+      </a>
+      <a href="novosti.html" class="news-card" style="text-decoration:none">
+        <div class="news-photo"><div class="slot"><span>Фото<br>выставки</span></div></div>
+        <div class="news-body">
+          <span class="news-date">08.01.2024</span>
+          <h3>Участие в международной выставке CPhI Barcelona 2024</h3>
+          <span class="news-arr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+        </div>
+      </a>
+      <a href="novosti.html" class="news-card" style="text-decoration:none">
+        <div class="news-photo"><div class="slot"><span>Фото<br>сертификации</span></div></div>
+        <div class="news-body">
+          <span class="news-date">10.01.2024</span>
+          <h3>Сертификация производства по стандарту качества EU</h3>
+          <span class="news-arr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+        </div>
+      </a>
+      <div class="news-side">
+        <a href="novosti.html" class="side-link">Все новости
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── FOOTER ───── -->
+<footer class="foot" id="contacts">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="index.html" class="brand"><img src="img/logo-hvara.png" alt="HVARA Pharmaceuticals" class="brand-logo" style="height:52px;filter:brightness(0) invert(1)">
+        </a>
+        <p>Современное фармацевтическое производство полного цикла. Наука, качество, забота о людях с первого дня работы компании.</p>
+      </div>
+      <div>
+        <h5>Компания</h5>
+        <ul>
+          <li><a href="o-nas.html">О компании</a></li>
+          <li><a href="produkciya.html">Продукция</a></li>
+          <li><a href="partneram.html">Партнёрам</a></li>
+          <li><a href="standarty.html">Стандарты</a></li>
+          <li></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Категории</h5>
+        <ul>
+          <li><a href="katalog.html?cat=solutions">Растворы для приёма внутрь</a></li>
+          <li><a href="katalog.html?cat=drops">Капли</a></li>
+          <li><a href="katalog.html?cat=capsules">Капсулы</a></li>
+          <li><a href="katalog.html?cat=sprays">Спреи</a></li>
+          <li><a href="katalog.html?cat=suspensions">Суспензии</a></li>
+          <li><a href="katalog.html?cat=powders">Порошки и саше</a></li>
+          <li><a href="katalog.html?cat=gels">Гели</a></li>
+          <li><a href="katalog.html?cat=creams">Кремы и мази</a></li>
+          <li><a href="katalog.html?cat=eye">Глазные капли</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Контакты</h5>
+        <ul>
+          <li><a href="tel:+998339890090">+998 33 989 00 90</a></li>
+          <li><a href="mailto:info@hvara.uz">info@hvara.uz</a></li>
+          <li>Ургенч, Хорезмская область</li>
+          <li>Республика Узбекистан</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <div>© 2020–2026 HVARA  Все права защищены</div>
+      
+    </div>
+  </div>
+</footer>
+
+
+
+<script>
+/* Animate stat counters from 0 to target when stats section enters viewport */
+(function(){
+  function animateCount(el, target, suffix, duration){
+    var start = 0;
+    var startTime = performance.now();
+    function step(now){
+      var t = Math.min(1, (now - startTime) / duration);
+      // easeOutCubic
+      var eased = 1 - Math.pow(1 - t, 3);
+      var val = Math.round(start + (target - start) * eased);
+      el.textContent = val + suffix;
+      if (t < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  function run(){
+    var nodes = document.querySelectorAll('.stat-n');
+    nodes.forEach(function(node){
+      // Save original innerHTML so we can restore non-numeric markup if needed
+      var raw = node.textContent.trim();
+      var m = raw.match(/^(\d+(?:[.,]\d+)?)(.*)$/);
+      if (!m) return; // non-numeric (e.g. GMP) — skip
+      var numStr = m[1].replace(',', '.');
+      var target = parseFloat(numStr);
+      var isFloat = numStr.indexOf('.') !== -1;
+      var suffix = m[2] || '';
+      // For floats (e.g. 1.2) animate to 10×target then divide
+      if (isFloat) {
+        var startTime = performance.now();
+        var duration = 1500;
+        function stepF(now){
+          var t = Math.min(1, (now - startTime) / duration);
+          var eased = 1 - Math.pow(1 - t, 3);
+          var v = (target * eased).toFixed(1);
+          node.textContent = v + suffix;
+          if (t < 1) requestAnimationFrame(stepF);
+        }
+        node.textContent = '0' + suffix;
+        requestAnimationFrame(stepF);
+      } else {
+        node.textContent = '0' + suffix;
+        animateCount(node, target, suffix, 1500);
+      }
+    });
+  }
+
+  function init(){
+    var section = document.querySelector('.stats');
+    if (!section) { run(); return; }
+    if ('IntersectionObserver' in window) {
+      var seen = false;
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (e.isIntersecting && !seen) {
+            seen = true;
+            run();
+            io.disconnect();
+          }
+        });
+      }, { threshold: 0.3 });
+      io.observe(section);
+    } else {
+      run();
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+
+
+<script>
+/* Region map hover → show country name in top tooltip */
+(function(){
+  function init(){
+    var maps = document.querySelectorAll('.region-map');
+    maps.forEach(function(svg){
+      var tooltip = svg.querySelector('#mapTooltip');
+      var countries = svg.querySelectorAll('.country');
+      countries.forEach(function(c){
+        c.addEventListener('mouseenter', function(){
+          if (tooltip) tooltip.textContent = c.dataset.name || '';
+        });
+        c.addEventListener('mouseleave', function(){
+          if (tooltip) tooltip.textContent = '';
+        });
+      });
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+</script>
+
+<!-- lang-wrap toggle --><script>(function(){document.addEventListener('DOMContentLoaded',function(){var w=document.querySelector('.lang-wrap');if(!w)return;var b=w.querySelector('.util-btn'),m=w.querySelector('.lang-menu');if(!b||!m)return;b.addEventListener('click',function(e){e.stopPropagation();m.classList.toggle('is-open')});document.addEventListener('click',function(){m.classList.remove('is-open')})})})();</script>
+<script>
+function openMapLB(src){
+  var ov=document.createElement('div');
+  ov.style.cssText='position:fixed;inset:0;z-index:9999;background:rgba(8,18,40,.92);display:flex;align-items:center;justify-content:center;cursor:zoom-out;padding:24px';
+  var im=document.createElement('img');
+  im.src=src; im.style.cssText='max-width:96%;max-height:96%;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.5)';
+  ov.appendChild(im); ov.onclick=function(){ov.remove();};
+  document.body.appendChild(ov);
+}
+</script>
+<script>window.jsVectorMap={_maps:{},addMap:function(n,d){this._maps[n]=d}};</script>
+<script src="js/world-map.js"></script>
+<script>
+(function(){
+  function init(){
+    var md=(window.jsVectorMap&&window.jsVectorMap._maps&&window.jsVectorMap._maps.world);
+    var svg=document.getElementById('worldMap'), tip=document.getElementById('geoTip'), wrap=document.getElementById('geoMapWrap');
+    if(!md||!svg||svg.dataset.done) return; svg.dataset.done='1';
+    var partners={
+      UZ:{n:'Узбекистан',s:'Основной рынок',home:true},KZ:{n:'Казахстан',s:'Дистрибьюторы'},
+      TJ:{n:'Таджикистан',s:'Активные поставки'},KG:{n:'Кыргызстан',s:'Регулярные поставки'},
+      AF:{n:'Афганистан',s:'Социальные программы'},GE:{n:'Грузия',s:'Новые соглашения 2026'},
+      BY:{n:'Беларусь',s:'Экспорт'},MD:{n:'Молдова',s:'Экспорт'},AZ:{n:'Азербайджан',s:'Экспорт'}
+    };
+    var ns='http://www.w3.org/2000/svg', inset=md.insets[0], W=inset.width, H=inset.height;
+    var gP=document.createElementNS(ns,'g'), gL=document.createElementNS(ns,'g'), gM=document.createElementNS(ns,'g');
+    function moveTip(e,info){ tip.innerHTML='<b>'+info.n+'</b><span>'+info.s+'</span>'; tip.classList.add('show'); var r=wrap.getBoundingClientRect(); tip.style.left=(e.clientX-r.left)+'px'; tip.style.top=(e.clientY-r.top)+'px'; }
+    function hideTip(){ tip.classList.remove('show'); }
+    Object.keys(md.paths).forEach(function(code){
+      var pe=md.paths[code], p=document.createElementNS(ns,'path');
+      p.setAttribute('d',pe.path); p.setAttribute('data-code',code);
+      var info=partners[code];
+      p.setAttribute('class','wm-c'+(info?(' on'+(info.home?' home':'')):''));
+      if(info){ p.addEventListener('mousemove',function(e){moveTip(e,info)}); p.addEventListener('mouseleave',hideTip); }
+      gP.appendChild(p);
+    });
+    svg.appendChild(gP); svg.appendChild(gL); svg.appendChild(gM);
+    var cen={}, ccx=0, ccy=0, k=0;
+    Object.keys(partners).forEach(function(code){
+      var el=gP.querySelector('path[data-code="'+code+'"]'); if(!el) return;
+      var bb; try{ bb=el.getBBox(); }catch(e){ return; }
+      cen[code]={x:bb.x+bb.width/2, y:bb.y+bb.height/2}; ccx+=cen[code].x; ccy+=cen[code].y; k++;
+    });
+    var cz=1.69;
+    function setView(){ var vw=W/cz, vh=H/cz;
+      var vx=Math.max(0,Math.min(ccx-vw/2, W-vw)), vy=Math.max(0,Math.min(ccy-vh/2, H-vh));
+      if(vw>=W) vx=0; if(vh>=H) vy=0;
+      svg.setAttribute('viewBox', vx.toFixed(1)+' '+vy.toFixed(1)+' '+vw.toFixed(1)+' '+vh.toFixed(1));
+    }
+    if(k){ ccx/=k; ccy/=k; } else { ccx=W/2; ccy=H/2; }
+    setView();
+    var zi=document.getElementById('geoZoomIn'), zo=document.getElementById('geoZoomOut');
+    if(zi) zi.addEventListener('click',function(){ cz=Math.min(cz*1.3,6); setView(); });
+    if(zo) zo.addEventListener('click',function(){ cz=Math.max(cz/1.3,1); setView(); });
+    if(cen.UZ){ Object.keys(cen).forEach(function(code){ if(code==='UZ') return;
+      var ln=document.createElementNS(ns,'line');
+      ln.setAttribute('x1',cen.UZ.x.toFixed(1)); ln.setAttribute('y1',cen.UZ.y.toFixed(1));
+      ln.setAttribute('x2',cen[code].x.toFixed(1)); ln.setAttribute('y2',cen[code].y.toFixed(1));
+      ln.setAttribute('class','wm-line'); gL.appendChild(ln);
+    }); }
+    Object.keys(partners).forEach(function(code){
+      if(!cen[code]) return;
+      var info=partners[code], c=document.createElementNS(ns,'circle');
+      c.setAttribute('cx',cen[code].x.toFixed(1)); c.setAttribute('cy',cen[code].y.toFixed(1));
+      c.setAttribute('r',info.home?3.2:2.4); c.setAttribute('class','wm-dot'+(info.home?' home':''));
+      c.addEventListener('mousemove',function(e){moveTip(e,info)}); c.addEventListener('mouseleave',hideTip);
+      gM.appendChild(c);
+    });
+  }
+  if(document.readyState!=='loading') init(); else document.addEventListener('DOMContentLoaded',init);
+})();
+</script>
+<script>
+/* ───── Virtual tour — branching walkthrough ───── */
+(function(){
+  var names={1:'Главный холл',2:'Холл',3:'Ресепшн',4:'Ресепшн',5:'Ресепшн',
+    6:'Лестница',7:'Лестница',8:'Лестница',9:'Лестница',10:'Площадка 2-го этажа',11:'Балкон 2-го этажа',
+    12:'2-й этаж',13:'Коридор',14:'Коридор',15:'Коридор',16:'Коридор',17:'Коридор',18:'Коридор',19:'Коридор',20:'Коридор',21:'Коридор',
+    22:'Выход',23:'Коридор',24:'Коридор'};
+  var nav={
+    1:{fwd:2,left:6}, 2:{fwd:3}, 3:{fwd:4}, 4:{fwd:5}, 5:{},
+    6:{fwd:7}, 7:{fwd:8}, 8:{fwd:9}, 9:{fwd:10}, 10:{fwd:11}, 11:{fwd:12},
+    12:{left:13}, 13:{fwd:14}, 14:{fwd:15}, 15:{fwd:16}, 16:{fwd:17}, 17:{fwd:18}, 18:{fwd:19}, 19:{fwd:20}, 20:{fwd:21},
+    21:{fwd:22,right:12}, 22:{fwd:23}, 23:{fwd:24}, 24:{}
+  };
+  var ov=document.getElementById('tvOverlay'), frame=document.getElementById('tvFrame'),
+      nameEl=document.getElementById('tvName'), arrowsEl=document.getElementById('tvArrows'),
+      backBtn=document.getElementById('tvBack'), stepEl=document.getElementById('tvStep'),
+      closeBtn=document.getElementById('tvClose'), stage=document.getElementById('tourStage');
+  if(!ov||!stage) return;
+  function src(n){ return 'img/tour/'+n+'.jpg'; }
+  Object.keys(names).forEach(function(n){ var i=new Image(); i.src=src(n); });
+  var cur=0, busy=false, curEl=null, hist=[];
+  var CHEV='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 19V5M6 11l6-6 6 6"></path></svg>';
+  function buildArrows(id){
+    arrowsEl.innerHTML='';
+    var n=nav[id]||{};
+    [['fwd','dir-fwd'],['left','dir-left'],['right','dir-right']].forEach(function(p){
+      var t=n[p[0]]; if(!t) return;
+      var b=document.createElement('button'); b.type='button'; b.className='tv-af '+p[1];
+      b.innerHTML='<span class="disc">'+CHEV+'</span><span class="lbl">'+(names[t]||'')+'</span>';
+      b.addEventListener('click',function(e){ e.stopPropagation(); goTo(t,p[0]); });
+      arrowsEl.appendChild(b);
+    });
+  }
+  function render(id,motion){
+    var el=document.createElement('img'); el.alt=names[id]||('Фото '+id);
+    el.style.transform = motion==='back' ? 'scale(0.9)' : (motion==='left'?'translateX(7%) scale(1.1)':motion==='right'?'translateX(-7%) scale(1.1)':'scale(1.14)');
+    frame.appendChild(el);
+    var old=curEl; curEl=el;
+    el.src=src(id);
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ el.classList.add('show'); }); });
+    if(old){ old.classList.remove('show'); old.style.transform = motion==='back'?'scale(1.14)':'scale(0.92)'; setTimeout(function(){ if(old.parentNode) old.remove(); },900); }
+    cur=id; nameEl.textContent=names[id]||('Фото '+id); stepEl.textContent=id+' / 24';
+    buildArrows(id); backBtn.disabled=(hist.length===0);
+  }
+  function goTo(id,motion){ if(busy||!id) return; busy=true; hist.push(cur); render(id,motion||'fwd'); setTimeout(function(){busy=false;},600); }
+  function back(){ if(busy||!hist.length) return; busy=true; var id=hist.pop(); render(id,'back'); setTimeout(function(){busy=false;},600); }
+  function open(){ ov.classList.add('open'); ov.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; if(!cur){ hist=[]; render(1,'fwd'); } }
+  function close(){ ov.classList.remove('open'); ov.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+  stage.addEventListener('click',open);
+  stage.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();open();} });
+  closeBtn.addEventListener('click',close);
+  backBtn.addEventListener('click',back);
+  document.addEventListener('keydown',function(e){
+    if(!ov.classList.contains('open')) return;
+    var n=nav[cur]||{};
+    if(e.key==='Escape') close();
+    else if(e.key==='Backspace'){ e.preventDefault(); back(); }
+    else if(e.key==='ArrowUp'){ if(n.fwd) goTo(n.fwd,'fwd'); }
+    else if(e.key==='ArrowLeft'){ if(n.left) goTo(n.left,'left'); }
+    else if(e.key==='ArrowRight'){ if(n.right) goTo(n.right,'right'); }
+  });
+})();
+</script>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#0f4a85"/><g transform="translate(50 50)" fill="#fff"><path d="M-16 -14 h7 v11 h18 v-11 h7 v34 h-7 v-16 h-18 v16 h-7 z"/></g></svg></template>
+</body></html>
