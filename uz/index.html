@@ -655,12 +655,15 @@ a{color:inherit;text-decoration:none}
 .plogos-head{max-width:640px;margin:0 0 24px}
 .plogos-head h2{font-family:'Instrument Serif',serif;font-weight:400;font-size:38px;line-height:1.08;letter-spacing:-.01em;margin:0 0 10px;color:var(--ink)}
 .plogos-head p{font-size:15.5px;line-height:1.6;color:var(--muted);margin:0}
-.plogo-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:14px}
-.plogo{display:grid;place-items:center;background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 16px;min-height:112px;box-shadow:0 6px 20px -16px rgba(10,20,40,.18);transition:transform .2s,box-shadow .2s,border-color .2s}
+.plogo-marquee{overflow:hidden;padding:16px 0;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%)}
+.plogo-track{display:flex;gap:14px;width:max-content;animation:plogo-scroll 34s linear infinite}
+.plogo-marquee:hover .plogo-track{animation-play-state:paused}
+.plogo{flex:0 0 auto;width:200px;display:grid;place-items:center;background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 16px;min-height:112px;box-shadow:0 6px 20px -16px rgba(10,20,40,.18);transition:transform .2s,box-shadow .2s,border-color .2s}
 .plogo:hover{transform:translateY(-4px);box-shadow:0 14px 32px -14px rgba(10,20,40,.26);border-color:var(--brand-2)}
-.plogo img{max-width:100%;max-height:64px;width:auto;height:auto;object-fit:contain}
-@media(max-width:1000px){.plogo-grid{grid-template-columns:repeat(4,1fr)}}
-@media(max-width:640px){.plogo-grid{grid-template-columns:repeat(2,1fr)}}
+.plogo img{max-width:100%;max-height:77px;width:auto;height:auto;object-fit:contain}
+@keyframes plogo-scroll{from{transform:translateX(0)}to{transform:translateX(calc(-50% - 7px))}}
+@media(prefers-reduced-motion:reduce){.plogo-track{animation:none;flex-wrap:wrap;justify-content:center}}
+@media(max-width:640px){.plogo{width:150px}}
 
 
 /* ── PRODUCTS MAGAZINE ──────────────────────────────────── */
@@ -994,35 +997,45 @@ h1,h2,h3,h4,h5,h6,.section-title,.hero h1,.page-hero h1{font-family:'Geist',sans
 </section>
 
 <!-- ───── DIRECTIONS ───── -->
-<section class="prodmag" id="products">
+<section class="dir" id="products">
   <div class="wrap">
     <div class="section-head">
-      <a href="produkciya.html" class="section-eyebrow" style="font-size: 20px; font-family: Geist; text-decoration:none;font-weight:700;color:#8895AB">Bizning mahsulotlar</a>
+      <a href="produkciya.html" class="section-eyebrow" style="font-size: 20px; font-family: Geist; text-decoration:none;font-weight:700">Bizning mahsulotlar</a>
       
     </div>
-    <div class="prodmag-shell">
-      <div class="prodmag-grid">
-        <a class="pm-card pm-big" href="katalog.html?cat=capsules">
-          <span class="pm-bg" style="background-image:url('../img/cat-tablet.png')"></span>
-          <h3 class="pm-title">Ogʻiz orqali qattiq shakllar</h3>
-          <p class="pm-desc">Kapsulalar, kukun va paketchalar: keng assortiment</p>
-        </a>
-        <a class="pm-card pm-wide" href="katalog.html?cat=solutions">
-          <span class="pm-bg" style="background-image:url('../img/cat-jidkosti-photo.png')"></span>
-          <h3 class="pm-title">Suyuq eritmalar va suspenziyalar</h3>
-          <p class="pm-desc">Sifatli eritmalar va suspenziyalar: turli qoʻllanishlar va yuqori bioimkoniyat uchun</p>
-        </a>
-        <a class="pm-card " href="katalog.html?cat=eye">
-          <span class="pm-bg" style="background-image:url('../img/cat-eye.png')"></span>
-          <h3 class="pm-title">Maxsus tomchilar</h3>
-          <p class="pm-desc">Vitaminli, asab va namlovchi koʻz tomchilari</p>
-        </a>
-        <a class="pm-card " href="katalog.html?cat=sprays">
-          <span class="pm-bg" style="background-image:url('../img/cat-sprei-photo.png')"></span>
-          <h3 class="pm-title">Mahalliy va tashqi shakllar</h3>
-          <p class="pm-desc">Mahalliy qoʻllash uchun spreylar va teri, boʻgʻimlar va ayollar salomatligi uchun gellar</p>
-        </a>
-      </div>
+    <div class="dir-grid prod-grid">
+      <div class="dir-card" onclick="if(!event.target.closest('a'))location.href='katalog.html?cat=capsules'" style="cursor:pointer;background-image:url('../img/cat-tablet.png');background-size:115% auto;background-position:center top">
+        <h3 style="font-size:25px;font-weight:500">Kapsulalar</h3>
+        <p style="">Og‘iz orqali qabul qilish uchun keng shakllar tanlovi</p>
+        <a class="dir-arr" href="katalog.html?cat=capsules" style="text-decoration:none">Batafsil <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div>
+      <div class="dir-card" onclick="if(!event.target.closest('a'))location.href='katalog.html?cat=solutions'" style="cursor:pointer;background-image:url('../img/cat-jidkosti-photo.png');background-size:115% auto;background-position:center top">
+        <h3 style="font-size:25px;font-weight:500">Eritmalar</h3>
+        <p style="">Turli qo‘llanishlar uchun sifatli suyuqlik va eritmalar</p>
+        <a class="dir-arr" href="katalog.html?cat=solutions" style="text-decoration:none">Batafsil <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div>
+      <div class="dir-card" onclick="if(!event.target.closest('a'))location.href='katalog.html?cat=drops'" style="cursor:pointer;background-image:url('../img/forms/drops.jpg');background-size:cover;background-position:center">
+        <h3 style="font-size:25px;font-weight:500">Tomchilar</h3>
+        <p style="">Vitamin tomchilari — asab tizimi, OIT va boshqalar uchun</p>
+        <a class="dir-arr" href="katalog.html?cat=drops" style="text-decoration:none">Batafsil <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div>
+      <div class="dir-card" onclick="if(!event.target.closest('a'))location.href='katalog.html?cat=eye'" style="cursor:pointer;background-image:url('../img/cat-eye.png');background-size:115% auto;background-position:center top">
+        <h3 style="font-size:25px;font-weight:500">Ko‘z tomchilari</h3>
+        <p style="">Ko‘zni namlovchi va tiklovchi tomchilar</p>
+        <a class="dir-arr" href="katalog.html?cat=eye" style="text-decoration:none">Batafsil <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div>
+      <div class="dir-card" onclick="if(!event.target.closest('a'))location.href='katalog.html?cat=sprays'" style="cursor:pointer;background-image:url('../img/cat-sprei-photo.png');background-size:115% auto;background-position:center top">
+        <h3 style="font-size:25px;font-weight:500">Spreylar</h3>
+        <p style="">Mahalliy qo‘llash uchun yuqori samarali spreylar</p>
+        <a class="dir-arr" href="katalog.html?cat=sprays" style="text-decoration:none">Batafsil <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div>
+      <div class="dir-card" onclick="if(!event.target.closest('a'))location.href='katalog.html?cat=powders'" style="cursor:pointer;background-image:url('../img/forms/powders.webp');background-size:cover;background-position:center">
+        <h3 style="font-size:25px;font-weight:500">Kukun va paketchalar</h3>
+        <p style="">Eriydigan kukun va paketchalar: VMK, kollagen, immunitet</p>
+        <a class="dir-arr" href="katalog.html?cat=powders" style="text-decoration:none">Batafsil <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div>
+      <div class="dir-card" onclick="if(!event.target.closest('a'))location.href='katalog.html?cat=suspensions'" style="cursor:pointer;background-image:url('../img/forms/suspensions.webp');background-size:cover;background-position:center">
+        <h3 style="font-size:25px;font-weight:500">Suspenziyalar</h3>
+        <p style="">Ichimlik suspenziyalari — antatsidlar va OIT vositalari</p>
+        <a class="dir-arr" href="katalog.html?cat=suspensions" style="text-decoration:none">Batafsil <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div>
+      <div class="dir-card" onclick="if(!event.target.closest('a'))location.href='katalog.html?cat=gels'" style="cursor:pointer;background-image:url('../img/forms/gels.jpg');background-size:cover;background-position:center">
+        <h3 style="font-size:25px;font-weight:500">Gellar</h3>
+        <p style="">Teri, bo‘g‘imlar va ayollar salomatligi uchun gellar</p>
+        <a class="dir-arr" href="katalog.html?cat=gels" style="text-decoration:none">Batafsil <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div>
     </div>
   </div>
 </section>
@@ -1108,15 +1121,22 @@ h1,h2,h3,h4,h5,h6,.section-title,.hero h1,.page-hero h1{font-family:'Geist',sans
 <section class="plogos">
   <div class="wrap">
     <div class="plogos-head"><h2>Bizning hamkorlar</h2><p>Turli davlatlardagi distribyutor va importchilar bizga ishonadi</p></div>
-    <div class="plogo-grid">
-        <div class="plogo"><img src="../img/partners/1-wm.png" alt="W/M" loading="lazy"></div>
+    <div class="plogo-marquee"><div class="plogo-track" style="height:155px">
+<div class="plogo"><img src="../img/partners/1-wm.png" alt="W/M" loading="lazy"></div>
         <div class="plogo"><img src="../img/partners/2-welfar.png" alt="Welfar" loading="lazy"></div>
         <div class="plogo"><img src="../img/partners/3-naturavelle.png" alt="NaturaVelle Health Group" loading="lazy"></div>
         <div class="plogo"><img src="../img/partners/4-helba.png" alt="Helba" loading="lazy"></div>
         <div class="plogo"><img src="../img/partners/5-ownerpharm.png" alt="Owner Pharm" loading="lazy" style="max-height:85px"></div>
         <div class="plogo"><img src="../img/partners/6-biogenfarm.png" alt="Biogen Farm" loading="lazy" style="max-height:100px"></div>
-        <div class="plogo"><img src="../img/partners/7-zaminpharm.png" alt="ZaminPharm" loading="lazy"></div>
-    </div>
+        <div class="plogo"><img src="../img/partners/7-zaminpharm.png" alt="ZaminPharm" loading="lazy"></div><div class="plogo"><img src="../img/partners/8-synergy.png" alt="Synergy Pharmco" loading="lazy"></div>
+<div class="plogo" aria-hidden="true"><img src="../img/partners/1-wm.png" alt="W/M" loading="lazy"></div>
+        <div class="plogo" aria-hidden="true"><img src="../img/partners/2-welfar.png" alt="Welfar" loading="lazy"></div>
+        <div class="plogo" aria-hidden="true"><img src="../img/partners/3-naturavelle.png" alt="NaturaVelle Health Group" loading="lazy"></div>
+        <div class="plogo" aria-hidden="true"><img src="../img/partners/4-helba.png" alt="Helba" loading="lazy"></div>
+        <div class="plogo" aria-hidden="true"><img src="../img/partners/5-ownerpharm.png" alt="Owner Pharm" loading="lazy" style="max-height:85px"></div>
+        <div class="plogo" aria-hidden="true"><img src="../img/partners/6-biogenfarm.png" alt="Biogen Farm" loading="lazy" style="max-height:100px"></div>
+        <div class="plogo" aria-hidden="true"><img src="../img/partners/7-zaminpharm.png" alt="ZaminPharm" loading="lazy"></div><div class="plogo" aria-hidden="true"><img src="../img/partners/8-synergy.png" alt="Synergy Pharmco" loading="lazy"></div>
+</div></div>
   </div>
 </section>
 
@@ -1171,45 +1191,6 @@ h1,h2,h3,h4,h5,h6,.section-title,.hero h1,.page-hero h1{font-family:'Geist',sans
     </div>
   </div>
 </section>
-
-<!-- ───── VIRTUAL TOUR ───── -->
-<section class="tour" id="tour">
-  <div class="wrap">
-    <div class="focus-head">
-      <div>
-        <span class="focus-ey">Virtual tur</span>
-        <h2>Ishlab chiqarishni ko‘ring</h2>
-      </div>
-      <div class="focus-right">
-        <p>HVARA zavodining asosiy hududlari bo‘ylab panoramali sayr — kirish guruhi va sexlardan tortib nazorat laboratoriyasi va tayyor mahsulot omborigacha.</p>
-      </div>
-    </div>
-    <div class="tour-stage" id="tourStage" role="button" tabindex="0" aria-label="Virtual turni ochish">
-      <img src="../img/tour/1.jpg" alt="HVARA xolli — virtual tur">
-      <div class="tour-badge"><span class="dot"></span>Bino bo‘ylab virtual tur</div>
-      <div class="tour-play">
-        <span class="ring"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg></span>
-        <b>Turni ko‘rish</b>
-        <span>Zavodning 5 panoramali sahnasi</span>
-      </div>
-      <div class="tour-caption">
-        <h4>HVARA Pharmaceuticals</h4>
-        <p>Virtual sayrni boshlash uchun bosing</p>
-      </div>
-    </div>
-  </div>
-</section>
-<div class="tv-overlay" id="tvOverlay" aria-hidden="true">
-  <div class="tv-frame" id="tvFrame"></div>
-  <div class="tv-vignette"></div>
-  <div class="tv-top">
-    <div class="tv-title"><span class="ey">Virtual tur</span><h3 id="tvName"></h3></div>
-    <button class="tv-close" id="tvClose" type="button" aria-label="Yopish"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6l-12 12"></path></svg></button>
-  </div>
-  <div class="tv-arrows" id="tvArrows"></div>
-  <button class="tv-back" id="tvBack" type="button" aria-label="Orqaga"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 6l-6 6 6 6"></path></svg></button>
-  <div class="tv-step" id="tvStep"></div>
-</div>
 
 <!-- ───── NEWS ───── -->
 <section class="news" style="display:none">
@@ -1478,69 +1459,6 @@ function openMapLB(src){
     });
   }
   if(document.readyState!=='loading') init(); else document.addEventListener('DOMContentLoaded',init);
-})();
-</script>
-<script>
-/* ───── Virtual tour — branching walkthrough ───── */
-(function(){
-  var names={1:'Asosiy xoll',2:'Xoll',3:'Resepshn',4:'Resepshn',5:'Resepshn',
-    6:'Zinapoya',7:'Zinapoya',8:'Zinapoya',9:'Zinapoya',10:'2-qavat maydonchasi',11:'2-qavat balkoni',
-    12:'2-qavat',13:'Koridor',14:'Koridor',15:'Koridor',16:'Koridor',17:'Koridor',18:'Koridor',19:'Koridor',20:'Koridor',21:'Koridor',
-    22:'Chiqish',23:'Koridor',24:'Koridor'};
-  var nav={
-    1:{fwd:2,left:6}, 2:{fwd:3}, 3:{fwd:4}, 4:{fwd:5}, 5:{},
-    6:{fwd:7}, 7:{fwd:8}, 8:{fwd:9}, 9:{fwd:10}, 10:{fwd:11}, 11:{fwd:12},
-    12:{left:13}, 13:{fwd:14}, 14:{fwd:15}, 15:{fwd:16}, 16:{fwd:17}, 17:{fwd:18}, 18:{fwd:19}, 19:{fwd:20}, 20:{fwd:21},
-    21:{fwd:22,right:12}, 22:{fwd:23}, 23:{fwd:24}, 24:{}
-  };
-  var ov=document.getElementById('tvOverlay'), frame=document.getElementById('tvFrame'),
-      nameEl=document.getElementById('tvName'), arrowsEl=document.getElementById('tvArrows'),
-      backBtn=document.getElementById('tvBack'), stepEl=document.getElementById('tvStep'),
-      closeBtn=document.getElementById('tvClose'), stage=document.getElementById('tourStage');
-  if(!ov||!stage) return;
-  function src(n){ return '../img/tour/'+n+'.jpg'; }
-  Object.keys(names).forEach(function(n){ var i=new Image(); i.src=src(n); });
-  var cur=0, busy=false, curEl=null, hist=[];
-  var CHEV='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 19V5M6 11l6-6 6 6"></path></svg>';
-  function buildArrows(id){
-    arrowsEl.innerHTML='';
-    var n=nav[id]||{};
-    [['fwd','dir-fwd'],['left','dir-left'],['right','dir-right']].forEach(function(p){
-      var t=n[p[0]]; if(!t) return;
-      var b=document.createElement('button'); b.type='button'; b.className='tv-af '+p[1];
-      b.innerHTML='<span class="disc">'+CHEV+'</span><span class="lbl">'+(names[t]||'')+'</span>';
-      b.addEventListener('click',function(e){ e.stopPropagation(); goTo(t,p[0]); });
-      arrowsEl.appendChild(b);
-    });
-  }
-  function render(id,motion){
-    var el=document.createElement('img'); el.alt=names[id]||('Фото '+id);
-    el.style.transform = motion==='back' ? 'scale(0.9)' : (motion==='left'?'translateX(7%) scale(1.1)':motion==='right'?'translateX(-7%) scale(1.1)':'scale(1.14)');
-    frame.appendChild(el);
-    var old=curEl; curEl=el;
-    el.src=src(id);
-    requestAnimationFrame(function(){ requestAnimationFrame(function(){ el.classList.add('show'); }); });
-    if(old){ old.classList.remove('show'); old.style.transform = motion==='back'?'scale(1.14)':'scale(0.92)'; setTimeout(function(){ if(old.parentNode) old.remove(); },900); }
-    cur=id; nameEl.textContent=names[id]||('Фото '+id); stepEl.textContent=id+' / 24';
-    buildArrows(id); backBtn.disabled=(hist.length===0);
-  }
-  function goTo(id,motion){ if(busy||!id) return; busy=true; hist.push(cur); render(id,motion||'fwd'); setTimeout(function(){busy=false;},600); }
-  function back(){ if(busy||!hist.length) return; busy=true; var id=hist.pop(); render(id,'back'); setTimeout(function(){busy=false;},600); }
-  function open(){ ov.classList.add('open'); ov.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; if(!cur){ hist=[]; render(1,'fwd'); } }
-  function close(){ ov.classList.remove('open'); ov.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
-  stage.addEventListener('click',open);
-  stage.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();open();} });
-  closeBtn.addEventListener('click',close);
-  backBtn.addEventListener('click',back);
-  document.addEventListener('keydown',function(e){
-    if(!ov.classList.contains('open')) return;
-    var n=nav[cur]||{};
-    if(e.key==='Escape') close();
-    else if(e.key==='Backspace'){ e.preventDefault(); back(); }
-    else if(e.key==='ArrowUp'){ if(n.fwd) goTo(n.fwd,'fwd'); }
-    else if(e.key==='ArrowLeft'){ if(n.left) goTo(n.left,'left'); }
-    else if(e.key==='ArrowRight'){ if(n.right) goTo(n.right,'right'); }
-  });
 })();
 </script>
 <template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#0f4a85"/><g transform="translate(50 50)" fill="#fff"><path d="M-16 -14 h7 v11 h18 v-11 h7 v34 h-7 v-16 h-18 v16 h-7 z"/></g></svg></template>

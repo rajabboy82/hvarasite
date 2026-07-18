@@ -655,12 +655,15 @@ a{color:inherit;text-decoration:none}
 .plogos-head{max-width:640px;margin:0 0 24px}
 .plogos-head h2{font-family:'Instrument Serif',serif;font-weight:400;font-size:38px;line-height:1.08;letter-spacing:-.01em;margin:0 0 10px;color:var(--ink)}
 .plogos-head p{font-size:15.5px;line-height:1.6;color:var(--muted);margin:0}
-.plogo-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:14px}
-.plogo{display:grid;place-items:center;background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 16px;min-height:112px;box-shadow:0 6px 20px -16px rgba(10,20,40,.18);transition:transform .2s,box-shadow .2s,border-color .2s}
+.plogo-marquee{overflow:hidden;padding:16px 0;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%)}
+.plogo-track{display:flex;gap:14px;width:max-content;animation:plogo-scroll 34s linear infinite}
+.plogo-marquee:hover .plogo-track{animation-play-state:paused}
+.plogo{flex:0 0 auto;width:200px;display:grid;place-items:center;background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 16px;min-height:112px;box-shadow:0 6px 20px -16px rgba(10,20,40,.18);transition:transform .2s,box-shadow .2s,border-color .2s}
 .plogo:hover{transform:translateY(-4px);box-shadow:0 14px 32px -14px rgba(10,20,40,.26);border-color:var(--brand-2)}
-.plogo img{max-width:100%;max-height:64px;width:auto;height:auto;object-fit:contain}
-@media(max-width:1000px){.plogo-grid{grid-template-columns:repeat(4,1fr)}}
-@media(max-width:640px){.plogo-grid{grid-template-columns:repeat(2,1fr)}}
+.plogo img{max-width:100%;max-height:77px;width:auto;height:auto;object-fit:contain}
+@keyframes plogo-scroll{from{transform:translateX(0)}to{transform:translateX(calc(-50% - 7px))}}
+@media(prefers-reduced-motion:reduce){.plogo-track{animation:none;flex-wrap:wrap;justify-content:center}}
+@media(max-width:640px){.plogo{width:150px}}
 
 
 /* ── PRODUCTS MAGAZINE ──────────────────────────────────── */
@@ -994,35 +997,45 @@ h1,h2,h3,h4,h5,h6,.section-title,.hero h1,.page-hero h1{font-family:'Geist',sans
 </section>
 
 <!-- ───── DIRECTIONS ───── -->
-<section class="prodmag" id="products">
+<section class="dir" id="products">
   <div class="wrap">
     <div class="section-head">
-      <a href="produkciya.html" class="section-eyebrow" style="font-size: 20px; font-family: Geist; text-decoration:none;font-weight:700;color:#8895AB">I nostri prodotti</a>
+      <a href="produkciya.html" class="section-eyebrow" style="font-size: 20px; font-family: Geist; text-decoration:none;font-weight:700">I nostri prodotti</a>
       
     </div>
-    <div class="prodmag-shell">
-      <div class="prodmag-grid">
-        <a class="pm-card pm-big" href="katalog.html?cat=capsules">
-          <span class="pm-bg" style="background-image:url('../img/cat-tablet.png')"></span>
-          <h3 class="pm-title">Forme solide orali</h3>
-          <p class="pm-desc">Capsule, polveri e bustine: ampia scelta e uso pratico</p>
-        </a>
-        <a class="pm-card pm-wide" href="katalog.html?cat=solutions">
-          <span class="pm-bg" style="background-image:url('../img/cat-jidkosti-photo.png')"></span>
-          <h3 class="pm-title">Soluzioni liquide e sospensioni</h3>
-          <p class="pm-desc">Soluzioni e sospensioni di qualità: per usi diversi e alta biodisponibilità</p>
-        </a>
-        <a class="pm-card " href="katalog.html?cat=eye">
-          <span class="pm-bg" style="background-image:url('../img/cat-eye.png')"></span>
-          <h3 class="pm-title">Gocce specialistiche</h3>
-          <p class="pm-desc">Colliri vitaminici, neurologici e idratanti</p>
-        </a>
-        <a class="pm-card " href="katalog.html?cat=sprays">
-          <span class="pm-bg" style="background-image:url('../img/cat-sprei-photo.png')"></span>
-          <h3 class="pm-title">Forme topiche ed esterne</h3>
-          <p class="pm-desc">Spray per uso topico e gel per pelle, articolazioni e salute femminile</p>
-        </a>
-      </div>
+    <div class="dir-grid prod-grid">
+      <div class="dir-card" onclick="if(!event.target.closest('a'))location.href='katalog.html?cat=capsules'" style="cursor:pointer;background-image:url('../img/cat-tablet.png');background-size:115% auto;background-position:center top">
+        <h3 style="font-size:25px;font-weight:500">Capsule</h3>
+        <p style="">Un’ampia gamma di forme per uso orale</p>
+        <a class="dir-arr" href="katalog.html?cat=capsules" style="text-decoration:none">Dettagli <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div>
+      <div class="dir-card" onclick="if(!event.target.closest('a'))location.href='katalog.html?cat=solutions'" style="cursor:pointer;background-image:url('../img/cat-jidkosti-photo.png');background-size:115% auto;background-position:center top">
+        <h3 style="font-size:25px;font-weight:500">Soluzioni</h3>
+        <p style="">Liquidi e soluzioni di qualità per usi diversi</p>
+        <a class="dir-arr" href="katalog.html?cat=solutions" style="text-decoration:none">Dettagli <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div>
+      <div class="dir-card" onclick="if(!event.target.closest('a'))location.href='katalog.html?cat=drops'" style="cursor:pointer;background-image:url('../img/forms/drops.jpg');background-size:cover;background-position:center">
+        <h3 style="font-size:25px;font-weight:500">Gocce</h3>
+        <p style="">Gocce vitaminiche — per sistema nervoso, tratto gastrointestinale e altro</p>
+        <a class="dir-arr" href="katalog.html?cat=drops" style="text-decoration:none">Dettagli <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div>
+      <div class="dir-card" onclick="if(!event.target.closest('a'))location.href='katalog.html?cat=eye'" style="cursor:pointer;background-image:url('../img/cat-eye.png');background-size:115% auto;background-position:center top">
+        <h3 style="font-size:25px;font-weight:500">Colliri</h3>
+        <p style="">Colliri idratanti e rigeneranti</p>
+        <a class="dir-arr" href="katalog.html?cat=eye" style="text-decoration:none">Dettagli <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div>
+      <div class="dir-card" onclick="if(!event.target.closest('a'))location.href='katalog.html?cat=sprays'" style="cursor:pointer;background-image:url('../img/cat-sprei-photo.png');background-size:115% auto;background-position:center top">
+        <h3 style="font-size:25px;font-weight:500">Spray</h3>
+        <p style="">Spray altamente efficaci per uso topico</p>
+        <a class="dir-arr" href="katalog.html?cat=sprays" style="text-decoration:none">Dettagli <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div>
+      <div class="dir-card" onclick="if(!event.target.closest('a'))location.href='katalog.html?cat=powders'" style="cursor:pointer;background-image:url('../img/forms/powders.webp');background-size:cover;background-position:center">
+        <h3 style="font-size:25px;font-weight:500">Polveri e bustine</h3>
+        <p style="">Polveri solubili e bustine: VMC, collagene, immunità</p>
+        <a class="dir-arr" href="katalog.html?cat=powders" style="text-decoration:none">Dettagli <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div>
+      <div class="dir-card" onclick="if(!event.target.closest('a'))location.href='katalog.html?cat=suspensions'" style="cursor:pointer;background-image:url('../img/forms/suspensions.webp');background-size:cover;background-position:center">
+        <h3 style="font-size:25px;font-weight:500">Sospensioni</h3>
+        <p style="">Sospensioni orali — antiacidi e rimedi gastrointestinali</p>
+        <a class="dir-arr" href="katalog.html?cat=suspensions" style="text-decoration:none">Dettagli <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div>
+      <div class="dir-card" onclick="if(!event.target.closest('a'))location.href='katalog.html?cat=gels'" style="cursor:pointer;background-image:url('../img/forms/gels.jpg');background-size:cover;background-position:center">
+        <h3 style="font-size:25px;font-weight:500">Gel</h3>
+        <p style="">Gel per pelle, articolazioni e salute femminile</p>
+        <a class="dir-arr" href="katalog.html?cat=gels" style="text-decoration:none">Dettagli <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div>
     </div>
   </div>
 </section>
@@ -1108,15 +1121,22 @@ h1,h2,h3,h4,h5,h6,.section-title,.hero h1,.page-hero h1{font-family:'Geist',sans
 <section class="plogos">
   <div class="wrap">
     <div class="plogos-head"><h2>I nostri partner</h2><p>Scelti da distributori e importatori in diversi paesi</p></div>
-    <div class="plogo-grid">
-        <div class="plogo"><img src="../img/partners/1-wm.png" alt="W/M" loading="lazy"></div>
+    <div class="plogo-marquee"><div class="plogo-track" style="height:155px">
+<div class="plogo"><img src="../img/partners/1-wm.png" alt="W/M" loading="lazy"></div>
         <div class="plogo"><img src="../img/partners/2-welfar.png" alt="Welfar" loading="lazy"></div>
         <div class="plogo"><img src="../img/partners/3-naturavelle.png" alt="NaturaVelle Health Group" loading="lazy"></div>
         <div class="plogo"><img src="../img/partners/4-helba.png" alt="Helba" loading="lazy"></div>
         <div class="plogo"><img src="../img/partners/5-ownerpharm.png" alt="Owner Pharm" loading="lazy" style="max-height:85px"></div>
         <div class="plogo"><img src="../img/partners/6-biogenfarm.png" alt="Biogen Farm" loading="lazy" style="max-height:100px"></div>
-        <div class="plogo"><img src="../img/partners/7-zaminpharm.png" alt="ZaminPharm" loading="lazy"></div>
-    </div>
+        <div class="plogo"><img src="../img/partners/7-zaminpharm.png" alt="ZaminPharm" loading="lazy"></div><div class="plogo"><img src="../img/partners/8-synergy.png" alt="Synergy Pharmco" loading="lazy"></div>
+<div class="plogo" aria-hidden="true"><img src="../img/partners/1-wm.png" alt="W/M" loading="lazy"></div>
+        <div class="plogo" aria-hidden="true"><img src="../img/partners/2-welfar.png" alt="Welfar" loading="lazy"></div>
+        <div class="plogo" aria-hidden="true"><img src="../img/partners/3-naturavelle.png" alt="NaturaVelle Health Group" loading="lazy"></div>
+        <div class="plogo" aria-hidden="true"><img src="../img/partners/4-helba.png" alt="Helba" loading="lazy"></div>
+        <div class="plogo" aria-hidden="true"><img src="../img/partners/5-ownerpharm.png" alt="Owner Pharm" loading="lazy" style="max-height:85px"></div>
+        <div class="plogo" aria-hidden="true"><img src="../img/partners/6-biogenfarm.png" alt="Biogen Farm" loading="lazy" style="max-height:100px"></div>
+        <div class="plogo" aria-hidden="true"><img src="../img/partners/7-zaminpharm.png" alt="ZaminPharm" loading="lazy"></div><div class="plogo" aria-hidden="true"><img src="../img/partners/8-synergy.png" alt="Synergy Pharmco" loading="lazy"></div>
+</div></div>
   </div>
 </section>
 
@@ -1171,45 +1191,6 @@ h1,h2,h3,h4,h5,h6,.section-title,.hero h1,.page-hero h1{font-family:'Geist',sans
     </div>
   </div>
 </section>
-
-<!-- ───── VIRTUAL TOUR ───── -->
-<section class="tour" id="tour">
-  <div class="wrap">
-    <div class="focus-head">
-      <div>
-        <span class="focus-ey">Tour virtuale</span>
-        <h2>Dai un’occhiata alla produzione</h2>
-      </div>
-      <div class="focus-right">
-        <p>Una passeggiata panoramica nelle aree chiave dello stabilimento HVARA — dall’ingresso e i reparti al laboratorio di controllo e al magazzino dei prodotti finiti.</p>
-      </div>
-    </div>
-    <div class="tour-stage" id="tourStage" role="button" tabindex="0" aria-label="Apri il tour virtuale">
-      <img src="../img/tour/1.jpg" alt="Hall HVARA — tour virtuale">
-      <div class="tour-badge"><span class="dot"></span>Tour virtuale dell’edificio</div>
-      <div class="tour-play">
-        <span class="ring"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg></span>
-        <b>Avvia il tour</b>
-        <span>5 scene panoramiche dello stabilimento</span>
-      </div>
-      <div class="tour-caption">
-        <h4>HVARA Pharmaceuticals</h4>
-        <p>Clicca per iniziare la passeggiata virtuale</p>
-      </div>
-    </div>
-  </div>
-</section>
-<div class="tv-overlay" id="tvOverlay" aria-hidden="true">
-  <div class="tv-frame" id="tvFrame"></div>
-  <div class="tv-vignette"></div>
-  <div class="tv-top">
-    <div class="tv-title"><span class="ey">Tour virtuale</span><h3 id="tvName"></h3></div>
-    <button class="tv-close" id="tvClose" type="button" aria-label="Chiudi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6l-12 12"></path></svg></button>
-  </div>
-  <div class="tv-arrows" id="tvArrows"></div>
-  <button class="tv-back" id="tvBack" type="button" aria-label="Indietro"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 6l-6 6 6 6"></path></svg></button>
-  <div class="tv-step" id="tvStep"></div>
-</div>
 
 <!-- ───── NEWS ───── -->
 <section class="news" style="display:none">
@@ -1478,69 +1459,6 @@ function openMapLB(src){
     });
   }
   if(document.readyState!=='loading') init(); else document.addEventListener('DOMContentLoaded',init);
-})();
-</script>
-<script>
-/* ───── Virtual tour — branching walkthrough ───── */
-(function(){
-  var names={1:'Hall principale',2:'Hall',3:'Reception',4:'Reception',5:'Reception',
-    6:'Scala',7:'Scala',8:'Scala',9:'Scala',10:'Pianerottolo 2° piano',11:'Balconata 2° piano',
-    12:'2° piano',13:'Corridoio',14:'Corridoio',15:'Corridoio',16:'Corridoio',17:'Corridoio',18:'Corridoio',19:'Corridoio',20:'Corridoio',21:'Corridoio',
-    22:'Uscita',23:'Corridoio',24:'Corridoio'};
-  var nav={
-    1:{fwd:2,left:6}, 2:{fwd:3}, 3:{fwd:4}, 4:{fwd:5}, 5:{},
-    6:{fwd:7}, 7:{fwd:8}, 8:{fwd:9}, 9:{fwd:10}, 10:{fwd:11}, 11:{fwd:12},
-    12:{left:13}, 13:{fwd:14}, 14:{fwd:15}, 15:{fwd:16}, 16:{fwd:17}, 17:{fwd:18}, 18:{fwd:19}, 19:{fwd:20}, 20:{fwd:21},
-    21:{fwd:22,right:12}, 22:{fwd:23}, 23:{fwd:24}, 24:{}
-  };
-  var ov=document.getElementById('tvOverlay'), frame=document.getElementById('tvFrame'),
-      nameEl=document.getElementById('tvName'), arrowsEl=document.getElementById('tvArrows'),
-      backBtn=document.getElementById('tvBack'), stepEl=document.getElementById('tvStep'),
-      closeBtn=document.getElementById('tvClose'), stage=document.getElementById('tourStage');
-  if(!ov||!stage) return;
-  function src(n){ return '../img/tour/'+n+'.jpg'; }
-  Object.keys(names).forEach(function(n){ var i=new Image(); i.src=src(n); });
-  var cur=0, busy=false, curEl=null, hist=[];
-  var CHEV='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 19V5M6 11l6-6 6 6"></path></svg>';
-  function buildArrows(id){
-    arrowsEl.innerHTML='';
-    var n=nav[id]||{};
-    [['fwd','dir-fwd'],['left','dir-left'],['right','dir-right']].forEach(function(p){
-      var t=n[p[0]]; if(!t) return;
-      var b=document.createElement('button'); b.type='button'; b.className='tv-af '+p[1];
-      b.innerHTML='<span class="disc">'+CHEV+'</span><span class="lbl">'+(names[t]||'')+'</span>';
-      b.addEventListener('click',function(e){ e.stopPropagation(); goTo(t,p[0]); });
-      arrowsEl.appendChild(b);
-    });
-  }
-  function render(id,motion){
-    var el=document.createElement('img'); el.alt=names[id]||('Фото '+id);
-    el.style.transform = motion==='back' ? 'scale(0.9)' : (motion==='left'?'translateX(7%) scale(1.1)':motion==='right'?'translateX(-7%) scale(1.1)':'scale(1.14)');
-    frame.appendChild(el);
-    var old=curEl; curEl=el;
-    el.src=src(id);
-    requestAnimationFrame(function(){ requestAnimationFrame(function(){ el.classList.add('show'); }); });
-    if(old){ old.classList.remove('show'); old.style.transform = motion==='back'?'scale(1.14)':'scale(0.92)'; setTimeout(function(){ if(old.parentNode) old.remove(); },900); }
-    cur=id; nameEl.textContent=names[id]||('Фото '+id); stepEl.textContent=id+' / 24';
-    buildArrows(id); backBtn.disabled=(hist.length===0);
-  }
-  function goTo(id,motion){ if(busy||!id) return; busy=true; hist.push(cur); render(id,motion||'fwd'); setTimeout(function(){busy=false;},600); }
-  function back(){ if(busy||!hist.length) return; busy=true; var id=hist.pop(); render(id,'back'); setTimeout(function(){busy=false;},600); }
-  function open(){ ov.classList.add('open'); ov.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; if(!cur){ hist=[]; render(1,'fwd'); } }
-  function close(){ ov.classList.remove('open'); ov.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
-  stage.addEventListener('click',open);
-  stage.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();open();} });
-  closeBtn.addEventListener('click',close);
-  backBtn.addEventListener('click',back);
-  document.addEventListener('keydown',function(e){
-    if(!ov.classList.contains('open')) return;
-    var n=nav[cur]||{};
-    if(e.key==='Escape') close();
-    else if(e.key==='Backspace'){ e.preventDefault(); back(); }
-    else if(e.key==='ArrowUp'){ if(n.fwd) goTo(n.fwd,'fwd'); }
-    else if(e.key==='ArrowLeft'){ if(n.left) goTo(n.left,'left'); }
-    else if(e.key==='ArrowRight'){ if(n.right) goTo(n.right,'right'); }
-  });
 })();
 </script>
 <template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#0f4a85"/><g transform="translate(50 50)" fill="#fff"><path d="M-16 -14 h7 v11 h18 v-11 h7 v34 h-7 v-16 h-18 v16 h-7 z"/></g></svg></template>
